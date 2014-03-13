@@ -3,7 +3,14 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<link rel="stylesheet" type="text/css" href="css/login_dialog.css" />
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="js/login_dialog.js"></script>
+	<script src="js/main.js"></script>
+	
 	<title>航班管理系統</title>
+	<meta charset="UTF-8" />
+	<meta name="author" content="Chih-Yung Liang" />
 </head>
 <body>
 	<h1>航班管理系統</h1>
@@ -20,15 +27,15 @@
 			<a href="#">註冊新使用者</a> 
 			<a href="#">重設密碼</a>
 		</p>
-		<div id="what_new_user">
-			<p>為什麼要註冊新使用者？</p>
+		<div id="what_new_user" class="slide_help">
+			為什麼要註冊新使用者？<br>
 			成為我們的使用者可獲得以下好處：
 			<ul>
 				<li>隨時檢視航班資訊</li>
 				<li>隨時新增、更新航班資訊（限管理員）</li>
 			</ul>
 		</div>
-		<div id="what_reset_pwd">
+		<div id="what_reset_pwd" class="slide_help">
 			忘記密碼是什麼了嗎？<br>
 			利用重設密碼，系統將寄給您新的密碼
 		</div>
@@ -40,6 +47,13 @@
 			<button type="button" class="FB_login">Facebook登入</button>
 			<button type="button" class="google_login">Google+登入</button>
 			<button type="button" class="github_login">Github登入</button>
+			<div id="why_other_login" class="slide_help">
+				為什麼要使用Facebook、Google+或Github登入？<br>
+				<ul>
+					<li>免除註冊時填寫資料麻煩，直接擷取您的公開姓名。</li>
+					<li>您的密碼等個資將不會傳送給我。</li>
+				</ul>
+			</div>
 		</div>
 	</form>
 	</div>

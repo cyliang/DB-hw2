@@ -38,3 +38,7 @@ button:active {
 	border-color: #00FF33;
 	background-color: #00FF33;
 }
+
+.slide_help {
+	display: none;
+}
