@@ -20,24 +20,6 @@ h2 {
 	color: #009900;
 }
 
-#login_dialog {
-	margin-top: 15%;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 35px;
-	padding: 20px 10px;
-	width: 350px;
-	background-color: #A00000;
-	text-align: center;
-}
-
-#login_dialog input {
-	width: 60%;
-	height: 33px;
-	margin-bottom: 17px;
-	padding: 0px 7px;
-}
-
 button {
 	width: 100px;
 	padding-top: 3px;
