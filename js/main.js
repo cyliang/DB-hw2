@@ -18,9 +18,12 @@ var now_page = "welcome";
 $(document).ready(function() {
 	$("input").hover(function() {
 		$(this).focus();
+	}, function() {
+		$(this).change();
 	});
 
 	prepare_login_dialog();
+	prepare_regist_dialog();
 	$("#" + pages[now_page].div_id).slideDown();
 });
 
