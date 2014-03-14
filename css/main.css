@@ -16,6 +16,8 @@ body > div {
 }
 
 h1,h2 {
+	position: relative;
+	top: 22px;
 	background-color: #A00000;
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -32,12 +34,26 @@ h2 {
 	color: #009900;
 }
 
+#top_bar {
+	position: absolute;
+	top: 0px;
+	margin: 0px;
+	padding: 3px 3% 0px 0px;
+	height: 20px;
+	width: 97%;
+	background-color: #600000;
+	display: block;
+	border-radius: 0px;
+	text-align: right;
+	color: #808080;
+	font-size: small;
+}
+
 #foot_bar {
 	position: absolute;
 	bottom: 0px;
 	margin: 0px;
-	padding-top: 5px;
-	padding-bottom: 0px;
+	padding: 5px 0px 0px 0px;
 	height: 25px;
 	width: 100%;
 	background-color: #909090;
