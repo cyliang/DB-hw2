@@ -55,6 +55,10 @@
 	display: none;
 }
 
+#regist_dialog #new_second {
+	display: none;
+}
+
 .FB_login {
 	background-color: #0066CC;
 }
