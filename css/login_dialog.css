@@ -12,6 +12,11 @@
 	padding: 0px 7px;
 }
 
+.dialog input[type=checkbox] {
+	width: 20px;
+	height: 20px;
+}
+
 .dialog #links {
 	font-size: small;
 	text-align: left;
@@ -57,6 +62,18 @@
 
 #regist_dialog #new_second {
 	display: none;
+}
+
+#regist_dialog #new_admin {
+	font-size: small;
+	text-align: left;
+	vertical-align: top;
+	padding-left: 60px;
+	color: grey;
+}
+
+#regist_dialog #new_admin input[type=checkbox] {
+	margin: 0px 10px 0px 0px;
 }
 
 .FB_login {
