@@ -9,10 +9,11 @@ var pages = {
 	}
 };
 
-var now_page;
+var now_page = "welcome";
 
 $(document).ready(function() {
 	prepare_login_dialog();
+	$("#" + pages[now_page].div_id).slideDown();
 });
 
 function change_page(new_page) {

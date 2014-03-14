@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<link rel="stylesheet" type="text/css" href="css/login_dialog.css" />
+	<link rel="stylesheet" type="text/css" href="css/welcome.css" />
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/login_dialog.js"></script>
@@ -15,6 +16,13 @@
 <body>
 	<h1>航班管理系統</h1>
 	<h2>歡迎</h2>
+	<div id="welcome_page">
+		<h3>歡迎來到航班管理系統</h3>
+		<p>
+			立即 <a href="#" onClick="change_page('login_dialog')">登入</a>
+			或 <a href="#" onClick="">註冊</a> 以檢視航班
+		</p>
+	</div>
 	<div id="login_dialog">
 	<form method="POST" action="">
 		<div>
