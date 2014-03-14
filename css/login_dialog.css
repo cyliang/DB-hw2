@@ -1,19 +1,18 @@
-#login_dialog {
+.dialog {
 	margin-top: 15%;
-	padding: 20px 10px;
 	width: 350px;
 	background-color: #A00000;
 	text-align: center;
 }
 
-#login_dialog input {
+.dialog input {
 	width: 60%;
 	height: 33px;
 	margin-bottom: 17px;
 	padding: 0px 7px;
 }
 
-#login_dialog #links {
+.dialog #links {
 	font-size: small;
 	text-align: left;
 	padding-left: 60px;
@@ -21,12 +20,12 @@
 	margin-top: 0px;
 }
 
-#login_dialog  #links a{
+.dialog  #links a{
 	color: grey;
 	text-decoration: none;
 }
 
-#login_dialog .slide_help {
+.dialog .slide_help {
 	font-size: small;
 	text-align: left;
 	padding-left: 60px;
@@ -36,11 +35,11 @@
 	border-radius: 8px;
 }
 
-#login_dialog .slide_help ul {
+.dialog .slide_help ul {
 	margin-bottom: 0px;
 }
 
-#login_dialog #other_login div {
+.dialog #other_login div {
 	text-align: left;
 	font-size: small;
 	padding-left: 21px;

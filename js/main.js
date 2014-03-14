@@ -6,12 +6,20 @@ var pages = {
 	welcome: {
 		div_id: "welcome_page",
 		title: "歡迎"
+	},
+	regist_dialog: {
+		div_id: "regist_dialog",
+		title: "註冊新使用者"
 	}
 };
 
 var now_page = "welcome";
 
 $(document).ready(function() {
+	$("input").hover(function() {
+		$(this).focus();
+	});
+
 	prepare_login_dialog();
 	$("#" + pages[now_page].div_id).slideDown();
 });
