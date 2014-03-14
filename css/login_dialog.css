@@ -7,6 +7,7 @@
 	width: 350px;
 	background-color: #A00000;
 	text-align: center;
+	display: none;
 }
 
 #login_dialog input {
