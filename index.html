@@ -37,7 +37,7 @@
 	<section id="login_dialog" class="dialog">
 		<form method="POST" action="">
 		<div>
-			<input type="text" name="username" placeholder="輸入使用者名稱"/>
+			<input type="text" name="username" placeholder="輸入使用者名稱" autofocus/>
 		</div>
 		<div>
 			<input type="password" name="password" placeholder="輸入密碼"/>
@@ -77,30 +77,29 @@
 		</form>
 	</section>
 	<section id="regist_dialog" class="dialog">
-		<div id="new_first">
+		<form method="POST" action="" id="new_first">
 			<div id="new_rname">
-				<input type="text" name="name" placeholder="輸入您的姓名"/>
+				<input type="text" name="name" placeholder="輸入您的姓名" required autofocus/>
 			</div>
 			<div id="new_email">
-				<input type="text" name="email" placeholder="輸入您的電子郵件"/>
-				<div class="warning">
-					您輸入的電子郵件不符合格式。
-				</div>
+				<input type="email" name="email" placeholder="輸入您的電子郵件" required/>
 			</div>
-		</div>
-		<form method="POST" action="">
-		<div id="new_second">
+			<div>
+				<button type="submit">繼續</button>
+			</div>
+		</form>
+		<form method="POST" action="" id="new_second">
 			<div id="new_uname">
-				<input type="text" name="username" placeholder="輸入新使用者名稱"/>
+				<input type="text" name="username" pattern="[A-Za-z0-9_]{6,}" title="格式為6位以上的英文字母或數字，且不能包含'_'以外的符號" placeholder="輸入新使用者名稱" required autofocus/>
 				<div class="warning">
 					很抱歉、這個使用者名稱已經被註冊了。
 				</div>
 			</div>
 			<div id="new_pwd">
-				<input type="password" name="password" placeholder="輸入新密碼"/>
+				<input type="password" name="password" pattern=".{8,}" title="請至少輸入8個字以上，可以使用任何符號" placeholder="輸入新密碼" required/>
 			</div>
 			<div id="new_confirm_pwd">
-				<input type="password" placeholder="重複輸入新密碼"/>
+				<input type="password" placeholder="重複輸入新密碼" required/>
 				<div class="warning">
 					兩次輸入的密碼不符合。
 				</div>
@@ -115,7 +114,6 @@
 			<div>
 				<button type="submit">註冊</button>
 			</div>
-		</div>
 		</form>
 	</section>
 </main>

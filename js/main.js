@@ -16,10 +16,8 @@ var pages = {
 var now_page = "welcome";
 
 $(document).ready(function() {
-	$("input").hover(function() {
+	$("input").mouseenter(function() {
 		$(this).focus();
-	}, function() {
-		$(this).change();
 	});
 
 	prepare_login_dialog();
