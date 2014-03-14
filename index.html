@@ -15,23 +15,26 @@
 	<meta name="author" content="Chih-Yung Liang" />
 </head>
 <body>
+<header>
 	<h1>航班管理系統</h1>
 	<h2>歡迎</h2>
+</header>
 	<div id="top_bar">
 		<div id="login_state">未登入</div>
 	</div>
-	<div id="foot_bar">
-		&copy; 2014 Chih-Yung Liang
-	</div>
+<footer>
+	&copy; 2014 Chih-Yung Liang
+</footer>
 	
-	<div id="welcome_page">
+<main>
+	<section id="welcome_page">
 		<h3>歡迎來到航班管理系統</h3>
 		<p>
 			立即 <a href="#" onClick="change_page('login_dialog')">登入</a>
 			或 <a href="#" onClick="change_page('regist_dialog')">註冊</a> 以檢視航班
 		</p>
-	</div>
-	<div id="login_dialog" class="dialog">
+	</section>
+	<section id="login_dialog" class="dialog">
 		<form method="POST" action="">
 		<div>
 			<input type="text" name="username" placeholder="輸入使用者名稱"/>
@@ -72,8 +75,8 @@
 			</div>
 		</div>
 		</form>
-	</div>
-	<div id="regist_dialog" class="dialog">
+	</section>
+	<section id="regist_dialog" class="dialog">
 		<div id="new_first">
 			<div id="new_rname">
 				<input type="text" name="name" placeholder="輸入您的姓名"/>
@@ -114,6 +117,7 @@
 			</div>
 		</div>
 		</form>
-	</div>
+	</section>
+</main>
 </body>
 </html>
