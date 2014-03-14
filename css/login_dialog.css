@@ -46,6 +46,15 @@
 	color: #003333;
 }
 
+.dialog .warning {
+	color: #FF6600;
+	font-size: small;
+	margin-top: -15px;
+	padding-left: 60px;
+	text-align: left;
+	display: none;
+}
+
 .FB_login {
 	background-color: #0066CC;
 }
