@@ -8,6 +8,16 @@ function prepare_regist_dialog() {
 		});
 	});
 	
+	$("#regist_dialog #new_uname input").change(function() {
+		$.post('php/check_user_exist.php', {username: $(this).val()}, function(data) {
+			if(data == "true") {
+				$("#regist_dialog #new_uname .warning").slideDown();
+			} else {
+				$("#regist_dialog #new_uname .warning").slideUp();
+			}
+		}, "text");
+	});
+	
 	$("#regist_dialog #new_second #new_rewrite").click(function() {
 		$("#regist_dialog #new_second").slideUp(function() {
 			$("#regist_dialog #new_first .button").slideDown();
