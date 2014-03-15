@@ -64,6 +64,10 @@
 	display: none;
 }
 
+#regist_dialog #new_second #new_rewrite {
+	background-color: #C80000;
+}
+
 #regist_dialog #new_admin {
 	font-size: small;
 	text-align: left;
