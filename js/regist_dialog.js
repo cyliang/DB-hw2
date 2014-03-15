@@ -28,3 +28,12 @@ function prepare_regist_dialog() {
 		}
 	});
 }
+
+function reset_regist_dialog() {
+	$("#regist_dialog input[type!='checkbox']").val("");
+	$("#regist_dialog #admin_chk").removeAttr("checked");
+	$("#regist_dialog #new_first input").removeAttr("readonly");
+	$("#regist_dialog button[type=submit]").show();
+	$("#regist_dialog #new_second").hide();
+	$("#regist_dialog #regist_success").hide();
+}

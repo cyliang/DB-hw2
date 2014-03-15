@@ -17,6 +17,10 @@
 	height: 20px;
 }
 
+.dialog h3 {
+	color: #B0B0B0;
+}
+
 .dialog #links {
 	font-size: small;
 	text-align: left;
@@ -60,7 +64,7 @@
 	display: none;
 }
 
-#regist_dialog #new_second {
+#regist_dialog #new_second, #regist_dialog #regist_success {
 	display: none;
 }
 

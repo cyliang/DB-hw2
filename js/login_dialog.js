@@ -17,3 +17,7 @@ function prepare_login_dialog() {
 		$("#login_dialog #why_other_login").slideUp();
 	});
 }
+
+function reset_login_dialog() {
+	$("#login_dialog input").val("");
+}
