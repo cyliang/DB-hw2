@@ -84,7 +84,7 @@
 			<div id="new_email">
 				<input type="email" name="email" placeholder="輸入您的電子郵件" required/>
 			</div>
-			<div>
+			<div class="button">
 				<button type="submit">繼續</button>
 			</div>
 		</form>
@@ -112,11 +112,14 @@
 				什麼是成為管理員？<br>
 				成為管理員後，需管理各項航班資訊，因此擁有新增、更新、刪除航班的權力。
 			</div>
-			<div>
+			<div class="button">
 				<button type="submit">註冊</button>
 				<button type="button" id="new_rewrite">重新填寫</button>
 			</div>
 		</form>
+		<div id="new_wait">
+			<h3>請稍後...註冊中</h3>
+		</div>
 		<div id="regist_success">
 			<h3>註冊成功！</h3>
 			<button type="button" onClick="change_page('login_dialog')">登入以繼續</button>

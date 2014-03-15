@@ -3,6 +3,7 @@
 	width: 350px;
 	background-color: #A00000;
 	text-align: center;
+	color: #B0B0B0;
 }
 
 .dialog input {
@@ -15,10 +16,6 @@
 .dialog input[type=checkbox] {
 	width: 20px;
 	height: 20px;
-}
-
-.dialog h3 {
-	color: #B0B0B0;
 }
 
 .dialog #links {
@@ -64,7 +61,7 @@
 	display: none;
 }
 
-#regist_dialog #new_second, #regist_dialog #regist_success {
+#regist_dialog #new_second, #regist_dialog > div {
 	display: none;
 }
 

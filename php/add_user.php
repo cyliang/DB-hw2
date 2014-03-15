@@ -26,7 +26,7 @@ if($db->check_user_exist($_POST['username'])) {
 }
 
 if($alert_msg !== "") {
-	die("alert('{$alert_msg}');");
+	die("regist_fail('{$alert_msg}');");
 }
 
 $stat = $db->prepare('INSERT INTO `flight_user` (`account`, `password`, `name`, `email`, `is_admin`) 
@@ -40,9 +40,9 @@ $stat->execute(array(
 ));
 
 if($stat->rowCount() === 1) {
-	echo "";
+	echo "regist_success();";
 } else {
-	echo "alert('發生錯誤，已通報系統管理員，請稍後再重試');";
+	echo "regist_fail('發生錯誤，已通報系統管理員，請稍後再重試');";
 }
 
 ?>
