@@ -1,4 +1,6 @@
 <?php
+include 'include/DB.php';
+
 $alert_msg = "";
 
 if(strlen($_POST['name']) < 3) {
@@ -17,11 +19,16 @@ if(!preg_match("/.{8,}/",$_POST['password'])) {
 	alert_msg .= '必須輸入正確密碼！\n';
 }
 
-if($alert_msg !== "") {
-	die("alert({$alert_msg});");
+$db = new DB();
+
+if($db->check_user_exist($_POST['username'])) {
+	alert_msg .= "使用者名稱{$_POST['username']}已經存在，請輸入其他使用者名稱！";
 }
 
-$db = new DB();
+if($alert_msg !== "") {
+	die("alert('{$alert_msg}');");
+}
+
 $stat = $db->prepare('INSERT INTO `flight_user` (`account`, `password`, `name`, `email`, `is_admin`) 
 					VALUES ( :username , :password , :name , :email , :admin );');
 $stat->execute(array(
@@ -31,5 +38,11 @@ $stat->execute(array(
 	':admin' => ($_POST['admin'] == 'yes' ? 1 : 0),
 	':password' => $_POST['password'].$_POST['username']
 ));
+
+if($stat->rowCount() === 1) {
+	echo "";
+} else {
+	echo "alert('發生錯誤，已通報系統管理員，請稍後再重試');";
+}
 
 ?>
