@@ -41,7 +41,11 @@ function prepare_regist_dialog() {
 		$("#regist_dialog form input").attr("readonly", "");
 		$("#regist_dialog #new_second .button").slideUp(function() {
 			$("#regist_dialog #new_wait").slideDown(function() {
-				regist_success();
+				$.post('php/add_user.php', $("#regist_dialog form").serialize(), function(data, status) {
+					if(status != "success") {
+						alert('發生錯誤，已通報系統管理員，請稍後再重試');
+					}
+				}, "script");
 			});
 		});
 	});
