@@ -1,5 +1,6 @@
 <?php
-include 'include/DB.php';
+require 'include/DB.php';
+require 'lib/password.php';
 
 $alert_msg = "";
 
@@ -36,7 +37,7 @@ $stat->execute(array(
 	':name' => $_POST['name'],
 	':email' => $_POST['email'],
 	':admin' => ($_POST['admin'] == 'yes' ? 1 : 0),
-	':password' => $_POST['password'].$_POST['username']
+	':password' => password_hash($_POST['password'].$_POST['username'], PASSWORD_DEFAULT)
 ));
 
 if($stat->rowCount() === 1) {
