@@ -1,4 +1,6 @@
 <?php
+require 'lib/password.php';
+
 class User {
 	public $id;
 	public $name;
@@ -33,6 +35,20 @@ class Login {
 			unset($_SESSION['login_id']);
 			unset($_SESSION['login_admin']);
 		}
+	}
+	
+	public static function regist($user, $db) {
+		$stat = $db->prepare('INSERT INTO `flight_user` (`account`, `password`, `name`, `email`, `is_admin`) 
+					VALUES ( :username , :password , :name , :email , :admin );');
+		$stat->execute(array(
+			':username' => $user['username'],
+			':name' => $user['name'],
+			':email' => $user['email'],
+			':admin' => ($user['admin'] == 'yes' ? 1 : 0),
+			':password' => password_hash($user['password'].$user['username'], PASSWORD_DEFAULT)
+		));
+
+		return $stat->rowCount() === 1;
 	}
 	
 	public function check_login() {

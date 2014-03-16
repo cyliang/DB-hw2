@@ -1,6 +1,6 @@
 <?php
 require 'include/DB.php';
-require 'lib/password.php';
+require 'include/login.php';
 
 $alert_msg = "";
 
@@ -30,17 +30,7 @@ if($alert_msg !== "") {
 	die("regist_fail('{$alert_msg}');");
 }
 
-$stat = $db->prepare('INSERT INTO `flight_user` (`account`, `password`, `name`, `email`, `is_admin`) 
-					VALUES ( :username , :password , :name , :email , :admin );');
-$stat->execute(array(
-	':username' => $_POST['username'],
-	':name' => $_POST['name'],
-	':email' => $_POST['email'],
-	':admin' => ($_POST['admin'] == 'yes' ? 1 : 0),
-	':password' => password_hash($_POST['password'].$_POST['username'], PASSWORD_DEFAULT)
-));
-
-if($stat->rowCount() === 1) {
+if(Login::regist($_POST, $db)) {
 	echo "regist_success();";
 } else {
 	echo "regist_fail('發生錯誤，已通報系統管理員，請稍後再重試');";
