@@ -1,19 +1,23 @@
 var login = 'no';
+var user = null;
 
 function listen_login() {
 	var source = new EventSource('php/check_login.php');
 	source.onmessage = function(e) {
-		if(e.data != login) {
-			if(e.data == 'no') {
-				onLogout();
+		var data = JSON.parse(e.data);
+		if(data.login != login) {
+			login = data.login;
+			if(data.login == 'yes') {
+				user = data.user;
+				onLogin();
 			} else {
-				onLogin(e.data);
+				onLogout();
 			}
 		}
 	};
 }
 
-function onLogin(user_id) {
+function onLogin() {
 }
 
 function onLogout() {

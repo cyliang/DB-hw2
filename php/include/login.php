@@ -15,25 +15,30 @@ class Login {
 	//		login
 	//		login_id
 	//		login_admin
+	//		login_name
+	//		login_email
+	//		login_account
 	private $is_login;
-	private $login_id;
-	private $is_admin;
+	private $login_user;
 	private $db;
 
 	public function __construct($set_db = null) {
 		$this->db = $set_db;
 		session_start();
 		
-		if(isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && isset($_SESSION['login_id']) && isset($_SESSION['login_admin'])) {
+		if(isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && 
+			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['account'])) {
 			$this->is_login = true;
-			$this->is_admin = $_SESSION['login_admin'];
-			$this->login_id = $_SESSION['login_id'];
+			
+			$this->login_user = new User();
+			$this->login_user->is_admin = $_SESSION['login_admin'];
+			$this->login_user->id = $_SESSION['login_id'];
+			$this->login_user->name = $_SESSION['login_name'];
+			$this->login_user->email = $_SESSION['login_email'];
+			$this->login_user->account = $_SESSION['login_account'];
+			unset($this->login_user->password);
 		} else {
-			$this->is_login = false;
-			$this->login_id = null;
-			$_SESSION['login'] = 'no';
-			unset($_SESSION['login_id']);
-			unset($_SESSION['login_admin']);
+			$this->logout();
 		}
 	}
 	
@@ -51,17 +56,15 @@ class Login {
 		return $stat->rowCount() === 1;
 	}
 	
-	public function check_login() {
-		return ($this->is_login ? $login_id : false);
+	public function __toString() {
+		return json_encode($this->is_login ? array('login' => 'yes', 'user' => $login_user) : array('login' => 'no'));
 	}
 	
 	public function logout() {
-		$_SESSION['login'] = 'no';
-		unset($_SESSION['login_id']);
-		unset($_SESSION['login_admin']);
 		$this->is_login = false;
-		$this->login_id = null;
-		$this->is_admin = null;
+		$this->login_user = null;
+		$_SESSION['login'] = 'no';
+		unset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account']);
 	}
 	
 	public function __invoke($username, $password) {
@@ -70,17 +73,22 @@ class Login {
 		}
 		$this->logout();
 		
-		$stat = $this->db->prepare('SELECT `id`, `name`, `email`, `password`, `is_admin`
+		$stat = $this->db->prepare('SELECT `id`, `name`, `email`, `password`, `is_admin`, `account`
 									FROM `flight_user` WHERE `account` = ? ;');
 		$stat->execute(array($username));
-		if(($user_obj = $stat->fetchObject("User")) && password_verify($password, $user_obj->password)) {
-			unset($user_obj->password);
+		if(($this->login_user = $stat->fetchObject("User")) && password_verify($password, $this->login_user->password)) {
+			unset($this->login_user->password);
+			$this->is_login = true;
 			$_SESSION['login'] = 'yes';
-			$_SESSION['login_id'] = $user_obj->id;
-			$_SESSION['login_admin'] = $user_obj->is_admin ? 'yes' : 'no';
+			$_SESSION['login_id'] = $this->login_user->id;
+			$_SESSION['login_admin'] = $this->login_user->is_admin ? 'yes' : 'no';
+			$_SESSION['login_name'] = $this->login_user->name;
+			$_SESSION['login_email'] = $this->login_user->email;
+			$_SESSION['login_account'] = $this->login_user->account;
 			
-			return $user_obj;
+			return true;
 		} else {
+			$this->login_user = null;
 			return false;
 		}
 	}
