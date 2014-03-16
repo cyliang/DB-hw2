@@ -73,7 +73,7 @@ class Login {
 		$stat = $this->db->prepare('SELECT `id`, `name`, `email`, `password`, `is_admin`
 									FROM `flight_user` WHERE `account` = ? ;');
 		$stat->execute(array($username));
-		if(($user_obj = $stat->fetchObject("User")) && password_verify($password, $user_obj->password) {
+		if(($user_obj = $stat->fetchObject("User")) && password_verify($password, $user_obj->password)) {
 			unset($user_obj->password);
 			$_SESSION['login'] = 'yes';
 			$_SESSION['login_id'] = $user_obj->id;
