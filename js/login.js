@@ -11,6 +11,7 @@ function listen_login() {
 				user = data.user;
 				onLogin();
 			} else {
+				user = null;
 				onLogout();
 			}
 		}
@@ -18,7 +19,9 @@ function listen_login() {
 }
 
 function onLogin() {
+	$("#top_bar #login_state").text(user.name);
 }
 
 function onLogout() {
+	change_page('welcome');
 }

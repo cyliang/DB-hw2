@@ -13,6 +13,11 @@ var pages = {
 		div_id: "regist_dialog",
 		title: "註冊新使用者",
 		reset: reset_regist_dialog
+	},
+	home: {
+		div_id: "home_page",
+		title: "首頁",
+		reset: function() {}
 	}
 };
 
