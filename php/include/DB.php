@@ -5,7 +5,7 @@ class DB extends PDO {
 		require 'secret/DB_account.php';
 		
 		$dns = "mysql:dbname={$my_DB_account['db_name']};host={$my_DB_account['host']}";
-		parrent::__construct($dns, $my_DB_account['user'], $my_DB_account['password']);
+		parent::__construct($dns, $my_DB_account['user'], $my_DB_account['password']);
 	}
 	
 	public function check_user_exist($new_user) {
