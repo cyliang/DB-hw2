@@ -54,7 +54,7 @@ function prepare_regist_dialog() {
 function reset_regist_dialog() {
 	$("#regist_dialog input[type!='checkbox']").val("");
 	$("#regist_dialog #admin_chk").removeAttr("checked");
-	$("#regist_dialog #new_first input").removeAttr("readonly");
+	$("#regist_dialog form input").removeAttr("readonly");
 	$("#regist_dialog .button, #regist_dialog #new_first").show();
 	$("#regist_dialog > div, #regist_dialog #new_second").hide();
 }
