@@ -24,6 +24,7 @@ var pages = {
 var now_page = "welcome";
 
 $(document).ready(function() {
+	alert("欸");
 	$("input").mouseenter(function() {
 		$(this).focus();
 	});
