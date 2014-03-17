@@ -29,3 +29,13 @@ function onLogout() {
 	$("#top_bar #login_state").text("未登入");
 	change_page('welcome');
 }
+
+function logout() {
+	$.post('php/user_logout.php', function(data, status) {
+		if(status == "success") {
+			login = 'no';
+			user = null;
+			onLogout();
+		}
+	});
+}

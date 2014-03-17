@@ -95,6 +95,10 @@ nav li {
 	float: left;
 }
 
+nav #logout_button {
+	float: right;
+}
+
 nav a:link, nav a:visited {
 	display: block;
 	width: 120px;
