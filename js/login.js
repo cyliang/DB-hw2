@@ -19,11 +19,13 @@ function listen_login() {
 }
 
 function onLogin() {
+	$("nav").slideDown();
 	$("#top_bar #login_state").text(user.name);
 	change_page('home');
 }
 
 function onLogout() {
+	$("nav").slideUp();
 	$("#top_bar #login_state").text("未登入");
 	change_page('welcome');
 }
