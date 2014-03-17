@@ -76,6 +76,42 @@ a:active {
 	color: red;
 }
 
+nav {
+	background-color: #C8C8C8;
+	position: relative;
+	top: 22px;
+	padding: 0px 20px 0px 20px;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+nav li {
+	float: left;
+}
+
+nav a:link, nav a:visited {
+	display: block;
+	width: 120px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	padding: 5px;
+	text-decoration: none;
+}
+
+nav a:hover {
+	background-color: #D0D0D0;
+}
+
+nav a:active {
+	background-color: #B0B0B0;
+}
+
 button {
 	width: 100px;
 	color: black;
