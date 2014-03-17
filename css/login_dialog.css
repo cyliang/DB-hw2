@@ -61,7 +61,7 @@
 	display: none;
 }
 
-#regist_dialog #new_second, #regist_dialog > div {
+#regist_dialog #new_second, .dialog > div {
 	display: none;
 }
 

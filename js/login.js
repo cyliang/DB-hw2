@@ -20,8 +20,10 @@ function listen_login() {
 
 function onLogin() {
 	$("#top_bar #login_state").text(user.name);
+	change_page('home');
 }
 
 function onLogout() {
+	$("#top_bar #login_state").text("未登入");
 	change_page('welcome');
 }
