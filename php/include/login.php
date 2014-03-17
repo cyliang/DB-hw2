@@ -27,7 +27,7 @@ class Login {
 		session_start();
 		
 		if(isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && 
-			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['account'])) {
+			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account'])) {
 			$this->is_login = true;
 			
 			$this->login_user = new User();
@@ -57,7 +57,7 @@ class Login {
 	}
 	
 	public function __toString() {
-		return json_encode($this->is_login ? array('login' => 'yes', 'user' => $login_user) : array('login' => 'no'));
+		return json_encode($this->is_login ? array('login' => 'yes', 'user' => $this->login_user) : array('login' => 'no'));
 	}
 	
 	public function logout() {
@@ -76,7 +76,7 @@ class Login {
 		$stat = $this->db->prepare('SELECT `id`, `name`, `email`, `password`, `is_admin`, `account`
 									FROM `flight_user` WHERE `account` = ? ;');
 		$stat->execute(array($username));
-		if(($this->login_user = $stat->fetchObject("User")) && password_verify($password, $this->login_user->password)) {
+		if(($this->login_user = $stat->fetchObject("User")) && password_verify($password.$username, $this->login_user->password)) {
 			unset($this->login_user->password);
 			$this->is_login = true;
 			$_SESSION['login'] = 'yes';
