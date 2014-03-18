@@ -72,6 +72,7 @@ function flight_goto_page(page) {
 		$("#flight_manage tbody").empty();
 		for(var plain in data.data) {
 			$("#flight_manage tbody").append((plain % 2 == 1 ? '<tr class="alt">' : "<tr>") +
+					(user.is_admin == 1 ? '<td><span class="icon-pen"></span><span class="icon-trash"></span></td>' : "") +
 					"<td>" + data.data[plain].flight_number + "</td>" +
 					"<td>" + data.data[plain].departure + "</td>" +
 					"<td>" + data.data[plain].departure_date + "</td>" +
