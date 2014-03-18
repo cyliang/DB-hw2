@@ -39,6 +39,16 @@ header > h2 {
 	color: #009900;
 }
 
+header a:link, header a:visited {
+	color: #00FF33;
+	text-decoration: none;
+}
+
+header a:hover, header a:active {
+	color: #CCFF66;
+	text-decoration: none;
+}
+
 #top_bar {
 	position: absolute;
 	top: 0px;

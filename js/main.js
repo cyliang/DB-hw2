@@ -28,6 +28,10 @@ $(document).ready(function() {
 		$(this).focus();
 	});
 
+	$("h1").click(function() {
+		change_page(login == 'yes' ? 'home' : 'welcome');
+	});
+
 	prepare_login_dialog();
 	prepare_regist_dialog();
 	listen_login();
