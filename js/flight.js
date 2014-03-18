@@ -3,6 +3,12 @@ var flight_total_page = 0;
 var flight_sort_by = 'id';
 
 function prepare_flight() {
+	$("#flight_manage #flight_page_control #flight_p_select").bind('input', function() {
+		if($(this).val() != "" && $(this).val() != flight_now_page) {
+			flight_goto_page($(this).val());
+		}
+	});
+
 	$("#flight_manage > form").submit(function() {
 		event.preventDefault();
 		
@@ -75,6 +81,7 @@ function flight_goto_page(page) {
 		}
 		
 		$("#flight_manage #flight_page_control #flight_p_select").attr("placeholder", page + ' / ' + flight_total_page);
+		$("#flight_manage #flight_page_control #flight_p_select").val("");
 		$("#flight_manage #flight_page_control #flight_p_list").empty();
 		for(var i = 1; i <= flight_total_page; i++) {
 			$("#flight_manage #flight_page_control #flight_p_list").append('<option val="' + i + '">' + i + '</option>');
