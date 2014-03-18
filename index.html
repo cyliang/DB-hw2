@@ -4,11 +4,13 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<link rel="stylesheet" type="text/css" href="css/login_dialog.css" />
 	<link rel="stylesheet" type="text/css" href="css/welcome.css" />
+	<link rel="stylesheet" type="text/css" href="css/flight.css" />
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/login_dialog.js"></script>
 	<script src="js/regist_dialog.js"></script>
 	<script src="js/login.js"></script>
+	<script src="js/flight.js"></script>
 	<script src="js/main.js"></script>
 	
 	<title>航班管理系統 - 歡迎</title>
@@ -27,7 +29,7 @@
 	&copy; 2014 Chih-Yung Liang
 </footer>
 <nav><ul>
-	<li><a href="#">航班管理</a></li>
+	<li><a href="#" onClick="change_page('flight_manage')">航班管理</a></li>
 	<li><a href="#">使用者設定</a></li>
 	<li id="logout_button"><a href="#" onClick="logout()">登出</a></li>
 </ul></nav>
@@ -135,6 +137,32 @@
 	</section>
 	<section id="home_page">
 		<h1>Home Page</h1>
+	</section>
+	<section id="flight_manage">
+		<table>
+		<thead>
+			<tr>
+				<th>班機號碼 Flight No.</th>
+				<th>起飛機場 Departure</th>
+				<th>起飛時間 Departure Time</th>
+				<th>到達機場 Destination</th>
+				<th>到達時間 Arrival Time</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
+		<button type="button" id="flight_add">新增班機</button>
+		<span id="flight_page_control">
+			<button type="button" id="flight_p_first">第一頁</button>
+			<button type="button" id="flight_p_previous">上一頁</button>
+			<input list="flight_p_list" id="flight_p_select" placeholder="第1/2頁">
+			<datalist id="flight_p_list">
+				<option val="1">1</option>
+			</datalist>
+			<button type="button" id="flight_p_next">下一頁</button>
+			<button type="button" id="flight_p_last">最後一頁</button>
+		</span>
 	</section>
 </main>
 </body>

@@ -1,0 +1,11 @@
+#flight_manage table {
+	width: 100%;
+}
+
+#flight_manage #flight_page_control {
+	float: right;
+}
+
+#flight_manage #flight_page_control #flight_p_select {
+	width: 60px;
+}

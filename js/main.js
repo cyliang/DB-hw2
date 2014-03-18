@@ -18,6 +18,11 @@ var pages = {
 		div_id: "home_page",
 		title: "首頁",
 		reset: function() {}
+	}, 
+	flight_manage: {
+		div_id: "flight_manage",
+		title: "航班管理", 
+		reset: reset_flight_manage
 	}
 };
 
