@@ -2,26 +2,31 @@ var pages = {
 	login_dialog: {
 		div_id: "login_dialog",
 		title: "使用者登入",
+		init: function() {},
 		reset: reset_login_dialog
 	},
 	welcome: {
 		div_id: "welcome_page",
 		title: "歡迎",
+		init: function() {},
 		reset: function() {}
 	},
 	regist_dialog: {
 		div_id: "regist_dialog",
 		title: "註冊新使用者",
+		init: function() {},
 		reset: reset_regist_dialog
 	},
 	home: {
 		div_id: "home_page",
 		title: "首頁",
+		init: function() {},
 		reset: function() {}
 	}, 
 	flight_manage: {
 		div_id: "flight_manage",
 		title: "航班管理", 
+		init: flight_manage_onEnter,
 		reset: reset_flight_manage
 	}
 };
@@ -47,6 +52,7 @@ function change_page(new_page) {
 	$("#" + pages[now_page].div_id).slideUp(function() {
 		pages[now_page].reset();
 		now_page = new_page;
+		pages[new_page].init();
 		$("#" + pages[new_page].div_id).slideDown();
 	});
 	

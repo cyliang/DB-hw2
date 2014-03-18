@@ -2,6 +2,11 @@
 	width: 100%;
 }
 
+#flight_manage table thead {
+	background-color: #330000;
+	color: #CCFFFF;
+}
+
 #flight_manage #flight_page_control {
 	float: right;
 }
