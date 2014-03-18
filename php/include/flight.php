@@ -6,7 +6,7 @@ class Flight {
 		$this->db = $db;
 	}
 
-	public function add_flight($flight_info) {
+	public function add($flight_info) {
 		$stat = $this->db->prepare("INSERT INTO `flight_flight` (`flight_number`, `departure`, `destination`, `departure_date`, `arrival_date`)
 						VALUES ( :no , :from , :to , :fromtime , :totime );");
 		$stat->execute(array(
@@ -17,6 +17,21 @@ class Flight {
 			':totime' => $flight_info['arrival_date']
 		));
 
+		return $stat->rowCount() === 1;
+	}
+	
+	public function edit($flight_info) {
+		$stat = $this->db->prepare("UPDATE `flight_flight` SET `flight_number` = :no , `departure` = :from , 
+			`destination` = :to , `departure_date` = :fromtime , `arrival_date` = :totime WHERE `id` = :id ;");
+		$stat->execute(array(
+			':id' => $flight_info['id'],
+			':no' => filter_var($flight_info['number'], FILTER_SANITIZE_SPECIAL_CHARS),
+			':from' => filter_var($flight_info['departure'], FILTER_SANITIZE_SPECIAL_CHARS),
+			':to' => filter_var($flight_info['destination'], FILTER_SANITIZE_SPECIAL_CHARS),
+			':fromtime' => $flight_info['departure_date'],
+			':totime' => $flight_info['arrival_date']
+		));
+		
 		return $stat->rowCount() === 1;
 	}
 
