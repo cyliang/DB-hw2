@@ -44,6 +44,7 @@ $(document).ready(function() {
 
 	prepare_login_dialog();
 	prepare_regist_dialog();
+	prepare_flight();
 	listen_login();
 	$("#" + pages[now_page].div_id).slideDown();
 });
