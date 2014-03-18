@@ -28,8 +28,8 @@ function flight_goto_page(page) {
 			$("#flight_manage tbody").append("<tr>" +
 					"<td>" + data.data[plain].flight_number + "</td>" +
 					"<td>" + data.data[plain].departure + "</td>" +
-					"<td>" + data.data[plain].destination + "</td>" +
 					"<td>" + data.data[plain].departure_date + "</td>" +
+					"<td>" + data.data[plain].destination + "</td>" +
 					"<td>" + data.data[plain].arrival_date + "</td>" +
 					"</tr>");
 		}

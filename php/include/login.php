@@ -60,8 +60,8 @@ class Login {
 		return json_encode($this->is_login ? array('login' => 'yes', 'user' => $this->login_user) : array('login' => 'no'));
 	}
 
-	public function check() {
-		return $this->is_login;
+	public function check($check_admin = false) {
+		return $this->is_login && (!$check_admin || $this->login_user->is_admin);
 	}
 	
 	public function logout() {
@@ -85,7 +85,7 @@ class Login {
 			$this->is_login = true;
 			$_SESSION['login'] = 'yes';
 			$_SESSION['login_id'] = $this->login_user->id;
-			$_SESSION['login_admin'] = $this->login_user->is_admin ? 'yes' : 'no';
+			$_SESSION['login_admin'] = $this->login_user->is_admin;
 			$_SESSION['login_name'] = $this->login_user->name;
 			$_SESSION['login_email'] = $this->login_user->email;
 			$_SESSION['login_account'] = $this->login_user->account;

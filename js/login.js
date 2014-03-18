@@ -5,7 +5,8 @@ function listen_login() {
 	var source = new EventSource('php/check_login.php');
 	source.onmessage = function(e) {
 		var data = JSON.parse(e.data);
-		if(data.login != login) {
+		if(data.login != login || data.user.id != user.id) {
+			console.log(data.user);
 			login = data.login;
 			if(data.login == 'yes') {
 				user = data.user;
@@ -22,6 +23,12 @@ function onLogin() {
 	$("nav").slideDown();
 	$("#top_bar #login_state").text(user.name);
 	change_page('home');
+
+	if(user.is_admin == 1) {
+		$(".admin_option").show();
+	} else {
+		$(".admin_option").hide();
+	}
 }
 
 function onLogout() {
