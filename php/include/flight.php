@@ -6,7 +6,7 @@ class Flight {
 		$this->db = $db;
 	}
 
-	public function get_page($page_no = 1, $options = array()) {
+	public function get_page($page_no, $options = array()) {
 		$order = (isset($options['descend']) && $options['descend'] === true) ? "DESC" : "ASC";
 		$sort = (isset($options['sort']) && $options['sort'] == 'date') ? "departure_date" : "id";
 		$limit = isset($options['limit']) ? $options['limit'] : 10;

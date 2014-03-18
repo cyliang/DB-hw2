@@ -59,6 +59,10 @@ class Login {
 	public function __toString() {
 		return json_encode($this->is_login ? array('login' => 'yes', 'user' => $this->login_user) : array('login' => 'no'));
 	}
+
+	public function check() {
+		return $this->is_login;
+	}
 	
 	public function logout() {
 		$this->is_login = false;
