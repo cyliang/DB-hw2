@@ -47,7 +47,7 @@ class Login {
 					VALUES ( :username , :password , :name , :email , :admin );');
 		$stat->execute(array(
 			':username' => $user['username'],
-			':name' => $user['name'],
+			':name' => filter_var($user['name'], FILTER_SANITIZE_SPECIAL_CHARS),
 			':email' => $user['email'],
 			':admin' => ($user['admin'] == 'yes' ? 1 : 0),
 			':password' => password_hash($user['password'].$user['username'], PASSWORD_DEFAULT)

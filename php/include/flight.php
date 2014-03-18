@@ -10,9 +10,9 @@ class Flight {
 		$stat = $this->db->prepare("INSERT INTO `flight_flight` (`flight_number`, `departure`, `destination`, `departure_date`, `arrival_date`)
 						VALUES ( :no , :from , :to , :fromtime , :totime );");
 		$stat->execute(array(
-			':no' => $flight_info['number'],
-			':from' => $flight_info['departure'],
-			':to' => $flight_info['destination'],
+			':no' => filter_var($flight_info['number'], FILTER_SANITIZE_SPECIAL_CHARS),
+			':from' => filter_var($flight_info['departure'], FILTER_SANITIZE_SPECIAL_CHARS),
+			':to' => filter_var($flight_info['destination'], FILTER_SANITIZE_SPECIAL_CHARS),
 			':fromtime' => $flight_info['departure_date'],
 			':totime' => $flight_info['arrival_date']
 		));

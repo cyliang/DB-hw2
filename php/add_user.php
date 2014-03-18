@@ -8,7 +8,7 @@ if(strlen($_POST['name']) < 3) {
 	$alert_msg .= '必須輸入正確姓名！\n';
 }
 
-if(!preg_match("/^[\w\-]+\@[\w\-]+\.[\w\-]+$/",$_POST['email'])) {
+if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 	$alert_msg .= '必須輸入正確Email！\n';
 }
 
