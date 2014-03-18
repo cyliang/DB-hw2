@@ -34,7 +34,7 @@ class Flight {
 	}
 	
 	public function get_page_count() {
-		return $this->db->query("SELECT COUNT(*) FROM `flight_flight` ;")->fetchColumn();
+		return ceil($this->db->query("SELECT COUNT(*) FROM `flight_flight` ;")->fetchColumn() / 10);
 	}
 }
 ?>

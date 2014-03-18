@@ -146,6 +146,33 @@ button:active {
 	border-color: #00FF33;
 	background-color: #00FF33;
 }
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table tbody td {
+	padding: 5px 0px 4px 9px;
+	border:1px solid white;
+}
+
+table thead th {
+	padding: 7px 0px 6px 0px;
+	border:1px solid white;
+}
+
+table thead {
+	background-color: #330000;
+	color: #CCFFFF;
+}
+
+table tr.alt {
+	background-color: #B2FFB2;
+}
+
+table tbody tr:hover, table tbody tr.alt:hover {
+	background-color: #5CE65C;
+}
 
 .slide_help {
 	display: none;

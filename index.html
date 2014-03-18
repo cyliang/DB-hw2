@@ -168,14 +168,14 @@
 			<button type="button" id="flight_add_cancel" onClick="flight_adding_reset()">放棄</button>
 		</span>
 		<span id="flight_page_control">
-			<button type="button" id="flight_p_first">第一頁</button>
-			<button type="button" id="flight_p_previous">上一頁</button>
+			<button type="button" id="flight_p_first" onClick="flight_goto_page('first')">第一頁</button>
+			<button type="button" id="flight_p_previous" onClick="flight_goto_page('previous')">上一頁</button>
 			<input list="flight_p_list" id="flight_p_select" placeholder="第1/2頁">
 			<datalist id="flight_p_list">
 				<option val="1">1</option>
 			</datalist>
-			<button type="button" id="flight_p_next">下一頁</button>
-			<button type="button" id="flight_p_last">最後一頁</button>
+			<button type="button" id="flight_p_next" onClick="flight_goto_page('next')">下一頁</button>
+			<button type="button" id="flight_p_last" onClick="flight_goto_page('last')">最後一頁</button>
 		</span>
 		</form>
 	</section>
