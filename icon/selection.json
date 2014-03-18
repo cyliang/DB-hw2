@@ -47,6 +47,53 @@
 			},
 			"setIdx": 1,
 			"iconIdx": 6
+		},
+		{
+			"icon": {
+				"paths": [
+					"M512 0c-282.77 0-512 229.23-512 512s229.23 512 512 512 512-229.23 512-512-229.23-512-512-512zM416 832l-212-276 94-98 118 150 370-302 46 46-416 480z"
+				],
+				"tags": [
+					"checkmark-circle",
+					"tick",
+					"correct"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"id": 251,
+				"order": 3,
+				"prevSize": 32,
+				"code": 58882,
+				"name": "checkmark-circle",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 251
+		},
+		{
+			"icon": {
+				"paths": [
+					"M512 0c-282.77 0-512 229.23-512 512s229.23 512 512 512 512-229.23 512-512-229.23-512-512-512zM768 346.51l-165.488 165.49 165.488 165.488v90.512h-90.512l-165.488-165.488-165.49 165.488h-90.51v-90.512l165.49-165.488-165.49-165.49v-90.51h90.51l165.49 165.49 165.488-165.49h90.512v90.51z"
+				],
+				"tags": [
+					"cancel-circle",
+					"close",
+					"remove",
+					"delete"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"id": 250,
+				"order": 4,
+				"prevSize": 32,
+				"code": 58883,
+				"name": "cancel-circle",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 250
 		}
 	],
 	"height": 1024,
@@ -69,7 +116,8 @@
 			"showQuickUse": true,
 			"quickUsageToken": false,
 			"showMetrics": true,
-			"showMetadata": false
+			"showMetadata": false,
+			"autoHost": true
 		},
 		"imagePref": {
 			"color": 0,
@@ -85,6 +133,9 @@
 		"showLiga": false,
 		"showGrid": true,
 		"showGlyphs": true,
-		"showQuickUse": true
+		"showQuickUse": true,
+		"quickUsageToken": {
+			"UntitledProject1": "M2M5NmI2N2NhMjJjZjRkMWI3MTg4ZTZmNjlkN2M3OTIjMiMxMzk1MTgwMDczIyMj"
+		}
 	}
 }

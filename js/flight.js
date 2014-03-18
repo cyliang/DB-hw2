@@ -71,13 +71,14 @@ function flight_goto_page(page) {
 
 		$("#flight_manage tbody").empty();
 		for(var plain in data.data) {
-			$("#flight_manage tbody").append((plain % 2 == 1 ? '<tr class="alt">' : "<tr>") +
-					(user.is_admin == 1 ? '<td><span class="icon-pen"></span><span class="icon-trash"></span></td>' : "") +
-					"<td>" + data.data[plain].flight_number + "</td>" +
-					"<td>" + data.data[plain].departure + "</td>" +
-					"<td>" + data.data[plain].departure_date + "</td>" +
-					"<td>" + data.data[plain].destination + "</td>" +
-					"<td>" + data.data[plain].arrival_date + "</td>" +
+			$("#flight_manage tbody").append((plain % 2 == 1 ? '<tr class="alt"' : "<tr") + ' id="plain_row' + plain + '">' +
+					(user.is_admin == 1 ? '<td><span class="icon-pen" onClick="flight_editing(' + plain + ')"></span><span class="icon-trash"></span></td>' : "") +
+					'<td class="plain_id">' + data.data[plain].id + "</td>" +
+					'<td class="plain_no">' + data.data[plain].flight_number + "</td>" +
+					'<td class="plain_dept">' + data.data[plain].departure + "</td>" +
+					'<td class="plain_dept_date">' + data.data[plain].departure_date + "</td>" +
+					'<td class="plain_dest">' + data.data[plain].destination + "</td>" +
+					'<td class="plain_dest_date">' + data.data[plain].arrival_date + "</td>" +
 					"</tr>");
 		}
 		
@@ -112,6 +113,22 @@ function flight_manage_onEnter() {
 }
 
 function reset_flight_manage() {
+}
+
+function flight_editing(row) {
+	var id_field = $("#flight_manage tbody #plain_row" + row + " .plain_id");
+	var no_field = $("#flight_manage tbody #plain_row" + row + " .plain_no");
+	var dept_field = $("#flight_manage tbody #plain_row" + row + " .plain_dept");
+	var dept_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dept_date");
+	var dest_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest");
+	var dest_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest_date");
+	
+	id_field.html('<input type="hidden" name="id" value="' + id_field.text() + '" />' + id_field.text());
+	no_field.html('<input type="text" name="number" value="' + no_field.text() + '" />');
+	dept_field.html('<input type="text" name="departure" value="' + dept_field.text() + '" />');
+	dept_date_field.html('<input type="datetime-local" name="departure_date" value="' + dept_date_field.text().replace(" ", "T") + '" />');
+	dest_field.html('<input type="text" name="destination" value="' + dest_field.text() + '" />');
+	dest_date_field.html('<input type="datetime-local" name="arrival_date" value="' + dest_date_field.text().replace(" ", "T") + '" />');
 }
 
 function flight_adding() {
