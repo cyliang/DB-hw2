@@ -94,7 +94,7 @@ function flight_goto_page(page, callback) {
 		$("#flight_manage tbody").empty();
 		for(var plain in data.data) {
 			$("#flight_manage tbody").append((plain % 2 == 1 ? '<tr class="alt"' : "<tr") + ' id="plain_row' + plain + '">' +
-					(user.is_admin == 1 ? '<td class="plain_control"><a href="#" onClick="flight_editing(' + plain + ')"><span class="icon-pen"></span></a><a href="#"><span class="icon-trash"></span></a></td>' : "") +
+					(user.is_admin == 1 ? '<td class="plain_control"><a href="#" onClick="flight_editing(' + plain + ')"><span class="icon-pen"></span></a><a href="#" onClick="flight_delete(' + plain + ')"><span class="icon-trash"></span></a></td>' : "") +
 					'<td class="plain_id">' + data.data[plain].id + "</td>" +
 					'<td class="plain_no">' + data.data[plain].flight_number + "</td>" +
 					'<td class="plain_dept">' + data.data[plain].departure + "</td>" +
@@ -161,6 +161,24 @@ function flight_editing(row) {
 		$("#flight_manage tbody #plain_row" + row + " .plain_control").html('<button type="submit"></button><a href="#" onClick="$(\'#flight_manage tbody #plain_row' + row + ' .plain_control button\').click()"><span class="icon-checkmark-circle"></span></a><a href="#" onClick="flight_goto_page(\'now\')"><span class="icon-cancel-circle"></span></a>');
 		$("#flight_manage tbody #plain_row" + row + " .plain_control button").hide();
 	});
+}
+
+function flight_delete(row) {
+	if(confirm("真的要刪除此航班嗎？\n班機編號：" + flight_page_data[row].flight_number + "\n起飛：" + flight_page_data[row].departure_date + "於" + flight_page_data[row].departure + "\n降落：" + flight_page_data[row].arrival_date + "於" + flight_page_data[row].destination)) {
+		$.post('php/delete_flight.php', {id: flight_page_data[row].id}, function(data, status) {
+			if(status != 'success') {
+				alert('發生錯誤，已通報系統管理員，請稍後再重試');
+			} else if(data == 'not_admin') {
+				alert('身分錯誤！必須為管理員');
+				return;
+			} else if(data != 'success') {
+				alert('發生錯誤，已通報系統管理員，請稍後再重試');
+				return;
+			}
+			
+			flight_goto_page("now");
+		});
+	}
 }
 
 function flight_adding() {
