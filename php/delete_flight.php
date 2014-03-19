@@ -11,9 +11,9 @@ if(!$login->check(true)) {
 $db = new DB();
 $flight = new Flight($db);
 
-if(!isset($_POST['number'], $_POST['departure'], $_POST['destination'], $_POST['departure_date'], $_POST['arrival_date'])) {
+if(!isset($_POST['id'])) {
 	die("miss_arguments");
 }
 
-echo $flight->add($_POST) ? "success" : "fail";
+echo $flight->delete($_POST['id']) ? "success" : "fail";
 ?>

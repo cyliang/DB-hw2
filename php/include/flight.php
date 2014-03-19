@@ -34,6 +34,13 @@ class Flight {
 		
 		return true;
 	}
+	
+	public function delete($id) {
+		$stat = $this->db->prepare("DELETE FROM `flight_flight` WHERE `id` = ? ;");
+		$stat->execute(array($id));
+		
+		return $stat->rowCount() === 1;
+	}
 
 	public function get_page($page_no, $options = array()) {
 		$order = (isset($options['descend']) && $options['descend'] === true) ? "DESC" : "ASC";
