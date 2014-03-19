@@ -5,3 +5,23 @@
 #flight_manage #flight_page_control #flight_p_select {
 	width: 60px;
 }
+
+#flight_manage tbody .plain_control a {
+	text-decoration: none;
+}
+
+#flight_manage .icon-pen {
+	color: #99993D;
+}
+
+#flight_manage .icon-trash {
+	color: #990000;
+}
+
+#flight_manage .icon-checkmark-circle {
+	color: #00CC00;
+}
+
+#flight_manage .icon-cancel-circle {
+	color: #FF3300;
+}

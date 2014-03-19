@@ -32,7 +32,7 @@ class Flight {
 			':totime' => $flight_info['arrival_date']
 		));
 		
-		return $stat->rowCount() === 1;
+		return true;
 	}
 
 	public function get_page($page_no, $options = array()) {

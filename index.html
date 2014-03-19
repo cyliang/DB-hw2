@@ -140,7 +140,7 @@
 		<h1>Home Page</h1>
 	</section>
 	<section id="flight_manage">
-		<form method="POST" action="">
+		<form method="POST" id="flight_update_form" action="">
 		<table>
 		<thead>
 			<tr>
@@ -158,17 +158,18 @@
 		<tfoot>
 			<tr>
 				<td class="admin_option"></td>
-				<td><input type="text" name="number" placeholder="班機號碼 Flight No." required /></td>
-				<td><input type="text" name="departure" placeholder="起飛機場 Departure" required /></td>
-				<td><input type="datetime-local" name="departure_date" required /></td>
-				<td><input type="text" name="destination" placeholder="到達機場 Destination" required /></td>
-				<td><input type="datetime-local" name="arrival_date" required /></td>
+				<td></td>
+				<td><input type="text" name="number" form="flight_add_form" placeholder="班機號碼 Flight No." required /></td>
+				<td><input type="text" name="departure" form="flight_add_form" placeholder="起飛機場 Departure" required /></td>
+				<td><input type="datetime-local" name="departure_date" form="flight_add_form" required /></td>
+				<td><input type="text" name="destination" form="flight_add_form" placeholder="到達機場 Destination" required /></td>
+				<td><input type="datetime-local" name="arrival_date" form="flight_add_form" required /></td>
 			</tr>
 		</tfoot>
 		</table>
 		<span class="admin_option">
 			<button type="button" id="flight_add" onClick="flight_adding()">新增班機</button>
-			<button type="submit" id="flight_add_save">新增</button>
+			<button type="submit" id="flight_add_save" form="flight_add_form">新增</button>
 			<button type="button" id="flight_add_cancel" onClick="flight_adding_reset()">放棄</button>
 		</span>
 		<span id="flight_page_control">
@@ -182,6 +183,7 @@
 			<button type="button" id="flight_p_last" onClick="flight_goto_page('last')">最後一頁</button>
 		</span>
 		</form>
+		<form method="POST" id="flight_add_form" action=""></form>
 	</section>
 </main>
 </body>

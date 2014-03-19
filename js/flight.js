@@ -1,6 +1,7 @@
 var flight_now_page = 1;
 var flight_total_page = 0;
 var flight_sort_by = 'id';
+var flight_page_data;
 
 function prepare_flight() {
 	$("#flight_manage #flight_page_control #flight_p_select").bind('input', function() {
@@ -9,7 +10,7 @@ function prepare_flight() {
 		}
 	});
 
-	$("#flight_manage > form").submit(function() {
+	$("#flight_manage #flight_add_form").submit(function() {
 		event.preventDefault();
 		
 		$("#flight_manage #flight_add_cancal, #flight_manage #flight_add_save").hide();
@@ -24,13 +25,30 @@ function prepare_flight() {
 				return;
 			}
 			
-			flight_adding_reset();
 			flight_goto_page("last");
+		});
+	});
+	
+	$("#flight_manage #flight_update_form").submit(function() {
+		event.preventDefault();
+		
+		$.post('php/edit_flight.php', $("#flight_manage tbody input").serialize(), function(data, status) {
+			if(status != 'success') {
+				alert('發生錯誤，已通報系統管理員，請稍後再重試');
+			} else if(data == 'not_admin') {
+				alert('身分錯誤！必須為管理員');
+				return;
+			} else if(data != 'success') {
+				alert('發生錯誤，已通報系統管理員，請稍後再重試');
+				return;
+			}
+			
+			flight_goto_page("now");
 		});
 	});
 }
 
-function flight_goto_page(page) {
+function flight_goto_page(page, callback) {
 	switch(page) {
 	case "first":
 		page = 1;
@@ -47,6 +65,9 @@ function flight_goto_page(page) {
 		if(flight_now_page < flight_total_page) {
 			page = flight_now_page + 1;
 		}
+		break;
+	case "now":
+		page = flight_now_page;
 		break;
 	}
 	
@@ -68,11 +89,12 @@ function flight_goto_page(page) {
 
 		flight_now_page = page;
 		flight_total_page = data.page_count;
+		flight_page_data = data.data;
 
 		$("#flight_manage tbody").empty();
 		for(var plain in data.data) {
 			$("#flight_manage tbody").append((plain % 2 == 1 ? '<tr class="alt"' : "<tr") + ' id="plain_row' + plain + '">' +
-					(user.is_admin == 1 ? '<td><span class="icon-pen" onClick="flight_editing(' + plain + ')"></span><span class="icon-trash"></span></td>' : "") +
+					(user.is_admin == 1 ? '<td class="plain_control"><a href="#" onClick="flight_editing(' + plain + ')"><span class="icon-pen"></span></a><a href="#"><span class="icon-trash"></span></a></td>' : "") +
 					'<td class="plain_id">' + data.data[plain].id + "</td>" +
 					'<td class="plain_no">' + data.data[plain].flight_number + "</td>" +
 					'<td class="plain_dept">' + data.data[plain].departure + "</td>" +
@@ -103,6 +125,11 @@ function flight_goto_page(page) {
 			$("#flight_manage #flight_page_control #flight_p_last").show();
 			$("#flight_manage #flight_page_control #flight_p_next").show();
 		}
+		
+		flight_adding_reset();
+		if(callback) {
+			callback();
+		}
 	}, 'json');
 }
 
@@ -116,26 +143,33 @@ function reset_flight_manage() {
 }
 
 function flight_editing(row) {
-	var id_field = $("#flight_manage tbody #plain_row" + row + " .plain_id");
-	var no_field = $("#flight_manage tbody #plain_row" + row + " .plain_no");
-	var dept_field = $("#flight_manage tbody #plain_row" + row + " .plain_dept");
-	var dept_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dept_date");
-	var dest_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest");
-	var dest_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest_date");
-	
-	id_field.html('<input type="hidden" name="id" value="' + id_field.text() + '" />' + id_field.text());
-	no_field.html('<input type="text" name="number" value="' + no_field.text() + '" />');
-	dept_field.html('<input type="text" name="departure" value="' + dept_field.text() + '" />');
-	dept_date_field.html('<input type="datetime-local" name="departure_date" value="' + dept_date_field.text().replace(" ", "T") + '" />');
-	dest_field.html('<input type="text" name="destination" value="' + dest_field.text() + '" />');
-	dest_date_field.html('<input type="datetime-local" name="arrival_date" value="' + dest_date_field.text().replace(" ", "T") + '" />');
+	flight_goto_page("now", function() {
+		var id_field = $("#flight_manage tbody #plain_row" + row + " .plain_id");
+		var no_field = $("#flight_manage tbody #plain_row" + row + " .plain_no");
+		var dept_field = $("#flight_manage tbody #plain_row" + row + " .plain_dept");
+		var dept_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dept_date");
+		var dest_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest");
+		var dest_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest_date");
+		
+		id_field.html('<input type="hidden" name="id" value="' + flight_page_data[row].id + '" required />' + id_field.text());
+		no_field.html('<input type="text" name="number" value="' + flight_page_data[row].flight_number + '" required />');
+		dept_field.html('<input type="text" name="departure" value="' + flight_page_data[row].departure + '" required />');
+		dept_date_field.html('<input type="datetime-local" name="departure_date" value="' + flight_page_data[row].departure_date.replace(" ", "T") + '" required />');
+		dest_field.html('<input type="text" name="destination" value="' + flight_page_data[row].destination + '" required />');
+		dest_date_field.html('<input type="datetime-local" name="arrival_date" value="' + flight_page_data[row].arrival_date.replace(" ", "T") + '" required />');
+		
+		$("#flight_manage tbody #plain_row" + row + " .plain_control").html('<button type="submit"></button><a href="#" onClick="$(\'#flight_manage tbody #plain_row' + row + ' .plain_control button\').click()"><span class="icon-checkmark-circle"></span></a><a href="#" onClick="flight_goto_page(\'now\')"><span class="icon-cancel-circle"></span></a>');
+		$("#flight_manage tbody #plain_row" + row + " .plain_control button").hide();
+	});
 }
 
 function flight_adding() {
-	$("#flight_manage #flight_add").hide();
-	$("#flight_manage #flight_add_cancel").show();
-	$("#flight_manage #flight_add_save").show();
-	$("#flight_manage tfoot").show();
+	flight_goto_page("now", function() {
+		$("#flight_manage #flight_add").hide();
+		$("#flight_manage #flight_add_cancel").show();
+		$("#flight_manage #flight_add_save").show();
+		$("#flight_manage tfoot").show();
+	});
 }
 
 function flight_adding_reset() {
