@@ -6,7 +6,6 @@ function listen_login() {
 	source.onmessage = function(e) {
 		var data = JSON.parse(e.data);
 		if(data.login != login || data.user.id != user.id) {
-			console.log(data.user);
 			login = data.login;
 			if(data.login == 'yes') {
 				user = data.user;

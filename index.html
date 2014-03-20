@@ -12,6 +12,7 @@
 	<script src="js/regist_dialog.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/flight.js"></script>
+	<script src="js/user_set_dialog.js"></script>
 	<script src="js/main.js"></script>
 	
 	<title>航班管理系統 - 歡迎</title>
@@ -184,6 +185,39 @@
 		</span>
 		</form>
 		<form method="POST" id="flight_add_form" action=""></form>
+	</section>
+	<section id="uset" class="dialog">
+		<h3>輸入欲修改的資料</h3>
+		<form method="POST" action="" id="uset_form">
+			<div id="uset_rname">
+				<input type="text" name="name" placeholder="" required autofocus/>
+			</div>
+			<div id="uset_email">
+				<input type="email" name="email" placeholder="" required/>
+			</div>
+			<div id="uset_pwd">
+				<input type="password" name="password" pattern="^.{8,}$" title="請至少輸入8個字以上，可以使用任何符號" placeholder="輸入新密碼" required/>
+			</div>
+			<div id="uset_confirm_pwd">
+				<input type="password" placeholder="重複輸入新密碼" required/>
+				<div class="warning">
+					兩次輸入的密碼不符合。
+				</div>
+			</div>
+			<div id="uset_admin">
+				<input type="checkbox" name="admin" value="yes" id="admin_chk"/>
+				<label for="admin_chk">成為管理員</label>
+			</div>
+			<div class="button">
+				<button type="submit">更新</button>
+			</div>
+		</form>
+		<div id="uset_wait">
+			<h3>請稍後...更新中</h3>
+		</div>
+		<div id="uset_success">
+			<h3>更新成功！</h3>
+		</div>
 	</section>
 </main>
 </body>
