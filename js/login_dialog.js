@@ -11,12 +11,6 @@ function prepare_login_dialog() {
 		$("#login_dialog #what_reset_pwd").slideUp();
 	});
 	
-	$("#login_dialog #other_login").hover(function() {
-		$("#login_dialog #why_other_login").slideDown();
-	}, function() {
-		$("#login_dialog #why_other_login").slideUp();
-	});
-	
 	$("#login_dialog #login_form").submit(function() {
 		event.preventDefault();
 		
