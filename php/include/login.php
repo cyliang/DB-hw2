@@ -56,6 +56,32 @@ class Login {
 		return $stat->rowCount() === 1;
 	}
 	
+	public function edit($fields) {
+		if($this->db === null) {
+			die("DB is not set!");
+		}
+		$field_ary = array();
+		$val_ary = array(':id' => $this->login_user->id);
+		
+		if(isset($fields['name']) && $fields['name'] != "") {
+			$field_ary[] = ('`name` = :name');
+			$val_ary[':name'] = filter_var($fields['name'], FILTER_SANITIZE_SPECIAL_CHARS);
+		}
+		if(isset($fields['email']) && $fields['email'] != "") {
+			$field_ary[] = ('`email` = :email');
+			$val_ary[':email'] = $fields['email'];
+		}
+		if(isset($fields['password']) && $fields['password'] != "") {
+			$field_ary[] = ('`password` = :pwd');
+			$val_ary[':pwd'] = password_hash($fields['password'].$this->login_user->account, PASSWORD_DEFAULT);
+		}
+		
+		$stat = $this->db->prepare("UPDATE `flight_user` SET ".join(" , ", $field_ary)." WHERE `id` = :id ;");
+		$stat->execute($val_ary);
+		
+		return $stat->rowCount() === 1;
+	}
+	
 	public function __toString() {
 		return json_encode($this->is_login ? array('login' => 'yes', 'user' => $this->login_user) : array('login' => 'no'));
 	}

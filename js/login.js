@@ -5,7 +5,7 @@ function listen_login() {
 	var source = new EventSource('php/check_login.php');
 	source.onmessage = function(e) {
 		var data = JSON.parse(e.data);
-		if(data.login != login || data.user.id != user.id) {
+		if(data.login != login || data.login == 'yes' && data.user.id != user.id) {
 			login = data.login;
 			if(data.login == 'yes') {
 				user = data.user;
