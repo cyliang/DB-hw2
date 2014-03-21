@@ -50,3 +50,24 @@ function logout() {
 		}
 	});
 }
+
+window.fbAsyncInit = function() {
+	FB.init({
+		appId      : '568266273272509',
+		status     : true,
+		xfbml      : true
+	});
+	
+	FB.Event.subscribe('auth.authResponseChange', function(response) {
+		if(response.status === 'connected') {
+			FB.api('/me', {
+				locale: 'zh_TW',
+				fields: 'picture.width(100).height(100).type(normal),id,name'
+			}, function(resp) {
+				$("#has_login img").attr("src", resp.picture.data.url);
+				$("#has_login span").text(resp.name);
+				$("#has_login").show();
+			});
+		}
+	});
+};
