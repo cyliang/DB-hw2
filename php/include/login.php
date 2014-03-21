@@ -71,6 +71,10 @@ class Login {
 			$field_ary[] = ('`email` = :email');
 			$val_ary[':email'] = $fields['email'];
 		}
+		if(isset($fields['admin'])) {
+			$field_ary[] = ('`is_admin` = :admin');
+			$val_ary[':admin'] = $fields['admin'] == "yes" ? 1 : 0;
+		}
 		if(isset($fields['password']) && $fields['password'] != "") {
 			$field_ary[] = ('`password` = :pwd');
 			$val_ary[':pwd'] = password_hash($fields['password'].$this->login_user->account, PASSWORD_DEFAULT);
