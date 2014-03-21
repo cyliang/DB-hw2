@@ -84,6 +84,20 @@
 	vertical-align: top;
 }
 
+#uconnect > div {
+	display: block;
+	padding-left: 50px;
+	padding-right: 50px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: left;
+	height: 28px;
+}
+
+#uconnect button, #uconnect span {
+	float: right;
+}
+
 .FB_login {
 	background-color: #0066CC;
 }

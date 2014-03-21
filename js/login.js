@@ -37,7 +37,8 @@ function onLogin() {
 function onLogout() {
 	$("nav").slideUp();
 	$("#top_bar #login_state").html("未登入");
-	$("#user_info div").html("");
+	$("#user_info div[id!=user_FB]").html("");
+	$("#user_info #user_FB img").attr("src", "");
 	change_page('welcome');
 }
 
@@ -50,11 +51,3 @@ function logout() {
 		}
 	});
 }
-
-window.fbAsyncInit = function() {
-	FB.init({
-		appId      : '568266273272509',
-		status     : false,
-		xfbml      : true
-	});
-};

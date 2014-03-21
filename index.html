@@ -10,6 +10,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/login_dialog.js"></script>
 	<script src="js/regist_dialog.js"></script>
+	<script src="js/connect_FB.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/flight.js"></script>
 	<script src="js/user_set_dialog.js"></script>
@@ -43,6 +44,10 @@
 		<div id="user_name"></div>
 		<div id="user_email"></div>
 		<div id="user_admin"></div>
+		<div id="user_FB">
+			<img src="" />
+			<div id="user_FB_name"></div>
+		</div>
 	</div>
 <footer>
 	&copy; 2014 Chih-Yung Liang
@@ -216,10 +221,9 @@
 		</form>
 	</section>
 	<section id="uconnect" class="dialog">
-		<span>
 		<div id="uconnect_facebook">
 			Facebook連結：
-			<button class="FB_login">登入Facebook</button>
+			<button class="FB_login" onClick="connect_FB()">登入Facebook</button>
 			<span></span>
 		</div>
 		<div id="uconnect_google">
@@ -232,7 +236,6 @@
 			<button class="github_login">登入GitHub</button>
 			<span></span>
 		</div>
-		</span>
 	</section>
 </main>
 </body>

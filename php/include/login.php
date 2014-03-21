@@ -8,6 +8,7 @@ class User {
 	public $password;
 	public $is_admin;
 	public $account;
+	public $FB_id;
 }
 
 class Login {
@@ -18,6 +19,7 @@ class Login {
 	//		login_name
 	//		login_email
 	//		login_account
+	//		login_FB
 	private $is_login;
 	private $login_user;
 	private $db;
@@ -27,7 +29,7 @@ class Login {
 		session_start();
 		
 		if(isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && 
-			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account'])) {
+			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account'], $_SESSION['login_FB'])) {
 			$this->is_login = true;
 			
 			$this->login_user = new User();
@@ -36,6 +38,7 @@ class Login {
 			$this->login_user->name = $_SESSION['login_name'];
 			$this->login_user->email = $_SESSION['login_email'];
 			$this->login_user->account = $_SESSION['login_account'];
+			$this->login_user->FB_id = $_SESSION['login_FB'];
 			unset($this->login_user->password);
 		} else {
 			$this->logout();
@@ -86,6 +89,16 @@ class Login {
 		return $stat->rowCount() === 1;
 	}
 	
+	public function connect_FB($FB_id) {
+		if($this->db === null) {
+			die("DB is not set!");
+		}
+		$stat = $this->db->prepare("UPDATE `flight_user` SET `FB_id` = ?");
+		$stat->execute(array($FB_id));
+
+		return $stat->rowCount() === 1;
+	}
+
 	public function __toString() {
 		return json_encode($this->is_login ? array('login' => 'yes', 'user' => $this->login_user) : array('login' => 'no'));
 	}
@@ -98,7 +111,7 @@ class Login {
 		$this->is_login = false;
 		$this->login_user = null;
 		$_SESSION['login'] = 'no';
-		unset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account']);
+		unset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account'], $_SESSION['login_FB']);
 	}
 	
 	public function __invoke($username, $password) {
@@ -107,7 +120,7 @@ class Login {
 		}
 		$this->logout();
 		
-		$stat = $this->db->prepare('SELECT `id`, `name`, `email`, `password`, `is_admin`, `account`
+		$stat = $this->db->prepare('SELECT `id`, `name`, `email`, `password`, `is_admin`, `account`, `FB_id`
 									FROM `flight_user` WHERE `account` = ? ;');
 		$stat->execute(array($username));
 		if(($this->login_user = $stat->fetchObject("User")) && password_verify($password.$username, $this->login_user->password)) {
@@ -119,6 +132,7 @@ class Login {
 			$_SESSION['login_name'] = $this->login_user->name;
 			$_SESSION['login_email'] = $this->login_user->email;
 			$_SESSION['login_account'] = $this->login_user->account;
+			$_SESSION['login_FB'] = $this->login_user->FB_id;
 			
 			return true;
 		} else {
