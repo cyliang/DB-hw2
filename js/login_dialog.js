@@ -50,3 +50,8 @@ function reset_login_dialog() {
 	$("#login_dialog #login_wait").hide();
 	$("#login_dialog form").show();
 }
+
+function reset_password() {
+	var email = prompt("請輸入您的Email");
+	alert("很抱歉，目前郵件伺服器無法正常工作，若您需要登入建議註冊新的帳號，謝謝！");
+}
