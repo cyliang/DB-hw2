@@ -28,6 +28,12 @@ var pages = {
 		title: "航班管理", 
 		init: flight_manage_onEnter,
 		reset: reset_flight_manage
+	},
+	uset_dialog: {
+		div_id: "uset",
+		title: "使用者設定",
+		init: uset_onEnter,
+		reset: reset_uset
 	}
 };
 
@@ -45,6 +51,7 @@ $(document).ready(function() {
 	prepare_login_dialog();
 	prepare_regist_dialog();
 	prepare_flight();
+	prepare_uset();
 	listen_login();
 	$("#" + pages[now_page].div_id).slideDown();
 });

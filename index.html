@@ -12,6 +12,7 @@
 	<script src="js/regist_dialog.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/flight.js"></script>
+	<script src="js/user_set_dialog.js"></script>
 	<script src="js/main.js"></script>
 	
 	<title>航班管理系統 - 歡迎</title>
@@ -31,7 +32,7 @@
 </footer>
 <nav><ul>
 	<li><a href="#" onClick="change_page('flight_manage')">航班管理</a></li>
-	<li><a href="#">使用者設定</a></li>
+	<li><a href="#" onClick="change_page('uset_dialog')">使用者設定</a></li>
 	<li id="logout_button"><a href="#" onClick="logout()">登出</a></li>
 </ul></nav>
 <main>
@@ -44,10 +45,10 @@
 	</section>
 	<section id="login_dialog" class="dialog">
 		<form method="POST" action="" id="login_form">
-		<div>
-			<input type="text" name="username" pattern="^[A-Za-z0-9_]{6,}$" placeholder="輸入使用者名稱" autofocus required/>
+		<div class="field">
+			<input type="text" name="username" pattern="^[A-Za-z0-9_]{6,}$" placeholder="輸入帳號" autofocus required/>
 		</div>
-		<div>
+		<div class="field">
 			<input type="password" name="password" pattern="^.{8,}$" placeholder="輸入密碼" required/>
 		</div>
 		<p id="links">
@@ -89,10 +90,10 @@
 	</section>
 	<section id="regist_dialog" class="dialog">
 		<form method="POST" action="" id="new_first">
-			<div id="new_rname">
-				<input type="text" name="name" placeholder="輸入您的姓名" required autofocus/>
+			<div id="new_rname" class="field">
+				<input type="text" name="name" placeholder="輸入您的姓名（此欄位非帳號！）" required autofocus/>
 			</div>
-			<div id="new_email">
+			<div id="new_email" class="field">
 				<input type="email" name="email" placeholder="輸入您的電子郵件" required/>
 			</div>
 			<div class="button">
@@ -100,22 +101,22 @@
 			</div>
 		</form>
 		<form method="POST" action="" id="new_second">
-			<div id="new_uname">
-				<input type="text" name="username" pattern="^[A-Za-z0-9_]{6,}$" title="格式為6位以上的英文字母或數字，且不能包含'_'以外的符號" placeholder="輸入新使用者名稱" required autofocus/>
+			<div id="new_uname" class="field">
+				<input type="text" name="username" pattern="^[A-Za-z0-9_]{6,}$" title="格式為6位以上的英文字母或數字，且不能包含'_'以外的符號" placeholder="輸入新帳號" required autofocus/>
 				<div class="warning">
 					很抱歉、這個使用者名稱已經被註冊了。
 				</div>
 			</div>
-			<div id="new_pwd">
+			<div id="new_pwd" class="field">
 				<input type="password" name="password" pattern="^.{8,}$" title="請至少輸入8個字以上，可以使用任何符號" placeholder="輸入新密碼" required/>
 			</div>
-			<div id="new_confirm_pwd">
+			<div id="new_confirm_pwd" class="field">
 				<input type="password" placeholder="重複輸入新密碼" required/>
 				<div class="warning">
 					兩次輸入的密碼不符合。
 				</div>
 			</div>
-			<div id="new_admin">
+			<div id="new_admin" class="field">
 				<input type="checkbox" name="admin" value="yes" id="admin_chk"/>
 				<label for="admin_chk">成為管理員</label>
 			</div>
@@ -184,6 +185,30 @@
 		</span>
 		</form>
 		<form method="POST" id="flight_add_form" action=""></form>
+	</section>
+	<section id="uset" class="dialog">
+		<h3>輸入欲修改的資料</h3>
+		<form method="POST" action="" id="uset_form">
+			<div id="uset_rname">
+				<input type="text" name="name" placeholder="" autofocus/>
+			</div>
+			<div id="uset_email">
+				<input type="email" name="email" placeholder="" />
+			</div>
+			<div id="uset_pwd">
+				<input type="password" name="password" pattern="^.{8,}$" title="請至少輸入8個字以上，可以使用任何符號" placeholder="輸入新密碼"/>
+			</div>
+			<div id="uset_confirm_pwd">
+				<input type="password" placeholder="重複輸入新密碼"/>
+			</div>
+			<div id="uset_admin">
+				<input type="checkbox" name="admin" value="yes" id="admin_chk"/>
+				<label for="admin_chk">成為管理員</label>
+			</div>
+			<div class="button">
+				<button type="submit">更新</button>
+			</div>
+		</form>
 	</section>
 </main>
 </body>
