@@ -160,10 +160,10 @@
 			<tr>
 				<td class="admin_option"></td>
 				<td></td>
-				<td><input type="text" name="number" form="flight_add_form" placeholder="班機號碼 Flight No." required /></td>
-				<td><input type="text" name="departure" form="flight_add_form" placeholder="起飛機場 Departure" required /></td>
+				<td><input type="text" name="number" form="flight_add_form" pattern="^\S+$" title="班機號碼不得包含空白" placeholder="班機號碼 Flight No." required /></td>
+				<td><input type="text" name="departure" form="flight_add_form" pattern="^\S+$" title="起飛機場不得包含空白" placeholder="起飛機場 Departure" required /></td>
 				<td><input type="datetime-local" name="departure_date" form="flight_add_form" required /></td>
-				<td><input type="text" name="destination" form="flight_add_form" placeholder="到達機場 Destination" required /></td>
+				<td><input type="text" name="destination" form="flight_add_form" pattern="^\S+$" title="到達機場不得包含空白" placeholder="到達機場 Destination" required /></td>
 				<td><input type="datetime-local" name="arrival_date" form="flight_add_form" required /></td>
 			</tr>
 		</tfoot>

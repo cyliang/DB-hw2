@@ -151,14 +151,22 @@ function flight_editing(row) {
 		var dest_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest");
 		var dest_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest_date");
 		
-		id_field.html('<input type="hidden" name="id" value="' + flight_page_data[row].id + '" required />' + id_field.text());
-		no_field.html('<input type="text" name="number" value="' + flight_page_data[row].flight_number + '" required />');
-		dept_field.html('<input type="text" name="departure" value="' + flight_page_data[row].departure + '" required />');
+		id_field.html('<input type="hidden" name="id" value="' + flight_page_data[row].id + '" />' + id_field.text());
+		no_field.html('<input type="text" name="number" value="' + flight_page_data[row].flight_number + '" required pattern="^\S+$" title="班機號碼不得包含空白" />');
+		dept_field.html('<input type="text" name="departure" value="' + flight_page_data[row].departure + '" required pattern="^\S+$" title="起飛機場不得包含空白" />');
 		dept_date_field.html('<input type="datetime-local" name="departure_date" value="' + flight_page_data[row].departure_date.replace(" ", "T") + '" required />');
-		dest_field.html('<input type="text" name="destination" value="' + flight_page_data[row].destination + '" required />');
+		dest_field.html('<input type="text" name="destination" value="' + flight_page_data[row].destination + '" required pattern="^\S+$" title="到達機場不得包含空白" />');
 		dest_date_field.html('<input type="datetime-local" name="arrival_date" value="' + flight_page_data[row].arrival_date.replace(" ", "T") + '" required />');
 		
-		$("#flight_manage tbody #plain_row" + row + " .plain_control").html('<button type="submit"></button><a href="#" onClick="$(\'#flight_manage tbody #plain_row' + row + ' .plain_control button\').click()"><span class="icon-checkmark-circle"></span></a><a href="#" onClick="flight_goto_page(\'now\')"><span class="icon-cancel-circle"></span></a>');
+		$("#flight_manage tbody #plain_row" + row + " .plain_control").html(
+			'<button type="submit"></button>' +
+			'<a href="#" onClick="$(\'#flight_manage tbody #plain_row' + row + ' .plain_control button\').click()">' +
+				'<span class="icon-checkmark-circle"></span>' +
+			'</a>' +
+			'<a href="#" onClick="flight_goto_page(\'now\')">' +
+				'<span class="icon-cancel-circle"></span>' +
+			'</a>'
+		);
 		$("#flight_manage tbody #plain_row" + row + " .plain_control button").hide();
 	});
 }
