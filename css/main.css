@@ -178,3 +178,23 @@ table tbody tr:hover, table tbody tr.alt:hover {
 .slide_help {
 	display: none;
 }
+
+#user_info {
+	position: absolute;
+	display: none;
+	z-index: 5;
+	background-color: #CCFFFF;
+	top: 40px;
+	right: 42px;
+	height: 100px;
+	width: 300px;
+	font-size: small;
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+#user_info div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}

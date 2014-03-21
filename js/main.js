@@ -48,6 +48,14 @@ $(document).ready(function() {
 		change_page(login == 'yes' ? 'home' : 'welcome');
 	});
 
+	$("#login_state").hover(function() {
+		if(login == 'yes') {
+			$("#user_info").fadeIn();
+		}
+	}, function() {
+		$("#user_info").fadeOut();
+	});
+
 	prepare_login_dialog();
 	prepare_regist_dialog();
 	prepare_flight();
