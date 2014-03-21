@@ -50,6 +50,7 @@
 <nav><ul>
 	<li><a href="#" onClick="change_page('flight_manage')">航班管理</a></li>
 	<li><a href="#" onClick="change_page('uset_dialog')">使用者設定</a></li>
+	<li><a href="#" onClick="change_page('connect_account')">連結帳號</a></li>
 	<li id="logout_button"><a href="#" onClick="logout()">登出</a></li>
 </ul></nav>
 <main>
@@ -213,6 +214,25 @@
 				<button type="submit">更新</button>
 			</div>
 		</form>
+	</section>
+	<section id="uconnect" class="dialog">
+		<span>
+		<div id="uconnect_facebook">
+			Facebook連結：
+			<button class="FB_login">登入Facebook</button>
+			<span></span>
+		</div>
+		<div id="uconnect_google">
+			Google+&nbsp;連結：
+			<button class="google_login">登入Google+</button>
+			<span></span>
+		</div>
+		<div id="uconnect_github">
+			GitHub&nbsp;&nbsp;連結：
+			<button class="github_login">登入GitHub</button>
+			<span></span>
+		</div>
+		</span>
 	</section>
 </main>
 </body>

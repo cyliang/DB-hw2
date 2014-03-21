@@ -34,6 +34,12 @@ var pages = {
 		title: "使用者設定",
 		init: uset_onEnter,
 		reset: reset_uset
+	},
+	connect_account: {
+		div_id: "uconnect",
+		title: "連結帳號",
+		init: function() {},
+		reset: function() {}
 	}
 };
 
