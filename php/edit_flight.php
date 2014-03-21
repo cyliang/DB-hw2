@@ -11,8 +11,12 @@ if(!$login->check(true)) {
 $db = new DB();
 $flight = new Flight($db);
 
-if(!isset($_POST['id'], $_POST['number'], $_POST['departure'], $_POST['destination'], $_POST['departure_date'], $_POST['arrival_date'])) {
+if(!isset($_POST['id'], $_POST['number'], $_POST['departure'], $_POST['destination'], $_POST['departure_date'], $_POST['arrival_date']) || $_POST['number'] == "" || $_POST['departure'] == "" || $_POST['destination'] == "" || $_POST['arrival_date'] == "" || $_POST['departure_date'] == "") {
 	die("miss_arguments");
+}
+
+if(strpos($_POST['number'].$_POST['departure'].$_POST['destination'], ' ') !== false) {
+	die("contain_space");
 }
 
 echo $flight->edit($_POST) ? "success" : "fail";
