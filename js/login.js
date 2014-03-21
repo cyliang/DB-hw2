@@ -20,7 +20,7 @@ function listen_login() {
 
 function onLogin() {
 	$("nav").slideDown();
-	$("#top_bar #login_state").text(user.name);
+	$("#top_bar #login_state").html(user.name);
 	change_page('home');
 
 	if(user.is_admin == 1) {
@@ -32,7 +32,7 @@ function onLogin() {
 
 function onLogout() {
 	$("nav").slideUp();
-	$("#top_bar #login_state").text("未登入");
+	$("#top_bar #login_state").html("未登入");
 	change_page('welcome');
 }
 
