@@ -32,6 +32,9 @@ function onLogin() {
 	} else {
 		$(".admin_option").hide();
 	}
+	if(user.FB_id != "") {
+		onFB_login();
+	}
 }
 
 function onLogout() {
