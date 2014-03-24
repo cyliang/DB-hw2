@@ -96,6 +96,7 @@ class Login {
 		$stat = $this->db->prepare("UPDATE `flight_user` SET `FB_id` = ? WHERE `id` = ? ;");
 		$stat->execute(array($FB_id, $this->login_user->id));
 
+		$_SESSION['login_FB'] = $FB_id;
 		return $stat->rowCount() === 1;
 	}
 
