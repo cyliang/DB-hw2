@@ -7,6 +7,10 @@ window.fbAsyncInit = function() {
 		status     : false,
 		xfbml      : true
 	});
+
+	if(login == 'yes' && user.FB_id != "") {
+		onFB_login();
+	}
 };
 
 function connect_FB() {
