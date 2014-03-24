@@ -38,8 +38,8 @@ var pages = {
 	connect_account: {
 		div_id: "uconnect",
 		title: "連結帳號",
-		init: function() {},
-		reset: function() {}
+		init: connect_FB_init,
+		reset: connect_FB_reset
 	}
 };
 

@@ -41,7 +41,7 @@ function onLogout() {
 	$("nav").slideUp();
 	$("#top_bar #login_state").html("未登入");
 	$("#user_info div[id!=user_FB]").html("");
-	$("#user_info #user_FB img").attr("src", "");
+	onFB_logout();
 	change_page('welcome');
 }
 
