@@ -52,7 +52,17 @@
 		<div id="user_admin"></div>
 	</div>
 <footer>
-	&copy; 2014 Chih-Yung Liang
+	<div id="foot_copy">&copy; 2014 Chih-Yung Liang</div>
+	<div class="foot_hover">
+		除使用的圖片、icon、jQuery等Libarary之外，其餘本站的HTML, Javascript, PHP, CSS設計皆為我自己撰寫。
+	</div>
+	<div class="foot_hover">
+		<button type="button" id="auto_bg" onClick="auto_background(true)">自動更換背景</button>
+		<button type="button" id="stop_bg" onClick="auto_background(false)">停止自動背景</button><br>
+		<button type="button" onClick="change_background('prev')">上一張</button>
+		更換背景
+		<button type="button" onClick="change_background('next')">下一張</button>
+	</div>
 </footer>
 <nav><ul>
 	<li><a href="#" onClick="change_page('flight_manage')">航班管理</a></li>

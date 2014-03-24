@@ -62,6 +62,12 @@ $(document).ready(function() {
 		$("#user_info").fadeOut();
 	});
 
+	$("footer").hover(function() {
+		$("footer .foot_hover").slideDown();
+	}, function() {
+		$("footer .foot_hover").slideUp();
+	});
+
 	prepare_login_dialog();
 	prepare_regist_dialog();
 	prepare_background();
