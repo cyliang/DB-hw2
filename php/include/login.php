@@ -93,8 +93,8 @@ class Login {
 		if($this->db === null) {
 			die("DB is not set!");
 		}
-		$stat = $this->db->prepare("UPDATE `flight_user` SET `FB_id` = ?");
-		$stat->execute(array($FB_id));
+		$stat = $this->db->prepare("UPDATE `flight_user` SET `FB_id` = ? WHERE `id` = ? ;");
+		$stat->execute(array($FB_id, $this->login_user->id));
 
 		return $stat->rowCount() === 1;
 	}

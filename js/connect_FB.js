@@ -27,9 +27,9 @@ function connect_FB() {
 function onFB_login() {
 	FB.api("/" + user.FB_id, {
 		locale: "zh_TW",
-		fields: "picture.type(square),name"
+		fields: "picture.width(74).height(74),name"
 	}, function(response) {
-		$("#user_info #user_FB #user_FB_name").text(response.name);
+		$("#user_info #user_FB #user_FB_name").text("Facebook登入為：" + response.name);
 		$("#user_info #user_FB img").attr("src", response.picture.data.url);
 	});
 }
