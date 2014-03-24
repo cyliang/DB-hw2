@@ -64,6 +64,7 @@ $(document).ready(function() {
 
 	prepare_login_dialog();
 	prepare_regist_dialog();
+	prepare_background();
 	prepare_connect_FB();
 	prepare_flight();
 	prepare_uset();

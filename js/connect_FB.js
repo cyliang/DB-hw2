@@ -1,5 +1,5 @@
-user_fb = null;
-login_fb = 'no';
+var user_fb = null;
+var login_fb = 'no';
 
 function prepare_connect_FB() {
 }
