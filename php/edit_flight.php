@@ -11,7 +11,7 @@ if(!$login->check(true)) {
 $db = new DB();
 $flight = new Flight($db);
 
-if(!isset($_POST['id'], $_POST['number'], $_POST['departure'], $_POST['destination'], $_POST['departure_date'], $_POST['arrival_date']) || $_POST['number'] == "" || $_POST['departure'] == "" || $_POST['destination'] == "" || $_POST['arrival_date'] == "" || $_POST['departure_date'] == "") {
+if(!isset($_POST['id'], $_POST['number'], $_POST['departure'], $_POST['destination'], $_POST['departure_date'], $_POST['arrival_date'], $_POST['price']) || $_POST['number'] == "" || $_POST['departure'] == "" || $_POST['destination'] == "" || $_POST['arrival_date'] == "" || $_POST['departure_date'] == "" || $_POST['price'] == "") {
 	die("miss_arguments");
 }
 
