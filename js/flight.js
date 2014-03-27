@@ -101,6 +101,7 @@ function flight_goto_page(page, callback) {
 					'<td class="plain_dept_date">' + data.data[plain].departure_date + "</td>" +
 					'<td class="plain_dest">' + data.data[plain].destination + "</td>" +
 					'<td class="plain_dest_date">' + data.data[plain].arrival_date + "</td>" +
+					'<td class="plain_price">' + data.data[plain].ticket_price + "</td>" +
 					"</tr>");
 		}
 		
@@ -150,6 +151,7 @@ function flight_editing(row) {
 		var dept_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dept_date");
 		var dest_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest");
 		var dest_date_field = $("#flight_manage tbody #plain_row" + row + " .plain_dest_date");
+		var price_field = $("#flight_manage tbody #plain_row" + row + " .plain_price");
 		
 		id_field.html('<input type="hidden" name="id" value="' + flight_page_data[row].id + '" />' + id_field.text());
 		no_field.html('<input type="text" name="number" value="' + flight_page_data[row].flight_number + '" required pattern="^\\S+$" title="班機號碼不得包含空白" />');
@@ -157,6 +159,7 @@ function flight_editing(row) {
 		dept_date_field.html('<input type="datetime-local" name="departure_date" value="' + flight_page_data[row].departure_date.replace(" ", "T") + '" required />');
 		dest_field.html('<input type="text" name="destination" value="' + flight_page_data[row].destination + '" required pattern="^\\S+$" title="到達機場不得包含空白" />');
 		dest_date_field.html('<input type="datetime-local" name="arrival_date" value="' + flight_page_data[row].arrival_date.replace(" ", "T") + '" required />');
+		price_field.html('<input type="number" name="price" form="flight_add_form" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" value="' + flight_page_data[row].ticket_price + '" required />');
 		
 		$("#flight_manage tbody #plain_row" + row + " .plain_control").html(
 			'<button type="submit"></button>' +
@@ -172,7 +175,7 @@ function flight_editing(row) {
 }
 
 function flight_delete(row) {
-	if(confirm("真的要刪除此航班嗎？\n班機編號：" + flight_page_data[row].flight_number + "\n起飛：" + flight_page_data[row].departure_date + "於" + flight_page_data[row].departure + "\n降落：" + flight_page_data[row].arrival_date + "於" + flight_page_data[row].destination)) {
+	if(confirm("真的要刪除此航班嗎？\n班機編號：" + flight_page_data[row].flight_number + "\n起飛：" + flight_page_data[row].departure_date + "於" + flight_page_data[row].departure + "\n降落：" + flight_page_data[row].arrival_date + "於" + flight_page_data[row].destination + "\n價格：" + flight_page_data[row].ticket_price)) {
 		$.post('php/delete_flight.php', {id: flight_page_data[row].id}, function(data, status) {
 			if(status != 'success') {
 				alert('發生錯誤，已通報系統管理員，請稍後再重試');

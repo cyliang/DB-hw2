@@ -181,6 +181,7 @@
 				<th>起飛時間 Departure Time</th>
 				<th>到達機場 Destination</th>
 				<th>到達時間 Arrival Time</th>
+				<th>機票價錢 Ticket Price</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -194,6 +195,7 @@
 				<td><input type="datetime-local" name="departure_date" form="flight_add_form" required /></td>
 				<td><input type="text" name="destination" form="flight_add_form" pattern="^\S+$" title="到達機場不得包含空白" placeholder="到達機場 Destination" required /></td>
 				<td><input type="datetime-local" name="arrival_date" form="flight_add_form" required /></td>
+				<td><input type="number" name="price" form="flight_add_form" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" required /></td>
 			</tr>
 		</tfoot>
 		</table>
