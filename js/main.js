@@ -1,49 +1,22 @@
-var pages = {
-	login_dialog: {
-		div_id: "login_dialog",
-		title: "使用者登入",
-		init: function() {},
-		reset: reset_login_dialog
-	},
+var page = new Object();
+page.pages = {
+	login_dialog: login_dialog,
 	welcome: {
 		div_id: "welcome_page",
 		title: "歡迎",
-		init: function() {},
-		reset: function() {}
 	},
-	regist_dialog: {
-		div_id: "regist_dialog",
-		title: "註冊新使用者",
-		init: function() {},
-		reset: reset_regist_dialog
-	},
+	regist_dialog: regist_dialog,
 	home: {
 		div_id: "home_page",
 		title: "首頁",
-		init: function() {},
-		reset: function() {}
 	}, 
-	flight_manage: {
-		div_id: "flight_manage",
-		title: "航班管理", 
-		init: flight_manage_onEnter,
-		reset: reset_flight_manage
-	},
-	uset_dialog: {
-		div_id: "uset",
-		title: "使用者設定",
-		init: uset_onEnter,
-		reset: reset_uset
-	},
-	connect_account: {
-		div_id: "uconnect",
-		title: "連結帳號",
-		init: connect_FB_init,
-		reset: connect_FB_reset
-	}
+	flight_manage: flight,
+	uset_dialog: uset,
+	connect_account: connect_FB,
+	background: background
 };
 
-var now_page = "welcome";
+page.now_page = "welcome";
 
 $(document).ready(function() {
 	$("input").mouseenter(function() {
@@ -51,7 +24,7 @@ $(document).ready(function() {
 	});
 
 	$("h1").click(function() {
-		change_page(login == 'yes' ? 'home' : 'welcome');
+		page.change_page(login == 'yes' ? 'home' : 'welcome');
 	});
 
 	$("#login_state").hover(function() {
@@ -68,28 +41,35 @@ $(document).ready(function() {
 		$("footer .foot_hover").slideUp();
 	});
 
-	prepare_login_dialog();
-	prepare_regist_dialog();
-	prepare_background();
-	prepare_connect_FB();
-	prepare_flight();
-	prepare_uset();
+	for(var obj in page.pages) {
+		if(page.pages[obj].prepare) {
+			page.pages[obj].prepare();
+		}
+	}
+
 	listen_login();
-	$("#" + pages[now_page].div_id).slideDown();
+	$("#" + page.pages[page.now_page].div_id).slideDown();
 });
 
-function change_page(new_page) {
-	$("#" + pages[now_page].div_id).slideUp(function() {
-		pages[now_page].reset();
-		now_page = new_page;
-		pages[new_page].init();
-		$("#" + pages[new_page].div_id).slideDown();
+page.change_page = function(new_page) {
+	$("#" + this.pages[this.now_page].div_id).slideUp(function() {
+		if(page.pages[page.now_page].reset) {
+			page.pages[page.now_page].reset();
+		}
+
+		page.now_page = new_page;
+		
+		if(page.pages[new_page].init) {
+			page.pages[new_page].init();
+		}
+
+		$("#" + page.pages[new_page].div_id).slideDown();
 	});
 	
 	$("h2").slideUp(function() {
-		$("h2").text(pages[new_page].title);
+		$("h2").text(page.pages[new_page].title);
 		$("h2").slideDown();
 	});
 	
-	$("title").text("航班管理系統 - " + pages[new_page].title);
+	$("title").text("航班管理系統 - " + this.pages[new_page].title);
 }

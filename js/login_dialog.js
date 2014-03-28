@@ -1,4 +1,8 @@
-function prepare_login_dialog() {
+var login_dialog = new Object();
+
+login_dialog.div_id = "login_dialog";
+login_dialog.title = "使用者登入";
+login_dialog.prepare = function() {
 	$("#login_dialog #links a").first().hover(function() {
 		$("#login_dialog #what_new_user").slideDown();
 	}, function() {
@@ -39,13 +43,13 @@ function prepare_login_dialog() {
 	});
 }
 
-function reset_login_dialog() {
+login_dialog.reset = function() {
 	$("#login_dialog input").val("");
 	$("#login_dialog #login_wait").hide();
 	$("#login_dialog form").show();
 }
 
-function reset_password() {
+login_dialog.reset_password = function() {
 	var email = prompt("請輸入您的Email");
 	alert("很抱歉，目前郵件伺服器無法正常工作，若您需要登入建議註冊新的帳號，謝謝！");
 }

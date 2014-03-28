@@ -1,4 +1,8 @@
-function prepare_regist_dialog() {	
+var regist_dialog = new Object();
+
+regist_dialog.div_id = "regist_dialog";
+regist_dialog.title = "註冊新使用者";
+regist_dialog.prepare = function() {	
 	$("#regist_dialog #new_first").submit(function() {
 		event.preventDefault();
 		$("#regist_dialog #new_first input").attr("readonly", "");
@@ -51,7 +55,7 @@ function prepare_regist_dialog() {
 	});
 }
 
-function reset_regist_dialog() {
+regist_dialog.reset = function() {
 	$("#regist_dialog input[type!='checkbox']").val("");
 	$("#regist_dialog #admin_chk").removeAttr("checked");
 	$("#regist_dialog form input").removeAttr("readonly");
@@ -59,7 +63,7 @@ function reset_regist_dialog() {
 	$("#regist_dialog > div, #regist_dialog #new_second").hide();
 }
 
-function regist_success() {
+regist_dialog.success = function() {
 	$("#regist_dialog form").slideUp(function() {
 		$("#regist_dialog #new_wait").slideUp(function() {
 			$("#regist_dialog #regist_success").slideDown();
@@ -67,7 +71,7 @@ function regist_success() {
 	});
 }
 
-function regist_fail(message) {
+regist_dialog.fail = function(message) {
 	$("#regist_dialog #new_wait").slideUp(function() {
 		alert(message);
 		$("#regist_dialog form input").removeAttr("readonly");

@@ -1,38 +1,36 @@
-var now_background = 0;
-var max_background;
-var background_auto;
+var background = new Object();
+background.now = 0;
 
-function prepare_background() {
-	max_background = $(".bg img").length;
-	change_background(0);
-	auto_background(true);
+background.prepare = function() {
+	this.max = $(".bg img").length;
+	this.change(0);
+	this.set_auto(true);
 }
 
-function auto_background(set) {
+background.set_auto = function(set) {
 	if(set) {
 		$("footer #auto_bg").hide();
 		$("footer #stop_bg").show();
-		background_auto = setInterval(function() {
-			change_background("next");
+		this.auto = setInterval(function() {
+			background.change("next");
 		}, 30000);
 	} else {
 		$("footer #stop_bg").hide();
 		$("footer #auto_bg").show();
-		clearTimeout(background_auto);
+		clearTimeout(this.auto);
 	}
 }
 
-function change_background(no) {
+background.change = function(no) {
 	if(no == "next") {
-		no = (now_background + 1) % max_background;
+		no = (this.now + 1) % this.max;
 	} else if(no == "prev") {
-		no = now_background - 1;
+		no = this.now - 1;
 		if(no < 0) {
-			no = max_background - 1;
+			no = this.max - 1;
 		}
 	}
-	console.log(no);
-	$(".bg img:nth-of-type(" + (now_background + 1) + ")").fadeOut("slow");
+	$(".bg img:nth-of-type(" + (this.now + 1) + ")").fadeOut("slow");
 	$(".bg img:nth-of-type(" + (no + 1) + ")").fadeIn("slow");
-	now_background = no;
+	this.now = no;
 }

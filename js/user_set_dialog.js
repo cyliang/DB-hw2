@@ -1,4 +1,8 @@
-function prepare_uset() {
+var uset = new Object();
+
+uset.div_id = "uset";
+uset.title = "使用者設定";
+uset.prepare = function() {
 	$("#uset #uset_form").submit(function() {
 		event.preventDefault();
 		
@@ -43,7 +47,7 @@ function prepare_uset() {
 	});
 }
 
-function uset_onEnter() {
+uset.init = function() {
 	$("#uset #uset_rname input").attr("placeholder", "姓名：" + user.name);
 	$("#uset #uset_email input").attr("placeholder", "Email：" + user.email);
 	if(user.is_admin == 1) {
@@ -53,6 +57,6 @@ function uset_onEnter() {
 	}
 }
 
-function reset_uset() {
+uset.reset = function() {
 	$("#uset input[type!=checkbox]").val("");
 }
