@@ -185,31 +185,31 @@ button:active {
 	border-color: #00FF33;
 	background-color: #00FF33;
 }
-table {
+table:not([class^="ui"]) {
 	width: 100%;
 	border-collapse: collapse;
 }
 
-table tbody td {
+table:not([class^="ui"]) tbody td {
 	padding: 5px 0px 4px 9px;
 	border:1px solid white;
 }
 
-table thead th {
+table:not([class^="ui"]) thead th {
 	padding: 7px 0px 6px 0px;
 	border:1px solid white;
 }
 
-table thead {
+table:not([class^="ui"]) thead {
 	background-color: #330000;
 	color: #CCFFFF;
 }
 
-table tr.alt {
+table:not([class^="ui"]) tr.alt {
 	background-color: #B2FFB2;
 }
 
-table tbody tr:hover, table tbody tr.alt:hover {
+table:not([class^="ui"]) tbody tr:hover, table:not([class^="ui"]) tbody tr.alt:hover {
 	background-color: #5CE65C;
 }
 

@@ -7,6 +7,10 @@ flight.page_data;
 flight.div_id = "flight_manage";
 flight.title = "航班管理";
 flight.prepare = function() {
+	$("#flight_manage tfoot .date_input").datetimepicker({
+		dateFormat: 'yy-mm-dd',
+		clockType: 24
+	});
 	$("#flight_manage #flight_page_control #flight_p_select").bind('input', function() {
 		if($(this).val() != "" && $(this).val() != flight.now_page) {
 			flight.goto_page($(this).val());
