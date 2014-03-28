@@ -160,9 +160,9 @@ flight.editing = function(row) {
 		id_field.html('<input type="hidden" name="id" value="' + flight.page_data[row].id + '" />' + id_field.text());
 		no_field.html('<input type="text" name="number" value="' + flight.page_data[row].flight_number + '" required pattern="^\\S+$" title="班機號碼不得包含空白" />');
 		dept_field.html('<input type="text" name="departure" value="' + flight.page_data[row].departure + '" required pattern="^\\S+$" title="起飛機場不得包含空白" />');
-		dept_date_field.html('<input type="datetime-local" name="departure_date" value="' + flight.page_data[row].departure_date.replace(" ", "T") + '" required />');
+		dept_date_field.html('<input type="text" name="departure_date" value="' + flight.page_data[row].departure_date + '" class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="起飛時間 Departure Time" required />');
 		dest_field.html('<input type="text" name="destination" value="' + flight.page_data[row].destination + '" required pattern="^\\S+$" title="到達機場不得包含空白" />');
-		dest_date_field.html('<input type="datetime-local" name="arrival_date" value="' + flight.page_data[row].arrival_date.replace(" ", "T") + '" required />');
+		dest_date_field.html('<input type="text" name="arrival_date" value="' + flight.page_data[row].arrival_date + '" required class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="到達時間 Arrival Time" />');
 		price_field.html('<input type="number" name="price" form="flight_add_form" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" value="' + flight.page_data[row].ticket_price + '" required />');
 		
 		$("#flight_manage tbody #plain_row" + row + " .plain_control").html(
@@ -174,6 +174,11 @@ flight.editing = function(row) {
 				'<span class="icon-cancel-circle"></span>' +
 			'</a>'
 		);
+
+		$("#flight_manage tbody #plain_row" + row + " .date_input").datetimepicker({
+			dateFormat: 'yy-mm-dd',
+			clockType: 24
+		});
 		$("#flight_manage tbody #plain_row" + row + " .plain_control button").hide();
 	});
 }
