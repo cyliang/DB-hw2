@@ -19,10 +19,6 @@ page.pages = {
 page.now_page = "welcome";
 
 $(document).ready(function() {
-	$("input").mouseenter(function() {
-		$(this).focus();
-	});
-
 	$("h1").click(function() {
 		page.change_page(login == 'yes' ? 'home' : 'welcome');
 	});

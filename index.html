@@ -2,6 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/sunny/jquery-ui-1.10.4.custom.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.slidemoney.css" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<link rel="stylesheet" type="text/css" href="css/login_dialog.css" />
 	<link rel="stylesheet" type="text/css" href="css/welcome.css" />
@@ -12,6 +13,7 @@
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script src="js/jquery.datetimeduck.js"></script>
+	<script src="js/jquery.slidemoney.js"></script>
 	<script src="js/login_dialog.js"></script>
 	<script src="js/regist_dialog.js"></script>
 	<script src="js/connect_FB.js"></script>
@@ -198,7 +200,7 @@
 				<td><input type="text" name="departure_date" form="flight_add_form" class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="起飛時間 Departure Time" required /></td>
 				<td><input type="text" name="destination" form="flight_add_form" pattern="^\S+$" title="到達機場不得包含空白" placeholder="到達機場 Destination" required /></td>
 				<td><input type="text" name="arrival_date" form="flight_add_form" class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="到達時間 Arrival Time" required /></td>
-				<td><input type="number" name="price" form="flight_add_form" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" required /></td>
+				<td><input type="number" name="price" form="flight_add_form" class="money_input" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" required /></td>
 			</tr>
 		</tfoot>
 		</table>
