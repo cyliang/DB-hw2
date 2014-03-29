@@ -164,7 +164,7 @@ flight.editing = function(row) {
 		dept_date_field.html('<input type="text" name="departure_date" value="' + flight.page_data[row].departure_date + '" class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="起飛時間 Departure Time" required />');
 		dest_field.html('<input type="text" name="destination" value="' + flight.page_data[row].destination + '" required pattern="^\\S+$" title="到達機場不得包含空白" />');
 		dest_date_field.html('<input type="text" name="arrival_date" value="' + flight.page_data[row].arrival_date + '" required class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="到達時間 Arrival Time" />');
-		price_field.html('<input type="number" name="price" form="flight_add_form" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" value="' + flight.page_data[row].ticket_price + '" required />');
+		price_field.html('<input type="number" name="price" class="money_input" form="flight_add_form" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" value="' + flight.page_data[row].ticket_price + '" required />');
 		
 		$("#flight_manage tbody #plain_row" + row + " .plain_control").html(
 			'<button type="submit"></button>' +
@@ -180,6 +180,7 @@ flight.editing = function(row) {
 			dateFormat: 'yy-mm-dd',
 			clockType: 24
 		});
+		$("#flight_manage tbody #plain_row" + row + " .money_input").slidemoney();
 		$("#flight_manage tbody #plain_row" + row + " .plain_control button").hide();
 	});
 }
