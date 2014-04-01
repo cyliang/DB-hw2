@@ -24,22 +24,29 @@ class Login {
 	private $login_user;
 	private $db;
 
-	public function __construct($set_db = null) {
+	public function __construct($set_db) {
 		$this->db = $set_db;
 		session_start();
 		
 		if(isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && 
 			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account'], $_SESSION['login_FB'])) {
-			$this->is_login = true;
-			
-			$this->login_user = new User();
-			$this->login_user->is_admin = $_SESSION['login_admin'];
-			$this->login_user->id = $_SESSION['login_id'];
-			$this->login_user->name = $_SESSION['login_name'];
-			$this->login_user->email = $_SESSION['login_email'];
-			$this->login_user->account = $_SESSION['login_account'];
-			$this->login_user->FB_id = $_SESSION['login_FB'];
-			unset($this->login_user->password);
+			$stat = $db->prepare('SELECT COUNT(*) FROM `flight_user` WHERE `id` = ?');
+			$stat->execute(array($_SESSION['login_id']));
+
+			if($stat->fetchColumn() == 1) {
+				$this->is_login = true;
+				
+				$this->login_user = new User();
+				$this->login_user->is_admin = $_SESSION['login_admin'];
+				$this->login_user->id = $_SESSION['login_id'];
+				$this->login_user->name = $_SESSION['login_name'];
+				$this->login_user->email = $_SESSION['login_email'];
+				$this->login_user->account = $_SESSION['login_account'];
+				$this->login_user->FB_id = $_SESSION['login_FB'];
+				unset($this->login_user->password);
+			} else {
+				$this->logout();
+			}
 		} else {
 			$this->logout();
 		}
@@ -60,9 +67,6 @@ class Login {
 	}
 	
 	public function edit($fields) {
-		if($this->db === null) {
-			die("DB is not set!");
-		}
 		$field_ary = array();
 		$val_ary = array(':id' => $this->login_user->id);
 		
@@ -90,9 +94,6 @@ class Login {
 	}
 	
 	public function connect_FB($FB_id) {
-		if($this->db === null) {
-			die("DB is not set!");
-		}
 		$stat = $this->db->prepare("UPDATE `flight_user` SET `FB_id` = ? WHERE `id` = ? ;");
 		$stat->execute(array($FB_id, $this->login_user->id));
 
@@ -105,7 +106,12 @@ class Login {
 	}
 
 	public function check($check_admin = false) {
-		return $this->is_login && (!$check_admin || $this->login_user->is_admin);
+		if(!$this->is_login) {
+			die(json_encode(array("status" => "not_login")));
+		}
+		if($check_admin && !$this->login_user->is_admin) {
+			die(json_encode(array("status" => "not_admin")));
+		}
 	}
 	
 	public function logout() {
@@ -116,9 +122,6 @@ class Login {
 	}
 	
 	public function __invoke($username, $password) {
-		if($this->db === null) {
-			die("DB is not set!");
-		}
 		$this->logout();
 		
 		$stat = $this->db->prepare('SELECT `id`, `name`, `email`, `password`, `is_admin`, `account`, `FB_id`
