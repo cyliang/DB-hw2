@@ -4,16 +4,14 @@ require 'include/flight.php';
 require 'include/login.php';
 
 $login = new Login();
-if(!$login->check(true)) {
-	die("not_admin");
-}
+$login->check(true);
 
 $db = new DB();
 $flight = new Flight($db);
 
 if(!isset($_POST['id'])) {
-	die("miss_arguments");
+	die(json_encode(array("status" => "miss_arguments")));
 }
 
-echo $flight->delete($_POST['id']) ? "success" : "fail";
+echo json_encode(array("status" => ($flight->delete($_POST['id']) ? "success" : "fail")));
 ?>

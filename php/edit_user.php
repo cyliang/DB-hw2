@@ -23,9 +23,7 @@ if($alert_msg !== "") {
 	die(json_encode(array("status" => "fail", "msg" => $alert_msg)));
 }
 
-if(!$login->check()) {
-	die(json_encode(array("status" => "not_login")));
-}
+$login->check();
 
-echo json_encode($login->edit($_POST) ? array("status" => "success") : array("status" => "fail", "msg" => '發生錯誤，已通報系統管理員，請稍後再重試'));
+echo json_encode($login->edit($_POST) ? array("status" => "success") : array("status" => "fail"));
 ?>
