@@ -71,9 +71,10 @@
 </footer>
 <nav><ul>
 	<li><a href="#" onClick="page.change_page('flight_manage')">航班管理</a></li>
-	<li><a href="#" onClick="page.change_page('uset_dialog')">使用者設定</a></li>
-	<li><a href="#" onClick="page.change_page('connect_account')">連結帳號</a></li>
-	<li id="logout_button"><a href="#" onClick="logout()">登出</a></li>
+	<li class="admin_option"><a href="#" onClick="page.change_page('users_manage')">航班管理</a></li>
+	<li class="login_settings"><a href="#" onClick="logout()">登出</a></li>
+	<li class="login_settings"><a href="#" onClick="page.change_page('uset_dialog')">使用者設定</a></li>
+	<li class="login_settings"><a href="#" onClick="page.change_page('connect_account')">連結帳號</a></li>
 </ul></nav>
 <main>
 	<section id="welcome_page">
@@ -168,7 +169,7 @@
 		<h3>航班管理</h3>
 			檢視航班<span class="admin_option">、新增、修改、刪除航班</span>。
 		<h3>使用者設定</h3>
-			修改使用者的姓名、Email、密碼或管理員權限。
+			修改自己的姓名、Email或密碼。
 		<h3>連結帳號</h3>
 			將帳號與Facebook、Google+或GitHub連結以獲得更佳的用戶體驗。
 		<h3>登出</h3>
@@ -221,6 +222,31 @@
 		</span>
 		</form>
 		<form method="POST" id="flight_add_form" action=""></form>
+	</section>
+	<section id="users_manage">
+		<table>
+		<thead>
+			<tr>
+				<th>管理</th>
+				<th>帳號</th>
+				<th>權限</th>
+				<th>姓名</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
+		<span id="users_page_control">
+			<button type="button" id="users_p_first" onClick="">第一頁</button>
+			<button type="button" id="users_p_previous" onClick="">上一頁</button>
+			<input list="users_p_list" id="users_p_select" placeholder="第1/2頁">
+			<datalist id="users_p_list">
+				<option val="1">1</option>
+			</datalist>
+			<button type="button" id="users_p_next" onClick="">下一頁</button>
+			<button type="button" id="users_p_last" onClick="">最後一頁</button>
+		</span>
 	</section>
 	<section id="uset" class="dialog">
 		<h3>輸入欲修改的資料</h3>

@@ -144,7 +144,7 @@ nav li {
 	float: left;
 }
 
-nav #logout_button {
+nav .login_settings {
 	float: right;
 }
 

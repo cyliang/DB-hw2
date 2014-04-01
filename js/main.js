@@ -11,6 +11,7 @@ page.pages = {
 		title: "首頁",
 	}, 
 	flight_manage: flight,
+	users_manage: users_manage,
 	uset_dialog: uset,
 	connect_account: connect_FB,
 	background: background
