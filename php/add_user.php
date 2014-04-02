@@ -28,7 +28,7 @@ if($db->check_user_exist($_POST['username'])) {
 
 if($alert_msg === "" && Login::regist($_POST, $db)) {
 	echo json_encode(array("status" => "success"));
-} else
+} else {
 	die(json_encode(array("status" => "fail", "msg" => $alert_msg)));
 }
 

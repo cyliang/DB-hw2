@@ -3,11 +3,11 @@ require 'include/DB.php';
 require 'include/flight.php';
 require 'include/login.php';
 
-$login = new Login();
+$db = new DB();
+$login = new Login($db);
 
 $login->check();
 
-$db = new DB();
 $flight = new Flight($db);
 
 echo json_encode(array(

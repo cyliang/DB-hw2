@@ -24,11 +24,11 @@ class Login {
 	private $login_user;
 	private $db;
 
-	public function __construct($set_db) {
+	public function __construct($set_db = null) {
 		$this->db = $set_db;
 		session_start();
 		
-		if(isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && 
+		if($this->db !== null && isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && 
 			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account'], $_SESSION['login_FB'])) {
 			$stat = $this->db->prepare('SELECT COUNT(*) FROM `flight_user` WHERE `id` = ?');
 			$stat->execute(array($_SESSION['login_id']));
@@ -59,7 +59,7 @@ class Login {
 			':username' => $user['username'],
 			':name' => filter_var($user['name'], FILTER_SANITIZE_SPECIAL_CHARS),
 			':email' => $user['email'],
-			':admin' => ($user['admin'] == 'yes' ? 1 : 0),
+			':admin' => (isset($user['admin']) && $user['admin'] == 'yes' ? 1 : 0),
 			':password' => password_hash($user['password'].$user['username'], PASSWORD_DEFAULT)
 		));
 

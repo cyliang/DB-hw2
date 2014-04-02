@@ -3,10 +3,10 @@ require 'include/DB.php';
 require 'include/flight.php';
 require 'include/login.php';
 
-$login = new Login();
+$db = new DB();
+$login = new Login($db);
 $login->check(true);
 
-$db = new DB();
 $flight = new Flight($db);
 
 if(!isset($_POST['number'], $_POST['departure'], $_POST['destination'], $_POST['departure_date'], $_POST['arrival_date'], $_POST['price']) || $_POST['number'] == "" || $_POST['departure'] == "" || $_POST['destination'] == "" || $_POST['arrival_date'] == "" || $_POST['departure_date'] == "" || $_POST['price'] == "") {
