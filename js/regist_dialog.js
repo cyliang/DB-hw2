@@ -45,7 +45,7 @@ regist_dialog.prepare = function() {
 		$("#regist_dialog form input").attr("readonly", "");
 		$("#regist_dialog #new_second .button").slideUp(function() {
 			$("#regist_dialog #new_wait").slideDown(function() {
-				post('php/add_user.php', $("#regist_dialog form").serialize(), regist_dialog.success, regist_dialog.fail);
+				post('php/regist.php', $("#regist_dialog form").serialize(), regist_dialog.success, regist_dialog.fail);
 			});
 		});
 	});
