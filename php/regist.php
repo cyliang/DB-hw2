@@ -26,6 +26,7 @@ if($db->check_user_exist($_POST['username'])) {
 	$alert_msg .= "使用者名稱{$_POST['username']}已經存在，請輸入其他使用者名稱！";
 }
 
+unset($_POST['admin']);
 if($alert_msg === "" && Login::regist($_POST, $db)) {
 	echo json_encode(array("status" => "success"));
 } else {

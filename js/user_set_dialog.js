@@ -22,9 +22,6 @@ uset.prepare = function() {
 		if($("#uset #uset_pwd input").val() != "") {
 			edit_data.password = $("#uset #uset_pwd input").val();
 		}
-		if($("#uset #uset_admin input").prop("checked") != (user.is_admin == 1)) {
-			edit_data.admin = $("#uset #uset_admin input").prop("checked") ? 'yes' : 'no';
-		}
 		
 		if(Object.keys(edit_data).length > 0) {
 			post('php/edit_user.php', edit_data, function(data, status) {
@@ -38,11 +35,6 @@ uset.prepare = function() {
 uset.init = function() {
 	$("#uset #uset_rname input").attr("placeholder", "姓名：" + user.name);
 	$("#uset #uset_email input").attr("placeholder", "Email：" + user.email);
-	if(user.is_admin == 1) {
-		$("#uset #uset_admin input").attr("checked", "");
-	} else {
-		$("#uset #uset_admin input").removeAttr("checked");
-	}
 }
 
 uset.reset = function() {
