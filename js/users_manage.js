@@ -37,21 +37,9 @@ users_manage.goto_page = function(page, callback) {
 		break;
 	}
 	
-	$.post('php/list_users.php', {
+	post('php/list_users.php', {
 		page: page,
 	}, function(data, status) {
-		if(status != 'success') {
-			alert('發生錯誤，已通報系統管理員，請稍後再重試');
-			return;
-		}
-		if(data.status != 'OK') {
-			if(data.status == 'not_login') {
-				login = no;
-				onLogout();
-			}
-			return;
-		}
-
 		users_manage.now_page = page;
 		users_manage.total_page = data.page_count;
 		users_manage.page_data = data.data;
@@ -67,7 +55,7 @@ users_manage.goto_page = function(page, callback) {
 					"</tr>");
 		}
 		
-		$("#users_manage #users_page_control #users_p_select").attr("placeholder", page + ' / ' + users_manage.total_page);
+		$("#users_manage #users_page_control #users_p_select").attr("placeholder", page + ' / ' + users_manage.total_page)
 									.val("");
 		$("#users_manage #users_page_control #users_p_list").empty();
 		for(var i = 1; i <= users_manage.total_page; i++) {
@@ -92,13 +80,13 @@ users_manage.goto_page = function(page, callback) {
 		if(callback) {
 			callback();
 		}
-	}, 'json');
+	});
 }
 
-flight.init = function() {
-	flight.now_page = 1;
-	flight.goto_page(1);
+users_manage.init = function() {
+	this.now_page = 1;
+	this.goto_page(1);
 }
 
-flight.editing = function(row) {
+users_manage.editing = function(row) {
 }

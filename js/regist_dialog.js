@@ -45,11 +45,7 @@ regist_dialog.prepare = function() {
 		$("#regist_dialog form input").attr("readonly", "");
 		$("#regist_dialog #new_second .button").slideUp(function() {
 			$("#regist_dialog #new_wait").slideDown(function() {
-				$.post('php/add_user.php', $("#regist_dialog form").serialize(), function(data, status) {
-					if(status != "success") {
-						alert('發生錯誤，已通報系統管理員，請稍後再重試');
-					}
-				}, "script");
+				post('php/add_user.php', $("#regist_dialog form").serialize(), regist_dialog.success, regist_dialog.fail);
 			});
 		});
 	});
@@ -63,7 +59,7 @@ regist_dialog.reset = function() {
 	$("#regist_dialog > div, #regist_dialog #new_second").hide();
 }
 
-regist_dialog.success = function() {
+regist_dialog.success = function(data, status) {
 	$("#regist_dialog form").slideUp(function() {
 		$("#regist_dialog #new_wait").slideUp(function() {
 			$("#regist_dialog #regist_success").slideDown();
@@ -71,9 +67,8 @@ regist_dialog.success = function() {
 	});
 }
 
-regist_dialog.fail = function(message) {
+regist_dialog.fail = function(data, status) {
 	$("#regist_dialog #new_wait").slideUp(function() {
-		alert(message);
 		$("#regist_dialog form input").removeAttr("readonly");
 		$("#regist_dialog #new_second .button").slideDown();
 	});

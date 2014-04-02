@@ -22,17 +22,7 @@ flight.prepare = function() {
 		event.preventDefault();
 		
 		$("#flight_manage #flight_add_cancal, #flight_manage #flight_add_save").hide();
-		$.post('php/add_flight.php', $("#flight_manage tfoot input").serialize(), function(data, status) {
-			if(status != 'success') {
-				alert('發生錯誤，已通報系統管理員，請稍後再重試');
-			} else if(data == 'not_admin') {
-				alert('身分錯誤！必須為管理員');
-				return;
-			} else if(data != 'success') {
-				alert('發生錯誤，已通報系統管理員，請稍後再重試');
-				return;
-			}
-			
+		post('php/add_flight.php', $("#flight_manage tfoot input").serialize(), function(data, status) {
 			flight.goto_page("last");
 		});
 	});
@@ -40,17 +30,7 @@ flight.prepare = function() {
 	$("#flight_manage #flight_update_form").submit(function() {
 		event.preventDefault();
 		
-		$.post('php/edit_flight.php', $("#flight_manage tbody input").serialize(), function(data, status) {
-			if(status != 'success') {
-				alert('發生錯誤，已通報系統管理員，請稍後再重試');
-			} else if(data == 'not_admin') {
-				alert('身分錯誤！必須為管理員');
-				return;
-			} else if(data != 'success') {
-				alert('發生錯誤，已通報系統管理員，請稍後再重試');
-				return;
-			}
-			
+		post('php/edit_flight.php', $("#flight_manage tbody input").serialize(), function(data, status) {
 			flight.goto_page("now");
 		});
 	});
@@ -79,22 +59,10 @@ flight.goto_page = function(page, callback) {
 		break;
 	}
 	
-	$.post('php/list_flight.php', {
+	post('php/list_flight.php', {
 		page: page,
 		sortby: flight.sort_by
 	}, function(data, status) {
-		if(status != 'success') {
-			alert('發生錯誤，已通報系統管理員，請稍後再重試');
-			return;
-		}
-		if(data.status != 'OK') {
-			if(data.status == 'not_login') {
-				login = no;
-				onLogout();
-			}
-			return;
-		}
-
 		flight.now_page = page;
 		flight.total_page = data.page_count;
 		flight.page_data = data.data;
@@ -139,7 +107,7 @@ flight.goto_page = function(page, callback) {
 		if(callback) {
 			callback();
 		}
-	}, 'json');
+	});
 }
 
 flight.init = function() {
@@ -187,17 +155,7 @@ flight.editing = function(row) {
 
 flight.remove = function(row) {
 	if(confirm("真的要刪除此航班嗎？\n班機編號：" + flight.page_data[row].flight_number + "\n起飛：" + flight.page_data[row].departure_date + "於" + flight.page_data[row].departure + "\n降落：" + flight.page_data[row].arrival_date + "於" + flight.page_data[row].destination + "\n價格：" + flight.page_data[row].ticket_price)) {
-		$.post('php/delete_flight.php', {id: flight.page_data[row].id}, function(data, status) {
-			if(status != 'success') {
-				alert('發生錯誤，已通報系統管理員，請稍後再重試');
-			} else if(data == 'not_admin') {
-				alert('身分錯誤！必須為管理員');
-				return;
-			} else if(data != 'success') {
-				alert('發生錯誤，已通報系統管理員，請稍後再重試');
-				return;
-			}
-			
+		post('php/delete_flight.php', {id: flight.page_data[row].id}, function(data, status) {
 			flight.goto_page("now");
 		});
 	}

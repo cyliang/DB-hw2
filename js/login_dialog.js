@@ -21,11 +21,6 @@ login_dialog.prepare = function() {
 		$(this).slideUp(function() {
 			$("#login_dialog #login_wait").slideDown(function() {
 				$.post('php/user_login.php', $("#login_dialog #login_form").serialize(), function(data, status) {
-					if(status != 'success') {
-						alert('發生錯誤，已通報系統管理員，請稍後再重試');
-						return;
-					}
-					
 					if(data.login == 'yes') {
 						login = 'yes';
 						user = data.user;
@@ -37,7 +32,7 @@ login_dialog.prepare = function() {
 							$("#login_dialog #login_form").slideDown();
 						});
 					}
-				}, "json");
+				}, 'json');
 			});
 		});
 	});

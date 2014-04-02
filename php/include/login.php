@@ -30,7 +30,7 @@ class Login {
 		
 		if(isset($_SESSION['login']) && $_SESSION['login'] == 'yes' && 
 			isset($_SESSION['login_id'], $_SESSION['login_admin'], $_SESSION['login_name'], $_SESSION['login_email'], $_SESSION['login_account'], $_SESSION['login_FB'])) {
-			$stat = $db->prepare('SELECT COUNT(*) FROM `flight_user` WHERE `id` = ?');
+			$stat = $this->db->prepare('SELECT COUNT(*) FROM `flight_user` WHERE `id` = ?');
 			$stat->execute(array($_SESSION['login_id']));
 
 			if($stat->fetchColumn() == 1) {

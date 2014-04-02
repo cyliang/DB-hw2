@@ -27,22 +27,10 @@ uset.prepare = function() {
 		}
 		
 		if(Object.keys(edit_data).length > 0) {
-			$.post('php/edit_user.php', edit_data, function(data, status) {
-				if(status != 'success') {
-					alert('發生錯誤，已通報系統管理員，請稍後再重試');
-					return;
-				}
-				if(data.status != 'success') {
-					if(data.status == 'not_login') {
-						alert('未登入！');
-					} else {
-						alert(data.msg);
-					}
-					return;
-				}
+			post('php/edit_user.php', edit_data, function(data, status) {
 				alert("修改成功！請重新登入");
 				logout();
-			}, 'json');
+			});
 		}
 	});
 }

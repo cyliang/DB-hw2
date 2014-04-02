@@ -35,25 +35,16 @@ window.fbAsyncInit = function() {
 connect_FB.connect = function() {
 	FB.login(function(response) {
 		if(response.status === 'connected') {
-			$.post('php/connect_FB.php', {fb: response.authResponse.userID}, function(data, status) {
-				if(status == 'success' && data == 'success') {
-					user.FB_id = response.authResponse.userID;
-					connect.onLogin();
-				} else {
-					alert("發生錯誤！");
-				}
+			post('php/connect_FB.php', {fb: response.authResponse.userID}, function(data, status) {
+					connect_FB.onLogin();
 			});
 		}
 	});
 }
 
 connect_FB.disconnect = function() {
-	$.post('php/connect_FB.php', {fb: ""}, function(data, status) {
-		if(status == 'success' && data == 'success') {
-			connect_FB.onLogout();
-		} else {
-			alert("發生錯誤");
-		}
+	post('php/connect_FB.php', {fb: ""}, function(data, status) {
+		connect_FB.onLogout();
 	});
 }
 

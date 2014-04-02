@@ -47,11 +47,34 @@ function onLogout() {
 }
 
 function logout() {
-	$.post('php/user_logout.php', function(data, status) {
-		if(status == "success") {
-			login = 'no';
-			user = null;
-			onLogout();
-		}
+	post('php/user_logout.php', {}, function(data, status) {
+		login = 'no';
+		user = null;
+		onLogout();
 	});
+}
+
+function post(URL, data, onSuccess, onFail) {
+	$.post(URL, data, function(data, status) {
+		if(status != "success") {
+			alert("連線錯誤：請稍候再試");
+		} else if(data.status == "not_login") {
+			alert("請登入後再繼續");
+			logout();
+		} else if(data.status == "not_admin") {
+			alert("權限錯誤：必須為管理員");
+			logout();
+		} else if(data.status != "success") {
+			if(data.msg) {
+				alert(data.msg);
+			} else {
+				alert("發生錯誤，已通報系統管理員，請稍候再試。");
+			}
+			if(onFail) {
+				onFail(data, status);
+			}
+		} else {
+			onSuccess(data, status);
+		}
+	}, "json");
 }
