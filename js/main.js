@@ -46,6 +46,11 @@ $(document).ready(function() {
 
 	listen_login();
 	$("#" + page.pages[page.now_page].div_id).slideDown();
+	$(document).tooltip({content: function() {
+		var title = $(this).attr("placeholder") || "";
+		return $("<a>").text(title).html();
+	}, items: "[placeholder]:not([disabled])"
+	});
 });
 
 page.change_page = function(new_page) {
