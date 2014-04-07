@@ -89,4 +89,26 @@ users_manage.init = function() {
 }
 
 users_manage.editing = function(row) {
+	this.edit_dialog = $('<div title="使用者管理">')
+				.appendTo("#users_manage")
+				.html(
+					'<p>帳號：' + users_manage.page_data[row].account + '</p>' +
+					'<p>姓名：' + users_manage.page_data[row].name + '</p>' +
+					'<p>Email：' + users_manage.page_data[row].email + '</p>' +
+					'<p>權限：' + (users_manage.page_data[row].is_admin == 1 ? "管理員" : "一般使用者") + '</p>'
+				     )
+				.dialog({
+					autoOpen: true,
+					height: 400,
+					width: 400,
+					modal: true,
+					buttons: {
+						"刪除帳號": function() {
+							/* TODO */
+						},
+						"取消": function() {
+							$(this).dialog("close");
+						}
+					}
+				});
 }
