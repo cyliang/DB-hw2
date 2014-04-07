@@ -49,7 +49,7 @@ users_manage.goto_page = function(page, callback) {
 			$("#users_manage tbody").append((user % 2 == 1 ? '<tr class="alt"' : "<tr") + ' id="users_row' + user + '">' +
 					'<td><a href="#" onClick="users_manage.editing(' + user + ')">管理</a></td>' +
 					'<td>' + data.data[user].account + "</td>" +
-					'<td>' + (data.data[user].is_admin ? "管理員" : "一般使用者") + "</td>" +
+					'<td>' + (data.data[user].is_admin == 1 ? "管理員" : "一般使用者") + "</td>" +
 					'<td>' + data.data[user].name + "</td>" +
 					'<td>' + data.data[user].email + "</td>" +
 					"</tr>");

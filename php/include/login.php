@@ -88,6 +88,18 @@ class Login {
 		
 		return $stat->rowCount() === 1;
 	}
+
+	public function list_page($page) {
+		$stat = $this->db->prepare("SELECT `id`, `name`, `email`, `account`, `is_admin` FROM `flight_user` LIMIT :pos , 10;");
+		$stat->bindValue(":pos", ($page - 1) * 10, PDO::PARAM_INT);
+		$stat->execute();
+
+		return $stat->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function list_page_count() {
+		return ceil($this->db->query("SELECT COUNT(*) FROM `flight_user`;")->fetchColumn() / 10);
+	}
 	
 	public function connect_FB($FB_id) {
 		$stat = $this->db->prepare("UPDATE `flight_user` SET `FB_id` = ? WHERE `id` = ? ;");
