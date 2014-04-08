@@ -82,6 +82,10 @@ class Login {
 			$field_ary[] = ('`password` = :pwd');
 			$val_ary[':pwd'] = password_hash($fields['password'].$this->login_user->account, PASSWORD_DEFAULT);
 		}
+		if(isset($fields['admin'])) {
+			$field_ary[] = ('`is_admin` = :admin');
+			$val_ary[':admin'] = $fields['admin'] == "yes" ? 1 : 0;
+		}
 		
 		$stat = $this->db->prepare("UPDATE `flight_user` SET ".join(" , ", $field_ary)." WHERE `id` = :id ;");
 		$stat->execute($val_ary);
