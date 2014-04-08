@@ -104,7 +104,16 @@ users_manage.editing = function(row) {
 					modal: true,
 					buttons: {
 						"刪除帳號": function() {
-							/* TODO */
+							if(confirm("確定要刪除嗎？")) {
+								post('php/user_manage.php', {
+									funct: "del",
+									id: users_manage.page_data[row].id
+								}, function(data, status) {
+									users_manage.goto_page("now");
+									users_manage.edit_dialog.dialog("close");
+								}, function(data, status) {
+								});
+							}
 						},
 						"取消": function() {
 							$(this).dialog("close");

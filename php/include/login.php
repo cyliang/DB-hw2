@@ -89,6 +89,13 @@ class Login {
 		return $stat->rowCount() === 1;
 	}
 
+	public function delete($id) {
+		$stat = $this->db->prepare("DELETE FROM `flight_user` WHERE `id` = ? ;");
+		$stat->execute(array($id));
+
+		return $stat->rowCount() === 1;
+	}
+
 	public function list_page($page) {
 		$stat = $this->db->prepare("SELECT `id`, `name`, `email`, `account`, `is_admin` FROM `flight_user` LIMIT :pos , 10;");
 		$stat->bindValue(":pos", ($page - 1) * 10, PDO::PARAM_INT);
