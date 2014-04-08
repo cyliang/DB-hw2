@@ -15,11 +15,15 @@ users_manage.prepare = function() {
 
 	this.add_dialog = $("#users_manage #users_manage_add_dialog").dialog({
 		autoOpen: false,
-		height: 400,
-		width: 400,
+		height: 350,
+		width: 360,
 		modal: true,
 		buttons: {
-			"取消": function() {
+			"新增為管理員": function() {
+				users_manage.add_dialog.find("#users_manage_add_admin").click();
+			}, "新增為一般使用者": function() {
+				users_manage.add_dialog.find("#users_manage_add_user").click();
+			}, "取消": function() {
 				$(this).dialog("close");
 			}
 		}
@@ -136,7 +140,6 @@ users_manage.editing = function(row) {
 						users_manage.edit_dialog.dialog("close");
 						users_manage.editing(row);
 					});
-				}, function(data, status) {
 				});
 			}
 		};
@@ -154,4 +157,14 @@ users_manage.editing = function(row) {
 }
 
 users_manage.adding = function() {
+	this.add_dialog.children('input[type!="hidden"]').val("");
+	this.add_dialog.dialog("open");
+}
+
+users_manage.add_action = function(add_admin) {
+	$('#users_manage #users_manage_add_dialog form input[name="admin"]').val(add_admin ? "yes" : "no");
+	post('php/user_manage.php', $("#users_manage #users_manage_add_dialog form").serialize(), function(data, status) {
+		users_manage.goto_page("last");
+		users_manage.add_dialog.dialog("close");
+	});
 }

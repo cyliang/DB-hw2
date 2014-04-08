@@ -231,6 +231,7 @@
 		<tbody>
 		</tbody>
 		</table>
+		<button type="button" onClick="users_manage.adding()">新增使用者</button>
 		<span id="users_page_control">
 			<button type="button" id="users_p_first" onClick="">第一頁</button>
 			<button type="button" id="users_p_previous" onClick="">上一頁</button>
@@ -243,16 +244,26 @@
 		</span>
 		<div id="users_manage_add_dialog" title="新增使用者">
 		<form method="POST" action="">
-		<fieldset>
-			<label for="name">姓名：</label>
-			<input type="text" name="name" placeholder="輸入新使用者的姓名（此欄位非帳號！）" required autofocus />
-			<label for="email">Email：</label>
+		<div>
+			姓名：&nbsp;&nbsp;
+			<input type="text" name="name" placeholder="輸入新使用者的姓名           （此欄位非帳號！）" required />
+		</div>
+		<div>
+			Email：
 			<input type="email" name="email" placeholder="輸入新使用者的電子郵件" required />
-			<label for="username">帳號：</label>
-			<input type="text" name="username" pattern="^[A-Za-z0-9_]{6,}$" title="格式為6位以上的英文字母或數字，且不能包含'_'以外的符號" placeholder="輸入新使用者的帳號" required autofocus/>
-			<label for="password">密碼：</label>
+		</div>
+		<div>
+			帳號：&nbsp;&nbsp;
+			<input type="text" name="username" pattern="^[A-Za-z0-9_]{6,}$" title="格式為6位以上的英文字母或數字，且不能包含'_'以外的符號" placeholder="輸入新使用者的帳號" required />
+		</div>
+		<div>
+			密碼：&nbsp;&nbsp;
 			<input type="password" name="password" pattern="^.{8,}$" title="請至少輸入8個字以上，可以使用任何符號" placeholder="輸入新使用者的密碼" required/>
-		</fieldset>
+		</div>
+			<input type="hidden" name="admin" />
+			<input type="hidden" name="funct" value="add" />
+			<button type="submit" id="users_manage_add_user" style="display: none" onClick="users_manage.add_action(false)"></button>
+			<button type="submit" id="users_manage_add_admin" style="display: none" onClick="users_manage.add_action(true)"></button>
 		</form>
 		</div>
 	</section>
