@@ -66,9 +66,13 @@ class Login {
 		return $stat->rowCount() === 1;
 	}
 	
-	public function edit($fields) {
+	public function edit($id, $fields) {
 		$field_ary = array();
-		$val_ary = array(':id' => $this->login_user->id);
+		if($id === null) {
+			$val_ary = array(':id' => $this->login_user->id);
+		} else {
+			$val_ary = array(':id' => $id);
+		}
 		
 		if(isset($fields['name']) && $fields['name'] != "") {
 			$field_ary[] = ('`name` = :name');

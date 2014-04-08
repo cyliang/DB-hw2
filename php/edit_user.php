@@ -26,5 +26,5 @@ if($alert_msg !== "") {
 $login->check();
 
 unset($_POST['admin']);
-echo json_encode($login->edit($_POST) ? array("status" => "success") : array("status" => "fail"));
+echo json_encode($login->edit(null, $_POST) ? array("status" => "success") : array("status" => "fail"));
 ?>
