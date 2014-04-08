@@ -89,35 +89,54 @@ users_manage.init = function() {
 }
 
 users_manage.editing = function(row) {
+	var dialog_option = {
+		autoOpen: true,
+		height: 400,
+		width: 400,
+		modal: true,
+		buttons: {
+			"刪除帳號": function() {
+				if(confirm("確定要刪除嗎？")) {
+					post('php/user_manage.php', {
+						funct: "del",
+						id: users_manage.page_data[row].id
+					}, function(data, status) {
+						users_manage.goto_page("now");
+						users_manage.edit_dialog.dialog("close");
+					}, function(data, status) {
+					});
+				}
+			},
+			"取消": function() {
+				$(this).dialog("close");
+			}
+		}
+	};
+
+	if(this.page_data[row].is_admin != 1) {
+		dialog_option.buttons["升級權限"] = function() {
+			if(confirm("確定要升級嗎？")) {
+				post('php/user_manage.php', {
+					funct: "upgrade",
+					id: users_manage.page_data[row].id
+				}, function(data, status) {
+					users_manage.goto_page("now", function() {
+						users_manage.edit_dialog.dialog("close");
+						users_manage.editing(row);
+					});
+				}, function(data, status) {
+				});
+			}
+		};
+	}
+
 	this.edit_dialog = $('<div title="使用者管理">')
 				.appendTo("#users_manage")
 				.html(
-					'<p>帳號：' + users_manage.page_data[row].account + '</p>' +
-					'<p>姓名：' + users_manage.page_data[row].name + '</p>' +
-					'<p>Email：' + users_manage.page_data[row].email + '</p>' +
-					'<p>權限：' + (users_manage.page_data[row].is_admin == 1 ? "管理員" : "一般使用者") + '</p>'
+					'<p>帳號：' + this.page_data[row].account + '</p>' +
+					'<p>姓名：' + this.page_data[row].name + '</p>' +
+					'<p>Email：' + this.page_data[row].email + '</p>' +
+					'<p>權限：' + (this.page_data[row].is_admin == 1 ? "管理員" : "一般使用者") + '</p>'
 				     )
-				.dialog({
-					autoOpen: true,
-					height: 400,
-					width: 400,
-					modal: true,
-					buttons: {
-						"刪除帳號": function() {
-							if(confirm("確定要刪除嗎？")) {
-								post('php/user_manage.php', {
-									funct: "del",
-									id: users_manage.page_data[row].id
-								}, function(data, status) {
-									users_manage.goto_page("now");
-									users_manage.edit_dialog.dialog("close");
-								}, function(data, status) {
-								});
-							}
-						},
-						"取消": function() {
-							$(this).dialog("close");
-						}
-					}
-				});
+				.dialog(dialog_option);
 }

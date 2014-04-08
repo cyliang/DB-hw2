@@ -15,6 +15,9 @@ switch($_POST['funct']) {
 case "del":
 	result(isset($_POST['id']) && $login->delete($_POST['id']));
 	break;
+case "upgrade":
+	result(isset($_POST['id']) && $login->edit($_POST['id'], array("admin" => "yes")));
+	break;
 }
 
 ?>
