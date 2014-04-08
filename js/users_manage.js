@@ -12,6 +12,18 @@ users_manage.prepare = function() {
 			users_manage.goto_page($(this).val());
 		}
 	});
+
+	this.add_dialog = $("#users_manage #users_manage_add_dialog").dialog({
+		autoOpen: false,
+		height: 400,
+		width: 400,
+		modal: true,
+		buttons: {
+			"取消": function() {
+				$(this).dialog("close");
+			}
+		}
+	});
 }
 
 users_manage.goto_page = function(page, callback) {
@@ -139,4 +151,7 @@ users_manage.editing = function(row) {
 					'<p>權限：' + (this.page_data[row].is_admin == 1 ? "管理員" : "一般使用者") + '</p>'
 				     )
 				.dialog(dialog_option);
+}
+
+users_manage.adding = function() {
 }
