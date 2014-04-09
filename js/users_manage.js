@@ -28,6 +28,15 @@ users_manage.prepare = function() {
 			}
 		}
 	});
+
+	this.add_dialog.find("form").submit(function() {
+		event.preventDefault();
+
+		post('php/user_manage.php', $(this).serialize(), function(data, status) {
+			users_manage.goto_page("last");
+			users_manage.add_dialog.dialog("close");
+		});
+	});
 }
 
 users_manage.goto_page = function(page, callback) {
@@ -161,10 +170,3 @@ users_manage.adding = function() {
 	this.add_dialog.dialog("open");
 }
 
-users_manage.add_action = function(add_admin) {
-	$('#users_manage #users_manage_add_dialog form input[name="admin"]').val(add_admin ? "yes" : "no");
-	post('php/user_manage.php', $("#users_manage #users_manage_add_dialog form").serialize(), function(data, status) {
-		users_manage.goto_page("last");
-		users_manage.add_dialog.dialog("close");
-	});
-}

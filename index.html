@@ -260,10 +260,9 @@
 			密碼：&nbsp;&nbsp;
 			<input type="password" name="password" pattern="^.{8,}$" title="請至少輸入8個字以上，可以使用任何符號" placeholder="輸入新使用者的密碼" required/>
 		</div>
-			<input type="hidden" name="admin" />
 			<input type="hidden" name="funct" value="add" />
-			<button type="submit" id="users_manage_add_user" style="display: none" onClick="users_manage.add_action(false)"></button>
-			<button type="submit" id="users_manage_add_admin" style="display: none" onClick="users_manage.add_action(true)"></button>
+			<input type="submit" name="admin" value="no" id="users_manage_add_user" style="display: none"></button>
+			<input type="submit" name="admin" value="yes" id="users_manage_add_admin" style="display: none"></button>
 		</form>
 		</div>
 	</section>
