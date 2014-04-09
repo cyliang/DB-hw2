@@ -20,9 +20,11 @@ users_manage.prepare = function() {
 		modal: true,
 		buttons: {
 			"新增為管理員": function() {
-				users_manage.add_dialog.find("#users_manage_add_admin").click();
+				users_manage.add_dialog.find('input[name="admin"]').val("yes");
+				users_manage.add_dialog.find("button").click();
 			}, "新增為一般使用者": function() {
-				users_manage.add_dialog.find("#users_manage_add_user").click();
+				users_manage.add_dialog.find('input[name="admin"]').val("no");
+				users_manage.add_dialog.find("button").click();
 			}, "取消": function() {
 				$(this).dialog("close");
 			}
@@ -166,7 +168,7 @@ users_manage.editing = function(row) {
 }
 
 users_manage.adding = function() {
-	this.add_dialog.children('input[type!="hidden"]').val("");
+	this.add_dialog.find('input[type!="hidden"]').val("");
 	this.add_dialog.dialog("open");
 }
 
