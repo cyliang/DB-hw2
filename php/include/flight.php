@@ -20,6 +20,16 @@ class Flight {
 
 		return $stat->rowCount() === 1;
 	}
+
+	public function add_sheet($user_id, $name) {
+		$stat = $this->db->prepare("INSERT INTO `flight_compare_name` (`user_id`, `name`) VALUES ( :uid , :name );");
+		$stat->execute(array(
+			':uid' => $user_id,
+			':name' => filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS)
+		));
+
+		return $stat->rowCount() === 1;
+	}
 	
 	public function edit($flight_info) {
 		$stat = $this->db->prepare("UPDATE `flight_flight` SET `flight_number` = :no , `departure` = :from , 

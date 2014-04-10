@@ -135,6 +135,8 @@ class Login {
 		if($check_admin && !$this->login_user->is_admin) {
 			die(json_encode(array("status" => "not_admin")));
 		}
+
+		return $this->login_user->id;
 	}
 	
 	public function logout() {
