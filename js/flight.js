@@ -196,7 +196,7 @@ flight.sheet.prepare = function() {
 				var new_sheet = new Object();
 				new_sheet.name = prompt("請輸入新比價表的名稱");
 
-				if(new_sheet.name == null) {
+				if(new_sheet.name == null || new_sheet.name == "") {
 					return;
 				}
 
@@ -223,7 +223,7 @@ flight.sheet.prepare = function() {
 		buttons: {
 			"加入": function() {
 				post('php/sheet_manage.php', $(this).find('form').serialize(), function(data, status) {
-					$(this).dialog("close");
+					flight.sheet.add_dialog.dialog("close");
 				});
 			}, 
 			"取消": function() {
@@ -265,7 +265,7 @@ flight.sheet.add = function(row) {
 
 		for(var sheet in flight.sheet.tab_data) {
 			var tab = flight.sheet.tab_data[sheet];
-			if(data.data.indexOf(tab.id) == -1) {
+			if(!data.data.hasOwnProperty(tab.id)) {
 				sheet_avail = true;
 				form.append('<input type="checkbox" name="sheet_id[]" value="' + tab.id + '">' + tab.name + '<br>');
 			}
