@@ -206,8 +206,12 @@ flight.sheet.prepare = function() {
 				});
 			} else if(sheet_id == 'all') {
 				$("#flight_manage #flight_add").show();
+				flight.sheet_id = 'all';
+				flight.goto_page("first");
 			} else {
 				$("#flight_manage #flight_add").hide();
+				flight.sheet_id = sheet_id;
+				flight.goto_page("first");
 			}
 		}
 	}).removeClass("ui-widget");
