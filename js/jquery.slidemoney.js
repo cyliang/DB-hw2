@@ -6,8 +6,8 @@ $.widget("custom.slidemoney", {
 	},
 	showSlider: function(event) {
 		this.slider = $("<div>", {})
-			.addClass("ui-slidemoney")
 			.insertAfter(this.element)
+			.addClass("ui-slidemoney")
 			.slider({
 				min: 0,
 				max: 999.99,
@@ -27,13 +27,12 @@ $.widget("custom.slidemoney", {
 		});
 		this._off(this.element, "focusin");
 
-		this.slider.position({
+		this.slider.fadeIn().position({
 			of: this.element,
 			my: "center top+10",
 			at: "center bottom",
 			collision: "fit"
 		});
-		this.slider.fadeIn();
 	},
 	hideSlider: function(event) {
 		if(!this.element.add(this.slider).add(this.slider.find("*")).is(event.relatedTarget)) {

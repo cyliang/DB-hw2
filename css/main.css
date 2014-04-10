@@ -200,9 +200,13 @@ table:not([class^="ui"]) thead th {
 	border:1px solid white;
 }
 
-table:not([class^="ui"]) thead {
+table:not([class^="ui"]) thead tr {
 	background-color: #330000;
 	color: #CCFFFF;
+}
+
+table:not([class^="ui"]) tr {
+	background-color: white;
 }
 
 table:not([class^="ui"]) tr.alt {
