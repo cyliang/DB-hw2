@@ -49,6 +49,22 @@ class Flight {
 		));
 		return $stat->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_UNIQUE, 0);
 	}
+
+	public function insert_sheet($flight_id, $sheet_ids) {
+		$stat = $this->db->prepare("INSERT INTO `flight_compare_content` (`sheet_id`, `flight_id`)
+					VALUES ( :sid , :fid );");
+
+		$success_count = 0;
+		foreach($sheet_ids as $id) {
+			$stat->execute(array(
+				':sid' => $id,
+				':fid' => $flight_id
+			));
+			$success_count += $stat->rowCount();
+		}
+
+		return $success_count == count($sheet_ids);
+	}
 	
 	public function edit($flight_info) {
 		$stat = $this->db->prepare("UPDATE `flight_flight` SET `flight_number` = :no , `departure` = :from , 

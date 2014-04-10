@@ -35,5 +35,19 @@ case "insert_able":
 		'data' => $flight->check_sheet_able($id, $_POST['id'])
 	));
 	break;
+case 'insert':
+	if(!isset($_POST['flight_id'])) {
+		die(json_encode(array('status' => 'miss_arguments')));
+	} else if(!isset($_POST['sheet_id'])) {
+		die(json_encode(array(
+			'status' => 'miss_arguments',
+			'msg' => '沒有選取比價表'
+		)));
+	}
+
+	echo json_encode(array(
+		'status' => ($flight->insert_sheet($_POST['flight_id'], $_POST['sheet_id']) ? 'success' : 'fail')
+	));
+	break;
 }
 ?>

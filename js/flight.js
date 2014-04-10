@@ -217,6 +217,9 @@ flight.sheet.prepare = function() {
 		model: true,
 		buttons: {
 			"加入": function() {
+				post('php/sheet_manage.php', $(this).find('form').serialize(), function(data, status) {
+					$(this).dialog("close");
+				});
 			}, 
 			"取消": function() {
 				$(this).dialog("close");
@@ -250,19 +253,26 @@ flight.sheet.add = function(row) {
 		id: flight.page_data[row].id
 	}, function(data, status) {
 		var sheet_avail = false;
-		flight.sheet.add_dialog.html('<form action="#" method="POST">請選擇欲加入的比價表<br>');
+		flight.sheet.add_dialog.empty();
+		var form = $('<form action="#" method="POST">')
+				.appendTo(flight.sheet.add_dialog)
+				.html("請選擇欲加入的比價表<br>");
 
 		for(var sheet in flight.sheet.tab_data) {
 			var tab = flight.sheet.tab_data[sheet];
 			if(data.data.indexOf(tab.id) == -1) {
 				sheet_avail = true;
-				flight.sheet.add_dialog.append('<input type="checkbox" name="sheet_id[]" value="' + tab.id + '">' + tab.name + '<br>');
+				form.append('<input type="checkbox" name="sheet_id[]" value="' + tab.id + '">' + tab.name + '<br>');
 			}
 		}
-		flight.sheet.add_dialog.append('</form>');
+		form.append(
+			'<input type="hidden" name="flight_id" value="' + flight.page_data[row].id + '">' + 
+			'<input type="hidden" name="funct" value="insert">' + 
+			'</form>'
+		);
 
 		if(!sheet_avail) {
-			flight.sheet.add_dialog.html('');
+			flight.sheet.add_dialog.empty();
 			alert("沒有能加入的比價表");
 		} else {
 			flight.sheet.add_dialog.dialog("open");
