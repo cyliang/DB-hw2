@@ -181,6 +181,7 @@
 		<thead>
 			<tr>
 				<th class="admin_option">修改</th>
+				<th>比價</th>
 				<th>id</th>
 				<th>班機號碼 Flight No.</th>
 				<th>起飛機場 Departure</th>
@@ -195,6 +196,7 @@
 		<tfoot>
 			<tr>
 				<td class="admin_option"></td>
+				<td></td>
 				<td></td>
 				<td><input type="text" name="number" form="flight_add_form" pattern="^\S+$" title="班機號碼不得包含空白" placeholder="班機號碼 Flight No." required /></td>
 				<td><input type="text" name="departure" form="flight_add_form" pattern="^\S+$" title="起飛機場不得包含空白" placeholder="起飛機場 Departure" required /></td>
@@ -223,6 +225,8 @@
 		</form>
 		<form method="POST" id="flight_add_form" action=""></form>
 		</div>
+	</div>
+	<div id="flight_add_comp">
 	</div>
 	</section>
 	<section id="users_manage">

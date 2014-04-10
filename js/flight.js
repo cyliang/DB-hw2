@@ -77,6 +77,7 @@ flight.goto_page = function(page, callback) {
 		for(var plain in data.data) {
 			$("#flight_manage tbody").append((plain % 2 == 1 ? '<tr class="alt"' : "<tr") + ' id="plain_row' + plain + '">' +
 					(user.is_admin == 1 ? '<td class="plain_control"><a href="#" onClick="flight.editing(' + plain + ')"><span class="icon-pen"></span></a><a href="#" onClick="flight.remove(' + plain + ')"><span class="icon-trash"></span></a></td>' : "") +
+					'<td class="plain_comp"><a href="#" onClick="flight.sheet.add(' + plain + ')">比價</a></td>' +
 					'<td class="plain_id">' + data.data[plain].id + "</td>" +
 					'<td class="plain_no">' + data.data[plain].flight_number + "</td>" +
 					'<td class="plain_dept">' + data.data[plain].departure + "</td>" +
@@ -210,6 +211,19 @@ flight.sheet.prepare = function() {
 		}
 	}).removeClass("ui-widget");
 
+	this.add_dialog = $("#flight_manage #flight_add_comp").dialog({
+		autoOpen: false,
+		width: 300,
+		model: true,
+		buttons: {
+			"加入": function() {
+			}, 
+			"取消": function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+
 	this.refresh();
 }
 
@@ -218,6 +232,7 @@ flight.sheet.refresh = function() {
 		funct: 'list'
 	}, function(data, status) {
 		var tabs_ul = $("#flight_manage #flight_tab > ul").empty();
+		flight.sheet.tab_data = data.data;
 
 		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="all">所有航班</a></li>');
 		for(var tab in data.data) {
@@ -226,5 +241,31 @@ flight.sheet.refresh = function() {
 		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="add">新增比價表</a></li>');
 
 		flight.sheet.sheet_tabs.tabs("refresh");
+	});
+}
+
+flight.sheet.add = function(row) {
+	post('php/sheet_manage.php', {
+		funct: 'insert_able',
+		id: flight.page_data[row].id
+	}, function(data, status) {
+		var sheet_avail = false;
+		flight.sheet.add_dialog.html('<form action="#" method="POST">請選擇欲加入的比價表<br>');
+
+		for(var sheet in flight.sheet.tab_data) {
+			var tab = flight.sheet.tab_data[sheet];
+			if(data.data.indexOf(tab.id) == -1) {
+				sheet_avail = true;
+				flight.sheet.add_dialog.append('<input type="checkbox" name="sheet_id[]" value="' + tab.id + '">' + tab.name + '<br>');
+			}
+		}
+		flight.sheet.add_dialog.append('</form>');
+
+		if(!sheet_avail) {
+			flight.sheet.add_dialog.html('');
+			alert("沒有能加入的比價表");
+		} else {
+			flight.sheet.add_dialog.dialog("open");
+		}
 	});
 }

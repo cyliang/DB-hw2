@@ -37,6 +37,18 @@ class Flight {
 
 		return $stat->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	public function check_sheet_able($id, $flight_id) {
+		$stat = $this->db->prepare("SELECT `flight_compare_name`.`id` FROM 
+						`flight_compare_name` INNER JOIN `flight_compare_content` 
+						ON `flight_compare_name`.`id` = `flight_compare_content`.`sheet_id` 
+						WHERE `flight_compare_name`.`user_id` = :uid AND `flight_compare_content`.`flight_id` = :fid ;");
+		$stat->execute(array(
+			':uid' => $id,
+			':fid' => $flight_id
+		));
+		return $stat->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_UNIQUE, 0);
+	}
 	
 	public function edit($flight_info) {
 		$stat = $this->db->prepare("UPDATE `flight_flight` SET `flight_number` = :no , `departure` = :from , 
