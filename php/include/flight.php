@@ -89,21 +89,47 @@ class Flight {
 		return $stat->rowCount() === 1;
 	}
 
-	public function get_page($page_no, $options = array()) {
+	public function get_page($sheet_id, $page_no, $options = array()) {
 		$order = (isset($options['descend']) && $options['descend'] === true) ? "DESC" : "ASC";
 		$sort = (isset($options['sort']) && $options['sort'] == 'date') ? "departure_date" : "id";
 		$limit = isset($options['limit']) ? $options['limit'] : 10;
+		$where_fields = array();
+		$where_vals = array();
 
-		$stat = $this->db->prepare("SELECT * FROM `flight_flight` ORDER BY `{$sort}` {$order} LIMIT :pos , :rows ;");
+		if($sheet_id == 'all') {
+			$join_part = "";
+		} else {
+			$join_part = "INNER JOIN `flight_compare_content` 
+				ON `flight_flight`.`id` = `flight_compare_content`.`flight_id`";
+			$where_fields[] = '`flight_compare_content`.`sheet_id` = :sid';
+			$where_vals[':sid'] = $sheet_id;
+		}
+		$stat = $this->db->prepare("SELECT `flight_flight`.* FROM `flight_flight` 
+					{$join_part} ".(count($where_fields) > 0 ? "WHERE ".join(" AND ", $where_fields) : "")." 
+					ORDER BY `{$sort}` {$order} LIMIT :pos , :rows ;");
+
 		$stat->bindValue(":pos", ($page_no - 1) * 10, PDO::PARAM_INT);
 		$stat->bindValue(":rows", $limit, PDO::PARAM_INT);
+		foreach($where_vals as $k => $v) {
+			$stat->bindValue($k, $v);
+		}
 		$stat->execute();
 
 		return $stat->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	public function get_page_count() {
-		return ceil($this->db->query("SELECT COUNT(*) FROM `flight_flight` ;")->fetchColumn() / 10);
+	public function get_page_count($sheet_id) {
+		if($sheet_id == 'all') {
+			$count = $this->db->query("SELECT COUNT(*) FROM `flight_flight` ;")->fetchColumn();
+		} else {
+			$stat = $this->db->prepare("SELECT COUNT(`flight_flight`.`id`) 
+						FROM `flight_flight` INNER JOIN `flight_compare_content` 
+						ON `flight_flight`.`id` = `flight_compare_content`.`flight_id` 
+						WHERE `flight_compare_content`.`sheet_id` = ? ;");
+			$stat->execute(array($sheet_id));
+			$count = $stat->fetchColumn();
+		}
+		return ceil($count / 10);
 	}
 }
 ?>

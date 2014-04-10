@@ -67,6 +67,7 @@ flight.goto_page = function(page, callback) {
 	
 	post('php/list_flight.php', {
 		page: page,
+		sheet: this.sheet_id,
 		sortby: flight.sort_by
 	}, function(data, status) {
 		flight.now_page = page;

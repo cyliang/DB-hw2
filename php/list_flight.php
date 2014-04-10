@@ -12,8 +12,9 @@ $flight = new Flight($db);
 
 echo json_encode(array(
 	'status' => 'success',
-	'page_count' => $flight->get_page_count(),
+	'page_count' => $flight->get_page_count($_POST['sheet']),
 	'data' => $flight->get_page(
+		$_POST['sheet'],
 		isset($_POST['page']) ? $_POST['page'] : 1, 
 		isset($_POST['sortby']) ? array('sort' => $_POST['sortby']) : array()
 	)
