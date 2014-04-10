@@ -7,7 +7,20 @@ flight.page_data;
 flight.div_id = "flight_manage";
 flight.title = "航班管理";
 flight.prepare = function() {
-	$("#flight_manage #flight_tab").tabs().removeClass("ui-widget");
+	$("#flight_manage #flight_tab").tabs({
+		beforeActivate: function(event, ui) {
+			var sheet_id = ui.newTab.find("a").attr("sheet-id");
+
+			if(sheet_id == 'all' || sheet_id == 'add') {
+				$("#flight_manage #flight_add").show();
+
+				if(sheet_id == 'add') {
+				}
+			} else {
+				$("#flight_manage #flight_add").hide();
+			}
+		}
+	}).removeClass("ui-widget");
 
 	$("#flight_manage tfoot .date_input").datetimepicker({
 		dateFormat: 'yy-mm-dd',
