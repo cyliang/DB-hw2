@@ -30,6 +30,13 @@ class Flight {
 
 		return $stat->rowCount() === 1;
 	}
+
+	public function list_sheet($id) {
+		$stat = $this->db->prepare("SELECT `id`, `name` FROM `flight_compare_name` WHERE `user_id` = ? ;");
+		$stat->execute(array($id));
+
+		return $stat->fetchAll(PDO::FETCH_ASSOC);
+	}
 	
 	public function edit($flight_info) {
 		$stat = $this->db->prepare("UPDATE `flight_flight` SET `flight_number` = :no , `departure` = :from , 

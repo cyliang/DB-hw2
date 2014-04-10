@@ -185,7 +185,7 @@ flight.adding_reset = function() {
 }
 
 flight.sheet.prepare = function() {
-	$("#flight_manage #flight_tab").tabs({
+	this.sheet_tabs = $("#flight_manage #flight_tab").tabs({
 		beforeActivate: function(event, ui) {
 			var sheet_id = ui.newTab.find("a").attr("sheet-id");
 
@@ -200,6 +200,7 @@ flight.sheet.prepare = function() {
 
 				new_sheet.funct = "add";
 				post('php/sheet_manage.php', new_sheet, function(data, status) {
+					flight.sheet.refresh();
 				});
 			} else if(sheet_id == 'all') {
 				$("#flight_manage #flight_add").show();
@@ -208,6 +209,8 @@ flight.sheet.prepare = function() {
 			}
 		}
 	}).removeClass("ui-widget");
+
+	this.refresh();
 }
 
 flight.sheet.refresh = function() {
@@ -216,10 +219,12 @@ flight.sheet.refresh = function() {
 	}, function(data, status) {
 		var tabs_ul = $("#flight_manage #flight_tab > ul").empty();
 
-		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="all">所有航班</a></li>");
+		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="all">所有航班</a></li>');
 		for(var tab in data.data) {
 			tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="' + data.data[tab].id + '">' + data.data[tab].name + "</a></li>");
 		}
-		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="add">新增比價表</a></li>");
+		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="add">新增比價表</a></li>');
+
+		flight.sheet.sheet_tabs.tabs("refresh");
 	});
 }
