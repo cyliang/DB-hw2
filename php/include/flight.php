@@ -65,6 +65,16 @@ class Flight {
 
 		return $success_count == count($sheet_ids);
 	}
+
+	public function sheet_edit_name($sheet_id, $new_name) {
+		$stat = $this->db->prepare("UPDATE `flight_compare_name` SET `name` = :name WHERE `id` = :sid ;");
+		$stat->execute(array(
+			':name' => filter_var($new_name, FILTER_SANITIZE_SPECIAL_CHARS),
+			':sid' => $sheet_id
+		));
+
+		return true;
+	}
 	
 	public function edit($flight_info) {
 		$stat = $this->db->prepare("UPDATE `flight_flight` SET `flight_number` = :no , `departure` = :from , 

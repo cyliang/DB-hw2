@@ -49,5 +49,14 @@ case 'insert':
 		'status' => ($flight->insert_sheet($_POST['flight_id'], $_POST['sheet_id']) ? 'success' : 'fail')
 	));
 	break;
+case 'edit_name':
+	if(!isset($_POST['id'], $_POST['name'])) {
+		die(json_encode(array('status' => 'miss_arguments')));
+	}
+
+	echo json_encode(array(
+		'status' => ($flight->sheet_edit_name($_POST['id'], $_POST['name']) ? 'success' : 'fail')
+	));
+	break;
 }
 ?>

@@ -244,12 +244,33 @@ flight.sheet.refresh = function() {
 
 		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="all">所有航班</a></li>');
 		for(var tab in data.data) {
-			tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="' + data.data[tab].id + '">' + data.data[tab].name + "</a></li>");
+			tabs_ul.append(
+				'<li><a href="#flight_tab_table" sheet-id="' + data.data[tab].id + '">' + data.data[tab].name + 
+				'<a href="#" onClick="flight.sheet.edit_name(' + data.data[tab].id + ')">' + 
+					'<span class="icon-pen"></span>' + 
+				'</a>' + 
+				'<a href="#" onClick="flight.sheet.remove(' + data.data[tab].id + ')">' + 
+					'<span class="icon-trash"></span>' + 
+				'</a></a></li>'
+			);
 		}
 		tabs_ul.append('<li><a href="#flight_tab_table" sheet-id="add">新增比價表</a></li>');
 
 		flight.sheet.sheet_tabs.tabs("refresh");
 	});
+}
+
+flight.sheet.edit_name = function(sheet_id) {
+	var new_name = prompt("請輸入比價表的新名稱");
+	if(new_name != null && new_name != "") {
+		post('php/sheet_manage.php', {
+			funct: "edit_name",
+			id: sheet_id,
+			name: new_name
+		}, function(data, status) {
+			flight.sheet.refresh();
+		});
+	}
 }
 
 flight.sheet.add = function(row) {
