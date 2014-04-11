@@ -78,7 +78,9 @@ flight.goto_page = function(page, callback) {
 		for(var plain in data.data) {
 			$("#flight_manage tbody").append((plain % 2 == 1 ? '<tr class="alt"' : "<tr") + ' id="plain_row' + plain + '">' +
 					(user.is_admin == 1 ? '<td class="plain_control"><a href="#" onClick="flight.editing(' + plain + ')"><span class="icon-pen"></span></a><a href="#" onClick="flight.remove(' + plain + ')"><span class="icon-trash"></span></a></td>' : "") +
-					'<td class="plain_comp"><a href="#" onClick="flight.sheet.add(' + plain + ')">比價</a></td>' +
+					'<td class="plain_comp">' + (flight.sheet_id == 'all' ?
+						('<a href="#" onClick="flight.sheet.add(' + plain + ')">比價</a>') :
+						('<a href="#" onClick="flight.sheet.delete_flight(' + plain + ')">取消比價</a>')) + '</td>' +
 					'<td class="plain_id">' + data.data[plain].id + "</td>" +
 					'<td class="plain_no">' + data.data[plain].flight_number + "</td>" +
 					'<td class="plain_dept">' + data.data[plain].departure + "</td>" +
@@ -315,4 +317,16 @@ flight.sheet.add = function(row) {
 			flight.sheet.add_dialog.dialog("open");
 		}
 	});
+}
+
+flight.sheet.delete_flight = function(row) {
+	if(confirm("確定要將此航班移出此比價表嗎？")) {
+		post('php/sheet_manage.php', {
+			funct: 'delete_flight',
+			sheet_id: flight.sheet_id,
+			flight_id: flight.page_data[row].id
+		}, function(data, status) {
+			flight.goto_page("now");
+		});
+	}
 }
