@@ -88,6 +88,16 @@ class Flight {
 		return $stat->rowCount() === 1;
 	}
 	
+	public function remove_sheet($user_id, $sheet_id) {
+		$stat = $this->db->prepare("DELETE FROM `flight_compare_name` WHERE `id` = :sid AND `user_id` = :uid ;");
+		$stat->execute(array(
+			':sid' => $sheet_id,
+			':uid' => $user_id
+		));
+
+		return $stat->rowCount() === 1;
+	}
+
 	public function edit($flight_info) {
 		$stat = $this->db->prepare("UPDATE `flight_flight` SET `flight_number` = :no , `departure` = :from , 
 			`destination` = :to , `departure_date` = :fromtime , `arrival_date` = :totime , `ticket_price` = :price WHERE `id` = :id ;");

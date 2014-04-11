@@ -273,6 +273,17 @@ flight.sheet.edit_name = function(sheet_id, old_name) {
 	}
 }
 
+flight.sheet.remove = function(sheet_id) {
+	if(confirm("確定要刪除此比價表嗎？\n該比價表的紀錄將會消失（不會影響原始航班）")) {
+		post("php/sheet_manage.php", {
+			funct: "delete_sheet",
+			id: sheet_id
+		}, function(data, status) {
+			flight.sheet.refresh();
+		});
+	}
+}
+
 flight.sheet.add = function(row) {
 	post('php/sheet_manage.php', {
 		funct: 'insert_able',

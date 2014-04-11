@@ -58,5 +58,14 @@ case 'edit_name':
 		'status' => ($flight->sheet_edit_name($id, $_POST['id'], $_POST['name']) ? 'success' : 'fail')
 	));
 	break;
+case 'delete_sheet':
+	if(!isset($_POST['id'])) {
+		die(json_encode(array('status' => 'miss_arguments')));
+	}
+
+	echo json_encode(array(
+		'status' => ($flight->remove_sheet($id, $_POST['id']) ? 'success' : 'fail')
+	));
+	break;
 }
 ?>
