@@ -18,6 +18,19 @@ flight.prepare = function() {
 	});
 	$("#flight_manage tfoot .money_input").slidemoney();
 
+	this.options_dialog = $("#flight_manage #flight_options_dialog").dialog({
+		autoOpen: false,
+		width: 600,
+		model: true,
+		buttons: {
+			"確定": function() {
+			}, 
+			"取消": function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+
 	$("#flight_manage #flight_page_control #flight_p_select").bind('input', function() {
 		if($(this).val() != "" && $(this).val() != flight.now_page) {
 			flight.goto_page($(this).val());
@@ -120,10 +133,15 @@ flight.goto_page = function(page, callback) {
 	});
 }
 
+flight.set_options = function() {
+	this.options_dialog.dialog("open");
+}
+
 flight.init = function() {
-	flight.adding_reset();
-	flight.now_page = 1;
-	flight.goto_page(1);
+	this.sheet.init();
+	this.adding_reset();
+	this.now_page = 1;
+	this.goto_page(1);
 }
 
 flight.editing = function(row) {
@@ -233,7 +251,9 @@ flight.sheet.prepare = function() {
 			}
 		}
 	});
+}
 
+flight.sheet.init = function() {
 	this.refresh();
 }
 

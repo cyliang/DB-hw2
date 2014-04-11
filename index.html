@@ -223,10 +223,27 @@
 			<button type="button" id="flight_p_last" onClick="flight.goto_page('last')">最後一頁</button>
 		</span>
 		</form>
+		<div id="flight_list_options">
+			<button type="button" onClick="flight.set_options()">修改搜尋條件</button><br>
+			<span>目前搜尋條件為：無</span>
+		</div>
 		<form method="POST" id="flight_add_form" action=""></form>
 		</div>
 	</div>
-	<div id="flight_add_comp">
+	<div id="flight_add_comp" title="加入比價表">
+	</div>
+	<div id="flight_options_dialog" title="搜尋條件">
+		<fieldset>
+			<legend>排序</legend>
+			<select>
+			</select>
+		</fieldset>
+		<fieldset>
+			<legend>搜尋</legend>
+			<select>
+			</select>
+			<input type="text">
+		</fieldset>
 	</div>
 	</section>
 	<section id="users_manage">

@@ -25,3 +25,11 @@
 #flight_manage .icon-cancel-circle {
 	color: #FF3300;
 }
+
+#flight_manage #flight_list_options {
+	text-align: center;
+}
+
+#flight_manage #flight_list_options span {
+	color: red;
+}
