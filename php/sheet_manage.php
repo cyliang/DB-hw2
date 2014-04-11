@@ -46,7 +46,7 @@ case 'insert':
 	}
 
 	echo json_encode(array(
-		'status' => ($flight->insert_sheet($_POST['flight_id'], $_POST['sheet_id']) ? 'success' : 'fail')
+		'status' => ($flight->insert_sheet($id, $_POST['flight_id'], $_POST['sheet_id']) ? 'success' : 'fail')
 	));
 	break;
 case 'edit_name':
@@ -55,7 +55,7 @@ case 'edit_name':
 	}
 
 	echo json_encode(array(
-		'status' => ($flight->sheet_edit_name($_POST['id'], $_POST['name']) ? 'success' : 'fail')
+		'status' => ($flight->sheet_edit_name($id, $_POST['id'], $_POST['name']) ? 'success' : 'fail')
 	));
 	break;
 }

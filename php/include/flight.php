@@ -50,7 +50,18 @@ class Flight {
 		return $stat->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_UNIQUE, 0);
 	}
 
-	public function insert_sheet($flight_id, $sheet_ids) {
+	public function insert_sheet($user_id, $flight_id, $sheet_ids) {
+		$stat = $this->db->prepare("SELECT COUNT(*) FROM `flight_compare_name` WHERE `user_id` = :uid AND `id` = :sid ;");
+		foreach($sheet_ids as $id) {
+			$stat->execute(array(
+				':uid' => $user_id,
+				':sid' => $id
+			));
+			if($stat->fetchColumn() != 1) {
+				return false;
+			}
+		}
+
 		$stat = $this->db->prepare("INSERT INTO `flight_compare_content` (`sheet_id`, `flight_id`)
 					VALUES ( :sid , :fid );");
 
@@ -66,14 +77,15 @@ class Flight {
 		return $success_count == count($sheet_ids);
 	}
 
-	public function sheet_edit_name($sheet_id, $new_name) {
-		$stat = $this->db->prepare("UPDATE `flight_compare_name` SET `name` = :name WHERE `id` = :sid ;");
+	public function sheet_edit_name($user_id, $sheet_id, $new_name) {
+		$stat = $this->db->prepare("UPDATE `flight_compare_name` SET `name` = :name WHERE `id` = :sid AND `user_id` = :uid ;");
 		$stat->execute(array(
 			':name' => filter_var($new_name, FILTER_SANITIZE_SPECIAL_CHARS),
-			':sid' => $sheet_id
+			':sid' => $sheet_id,
+			':uid' => $user_id
 		));
 
-		return true;
+		return $stat->rowCount() === 1;
 	}
 	
 	public function edit($flight_info) {
