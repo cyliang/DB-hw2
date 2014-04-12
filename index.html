@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/sunny/jquery-ui-1.10.4.custom.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.slidemoney.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.onoff.css" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<link rel="stylesheet" type="text/css" href="css/login_dialog.css" />
 	<link rel="stylesheet" type="text/css" href="css/welcome.css" />
@@ -15,6 +16,7 @@
 	<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script src="js/jquery.datetimeduck.js"></script>
 	<script src="js/jquery.slidemoney.js"></script>
+	<script src="js/jquery.onoff.min.js"></script>
 	<script src="js/users_manage.js"></script>
 	<script src="js/login_dialog.js"></script>
 	<script src="js/regist_dialog.js"></script>
@@ -233,16 +235,15 @@
 	<div id="flight_add_comp" title="加入比價表">
 	</div>
 	<div id="flight_options_dialog" title="搜尋條件">
-		<fieldset>
+		<fieldset id="flight_sort">
 			<legend>排序</legend>
-			<select>
-			</select>
+			<div>
+				<select id="flight_sort1_col"></select>
+				<input type="checkbox" id="flight_sort1_order">
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend>搜尋</legend>
-			<select>
-			</select>
-			<input type="text">
 		</fieldset>
 	</div>
 	</section>

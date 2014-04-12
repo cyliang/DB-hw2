@@ -17,11 +17,12 @@ flight.prepare = function() {
 		clockType: 24
 	});
 	$("#flight_manage tfoot .money_input").slidemoney();
+	$("#flight_manage #flight_sort input:checkbox").onoff();
 
 	this.options_dialog = $("#flight_manage #flight_options_dialog").dialog({
 		autoOpen: false,
 		width: 600,
-		model: true,
+		modal: true,
 		buttons: {
 			"確定": function() {
 			}, 
@@ -239,7 +240,7 @@ flight.sheet.prepare = function() {
 	this.add_dialog = $("#flight_manage #flight_add_comp").dialog({
 		autoOpen: false,
 		width: 300,
-		model: true,
+		modal: true,
 		buttons: {
 			"加入": function() {
 				post('php/sheet_manage.php', $(this).find('form').serialize(), function(data, status) {
