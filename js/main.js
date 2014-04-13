@@ -12,6 +12,7 @@ page.pages = {
 	}, 
 	flight_manage: flight,
 	users_manage: users_manage,
+	airport_manage: airport,
 	uset_dialog: uset,
 	connect_account: connect_FB,
 	background: background

@@ -65,7 +65,7 @@ users_manage.goto_page = function(page, callback) {
 	}
 	
 	post('php/list_users.php', {
-		page: page,
+		page: page
 	}, function(data, status) {
 		users_manage.now_page = page;
 		users_manage.total_page = data.page_count;

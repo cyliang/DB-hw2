@@ -23,6 +23,7 @@
 	<script src="js/connect_FB.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/flight.js"></script>
+	<script src="js/airport.js"></script>
 	<script src="js/user_set_dialog.js"></script>
 	<script src="js/background.js"></script>
 	<script src="js/main.js"></script>
@@ -76,6 +77,7 @@
 <nav><ul>
 	<li><a href="#" onClick="page.change_page('flight_manage')">航班管理</a></li>
 	<li class="admin_option"><a href="#" onClick="page.change_page('users_manage')">使用者管理</a></li>
+	<li class="admin_option"><a href="#" onClick="page.change_page('airport_manage')">機場管理</a></li>
 	<li class="login_settings"><a href="#" onClick="logout()">登出</a></li>
 	<li class="login_settings"><a href="#" onClick="page.change_page('uset_dialog')">使用者設定</a></li>
 	<li class="login_settings"><a href="#" onClick="page.change_page('connect_account')">連結帳號</a></li>
@@ -267,6 +269,37 @@
 			<input type="text" id="flight_search_txt" style="display:none" placeholder="包含字串">
 		</fieldset>
 	</div>
+	</section>
+	<section id="airport_manage">
+		<table>
+		<thead>
+			<tr>
+				<th>修改</th>
+				<th>機場名稱</th>
+				<th>經度</th>
+				<th>緯度</th>
+				<th>地圖</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
+		<button type="button" onClick="airport.adding()">新增機場</button>
+		<span id="airport_page_control">
+			<button type="button" id="airport_p_first" onClick="airport.goto_page('first')">第一頁</button>
+			<button type="button" id="airport_p_previous" onClick="airport.goto_page('previous')">上一頁</button>
+			<input list="airport_p_list" id="airport_p_select" placeholder="第1/2頁">
+			<datalist id="airport_p_list">
+				<option val="1">1</option>
+			</datalist>
+			<button type="button" id="airport_p_next" onClick="airport.goto_page('next')">下一頁</button>
+			<button type="button" id="airport_p_last" onClick="airport.goto_page('last')">最後一頁</button>
+		</span>
+		<div id="airport_add_dialog" title="新增使用者">
+		<form method="POST" action="">
+			<button type="submit" style="display: none" /></button>
+		</form>
+		</div>
 	</section>
 	<section id="users_manage">
 		<table>
