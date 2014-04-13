@@ -235,15 +235,36 @@
 	<div id="flight_add_comp" title="加入比價表">
 	</div>
 	<div id="flight_options_dialog" title="搜尋條件">
-		<fieldset id="flight_sort">
-			<legend>排序</legend>
+		<fieldset>
+		<legend>排序</legend>
 			<div>
-				<select id="flight_sort1_col"></select>
-				<input type="checkbox" id="flight_sort1_order">
+				<input type="checkbox" id="flight_sort1_order" checked>
+				先排序：
+				<select id="flight_sort1_col">
+					<option value="ignore" selected>忽略</option>
+					<option value="id">id</option>
+					<option value="departure">起飛機場 Departure</option>
+					<option value="departure_date">起飛時間 Departure Time</option>
+					<option value="destination">到達機場 Destination</option>
+					<option value="arrival_date">到達時間 Arrival Time</option>
+					<option value="price">機票價錢 Ticket Price</option>
+				</select>
+			</div>
+			<hr>
+			<div>
+				<input type="checkbox" id="flight_sort2_order" checked>
+				再排序：班機號碼 Flight No.
 			</div>
 		</fieldset>
 		<fieldset>
-			<legend>搜尋</legend>
+		<legend>搜尋</legend>
+			<select id="flight_search_col">
+				<option value="ignore" selected>搜尋全部</option>
+				<option value="flight_number">班機號碼 Flight No.</option>
+				<option value="departure">起飛機場 Departure</option>
+				<option value="destination">到達機場 Destination</option>
+			</select>
+			<input type="text" id="flight_search_txt" style="display:none" placeholder="包含字串">
 		</fieldset>
 	</div>
 	</section>

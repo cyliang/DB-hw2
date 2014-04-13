@@ -2,8 +2,17 @@ var flight = new Object();
 flight.sheet = new Object();
 flight.now_page = 1;
 flight.total_page = 0;
-flight.sort_by = 'id';
-flight.sort_order = 'ASC';
+flight.options = {
+	sort: {
+		col: "ignore",
+		ord1: "ASC",
+		ord2: "ASC"
+	}, 
+	search: {
+		col: "ignore",
+		txt: ""
+	}
+};
 flight.page_data;
 flight.sheet_id = 'all';
 
@@ -17,7 +26,7 @@ flight.prepare = function() {
 		clockType: 24
 	});
 	$("#flight_manage tfoot .money_input").slidemoney();
-	$("#flight_manage #flight_sort input:checkbox").onoff();
+	$("#flight_manage input:checkbox").onoff();
 
 	this.options_dialog = $("#flight_manage #flight_options_dialog").dialog({
 		autoOpen: false,
@@ -25,10 +34,30 @@ flight.prepare = function() {
 		modal: true,
 		buttons: {
 			"確定": function() {
+				if($(this).find("#flight_search_col").val() == 'ignore') {
+					$(this).find("#flight_search_txt").val("");
+				}
+
+				flight.options.sort.col = $(this).find("#flight_sort1_col").val();
+				flight.options.sort.ord1 = $(this).find("#flight_sort1_ord").prop("checked") ? "ASC" : "DESC";
+				flight.options.sort.ord2 = $(this).find("#flight_sort2_ord").prop("checked") ? "ASC" : "DESC";
+
+				flight.options.search.col = $(this).find("#flight_search_col").val();
+				flight.options.search.txt = $(this).find("#flight_search_txt").val();
+
+				flight.goto_page("first");
+				$(this).dialog("close");
 			}, 
 			"取消": function() {
 				$(this).dialog("close");
 			}
+		}
+	});
+	this.options_dialog.find("#flight_search_col").change(function() {
+		if($(this).val() == "ignore") {
+			flight.options_dialog.find("#flight_search_txt").fadeOut();
+		} else {
+			flight.options_dialog.find("#flight_search_txt").fadeIn();
 		}
 	});
 
@@ -82,7 +111,11 @@ flight.goto_page = function(page, callback) {
 	post('php/list_flight.php', {
 		page: page,
 		sheet: this.sheet_id,
-		sortby: flight.sort_by
+		sort_col: this.options.sort.sort_col,
+		sort_ord1: this.options.sort.sort_ord1,
+		sort_ord2: this.options.sort.sort_ord2,
+		search_col: this.options.search.col,
+		search_txt: this.options.search.txt
 	}, function(data, status) {
 		flight.now_page = page;
 		flight.total_page = data.page_count;
