@@ -10,9 +10,9 @@ class Airport {
 		$stat = $this->db->prepare("INSERT INTO `flight_airport` (`name`, `longitude`, `latitude`)
 						VALUES ( :name , :long , :lat );");
 		$stat->execute(array(
-			':name' => filter_var($flight_info['name'], FILTER_SANITIZE_SPECIAL_CHARS),
-			':long' => $flight_info['longitude'],
-			':lat' => $flight_info['latitude']
+			':name' => filter_var($airport_info['name'], FILTER_SANITIZE_SPECIAL_CHARS),
+			':long' => $airport_info['longitude'],
+			':lat' => $airport_info['latitude']
 		));
 
 		return $stat->rowCount() === 1;
@@ -24,8 +24,8 @@ class Airport {
 		$stat->execute(array(
 			':id' => $airport_info['id'],
 			':name' => filter_var($airport_info['name'], FILTER_SANITIZE_SPECIAL_CHARS),
-			':long' => $flight_info['longtitude'],
-			':lat' => $flight_info['latitude']
+			':long' => $airport_info['longtitude'],
+			':lat' => $airport_info['latitude']
 		));
 		
 		return true;

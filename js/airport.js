@@ -87,6 +87,7 @@ airport.goto_page = function(page, callback) {
 					'<td>' + data.data[item].name + "</td>" +
 					'<td>' + data.data[item].longitude + "</td>" +
 					'<td>' + data.data[item].latitude + "</td>" +
+					'<td></td>' + 
 					"</tr>");
 		}
 		

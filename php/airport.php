@@ -20,5 +20,17 @@ case 'list':
 		)
 	));
 	break;
+case 'add':
+	if(!isset($_POST['name'], $_POST['longitude'], $_POST['latitude']) || 
+		$_POST['name'] == "" || $_POST['longitude'] == "" || $_POST['latitude'] == "") {
+		die(json_encode(array('status' => "miss_arguments")));
+	}
+
+	if(strpos($_POST['name'].$_POST['longitude'].$_POST['latitude'], ' ') !== false) {
+		die(json_encode(array('status' => "contain_space")));
+	}
+
+	echo json_encode(array('status' => ($airport->add($_POST) ? "success" : "fail")));
+	break;
 }
 ?>
