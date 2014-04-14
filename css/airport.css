@@ -1,3 +1,18 @@
 #airport_manage .airport_edit a {
 	text-decoration: none;
 }
+
+.airport_left_wrapper {
+	width: 300px;
+}
+
+.airport_map {
+	width: 300px;
+	height: 300px;
+	float: right;
+}
+
+#airport_add_dialog fieldset,
+#airport_edit_dialog fieldset {
+	margin-bottom: 10px;
+}

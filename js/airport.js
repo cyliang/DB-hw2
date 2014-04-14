@@ -16,10 +16,11 @@ airport.prepare = function() {
 	this.add_dialog = $("#airport_manage #airport_add_dialog").dialog({
 		autoOpen: false,
 		modal: true,
-		width: 400,
-		height: 300,
+		width: 650,
 		buttons: {
-			"新增": function() {
+			"檢視地圖": function() {
+				airport.refresh_map();
+			}, "新增": function() {
 				$(this).find("button").click();
 			}, "取消": function() {
 				$(this).dialog("close");
@@ -41,40 +42,8 @@ airport.prepare = function() {
 		event.preventDefault();
 
 		post('php/airport.php', $(this).serialize(), function(data, status) {
-			airport.goto_page("last");
+			airport.goto_page(airport.add_dialog.find('input[name="funct"]').val() == "add" ? "last" : "now");
 			airport.add_dialog.dialog("close");
-		});
-	});
-
-	this.edit_dialog = $('#airport_manage #airport_edit_dialog').dialog({
-		autoOpen: false,
-		modal: true,
-		width: 400,
-		buttons: {
-			"修改": function() {
-				$(this).find("button").click();
-			},
-			"取消": function() {
-				$(this).dialog("close");
-			}
-		}
-	});
-	this.edit_dialog.find('input[name="longitude"]').slidemoney({
-		min: -180,
-		max: 180,
-		step: 0.000001
-	});
-	this.edit_dialog.find('input[name="latitude"]').slidemoney({
-		min: -90,
-		max: 90,
-		step: 0.000001
-	});
-	this.edit_dialog.find("form").submit(function() {
-		event.preventDefault();
-
-		post('php/airport.php', $(this).serialize(), function(data, status) {
-			airport.goto_page("now");
-			airport.edit_dialog.dialog("close");
 		});
 	});
 }
@@ -120,7 +89,6 @@ airport.goto_page = function(page, callback) {
 					'<td>' + data.data[item].name + "</td>" +
 					'<td>' + data.data[item].longitude + "</td>" +
 					'<td>' + data.data[item].latitude + "</td>" +
-					'<td></td>' + 
 					"</tr>");
 		}
 		
@@ -159,6 +127,8 @@ airport.init = function() {
 
 airport.adding = function() {
 	this.add_dialog.find('input[type!="hidden"]').val("");
+	this.add_dialog.find('input[name="funct"]').val("add");
+	this.add_dialog.find('.airport_map').hide();
 	this.add_dialog.dialog("open");
 }
 
@@ -176,11 +146,27 @@ airport.remove = function(row) {
 }
 
 airport.editing = function(row) {
-	this.edit_dialog.find('input[name="id"]').val(this.page_data[row].id);
-	this.edit_dialog.find('input[name="name"]').val(this.page_data[row].name);
-	this.edit_dialog.find('input[name="longitude"]').val(this.page_data[row].longitude);
-	this.edit_dialog.find('input[name="latitude"]').val(this.page_data[row].latitude);
-	this.edit_dialog.dialog("open");
+	this.add_dialog.find('input[name="id"]').val(this.page_data[row].id);
+	this.add_dialog.find('input[name="name"]').val(this.page_data[row].name);
+	this.add_dialog.find('input[name="longitude"]').val(this.page_data[row].longitude);
+	this.add_dialog.find('input[name="latitude"]').val(this.page_data[row].latitude);
+	this.add_dialog.find('input[name="funct"]').val("edit");
+	this.refresh_map();
+	this.add_dialog.dialog("open");
+}
+
+airport.refresh_map = function() {
+	var longitude = this.add_dialog.find('input[name="longitude"]').val();
+	var latitude = this.add_dialog.find('input[name="latitude"]').val();
+	if(longitude != "" && longitude >= -180 && longitude <= 180 &&
+		latitude != "" && latitude >= -90 && latitude <= 90) {
+		var pos = latitude + ',' + longitude;
+
+		this.add_dialog.find(".airport_map").attr("src", 
+			"http://maps.googleapis.com/maps/api/staticmap?center=" + pos +
+			"&zoom=12&size=300x300&sensor=false&markers=%7C" + pos
+		).show();
+	}
 }
 
 airport.refresh_list = function() {

@@ -277,12 +277,11 @@
 		<table>
 		<thead>
 			<tr>
-				<th>修改</th>
+				<th>修改、檢視地圖</th>
 				<th>id</th>
 				<th>機場名稱</th>
 				<th>經度</th>
 				<th>緯度</th>
-				<th>地圖</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -300,11 +299,13 @@
 			<button type="button" id="airport_p_last" onClick="airport.goto_page('last')">最後一頁</button>
 		</span>
 		<div id="airport_add_dialog" title="新增機場">
+		<img class="airport_map" src="http://maps.googleapis.com/maps/api/staticmap?center=25.076389,121.223889&zoom=12&size=300x300&sensor=false">
+		<div class="airport_left_wrapper">
 		<form method="POST" action="">
-		<div>
-			機場名稱：
+		<fieldset>
+			<legend>機場名稱</legend>
 			<input type="text" name="name" placeholder="請輸入新的機場名稱" pattern="^\S+$" title="名稱不得包含空白 Ex: TPE">
-		</div>
+		</fieldset>
 		<fieldset>
 			<legend>位置資訊</legend>
 		<div>
@@ -316,31 +317,11 @@
 			<input type="number" name="latitude" placeholder="請輸入緯度" min="-90" max="90" step="0.000001">
 		</div>
 		</fieldset>
+			<input type="hidden" name="id" value="" />
 			<input type="hidden" name="funct" value="add" />
 			<button type="submit" style="display: none"></button>
 		</form>
 		</div>
-		<div id="airport_edit_dialog" title="修改機場">
-		<form method="POST" action="">
-		<div>
-			機場名稱：
-			<input type="text" name="name" pattern="^\S+$" title="名稱不得包含空白 Ex: TPE">
-		</div>
-		<fieldset>
-			<legend>位置資訊</legend>
-		<div>
-			經度：
-			<input type="number" name="longitude" min="-180" max="180" step="0.000001">
-		</div>
-		<div>
-			緯度：
-			<input type="number" name="latitude" min="-90" max="90" step="0.000001">
-		</div>
-		</fieldset>
-			<input type="hidden" name="funct" value="edit" />
-			<input type="hidden" name="id" />
-			<button type="submit" style="display: none"></button>
-		</form>
 		</div>
 	</section>
 	<section id="users_manage">
