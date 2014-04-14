@@ -221,4 +221,20 @@ table:not([class^="ui"]) tbody tr:hover, table:not([class^="ui"]) tbody tr.alt:h
 	display: none;
 }
 
+.icon-pen {
+	color: #99993D;
+}
+
+.icon-trash {
+	color: #990000;
+}
+
+.icon-checkmark-circle {
+	color: #00CC00;
+}
+
+.icon-cancel-circle {
+	color: #FF3300;
+}
+
 

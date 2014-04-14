@@ -32,5 +32,12 @@ case 'add':
 
 	echo json_encode(array('status' => ($airport->add($_POST) ? "success" : "fail")));
 	break;
+case 'delete':
+	if(!isset($_POST['id'])) {
+		die(json_encode(array("status" => "miss_arguments")));
+	}
+
+	echo json_encode(array("status" => ($airport->delete($_POST['id']) ? "success" : "fail")));
+	break;
 }
 ?>

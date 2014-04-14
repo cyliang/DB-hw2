@@ -10,22 +10,6 @@
 	text-decoration: none;
 }
 
-#flight_manage .icon-pen {
-	color: #99993D;
-}
-
-#flight_manage .icon-trash {
-	color: #990000;
-}
-
-#flight_manage .icon-checkmark-circle {
-	color: #00CC00;
-}
-
-#flight_manage .icon-cancel-circle {
-	color: #FF3300;
-}
-
 #flight_manage #flight_list_options {
 	text-align: center;
 }

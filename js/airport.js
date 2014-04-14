@@ -81,9 +81,10 @@ airport.goto_page = function(page, callback) {
 		$("#airport_manage tbody").empty();
 		for(var item in data.data) {
 			$("#airport_manage tbody").append((item % 2 == 1 ? '<tr class="alt">' : "<tr>") +
-					'<td class="plain_control">' + 
+					'<td class="airport_edit">' + 
 						'<a href="#" onClick="airport.editing(' + item + ')"><span class="icon-pen"></span></a>' + 
 						'<a href="#" onClick="airport.remove(' + item + ')"><span class="icon-trash"></span></a></td>' +
+					'<td>' + data.data[item].id + "</td>" +
 					'<td>' + data.data[item].name + "</td>" +
 					'<td>' + data.data[item].longitude + "</td>" +
 					'<td>' + data.data[item].latitude + "</td>" +
@@ -127,4 +128,17 @@ airport.init = function() {
 airport.adding = function() {
 	this.add_dialog.find('input[type!="hidden"]').val("");
 	this.add_dialog.dialog("open");
+}
+
+airport.remove = function(row) {
+	if(confirm("真的要刪除此機場嗎？\n機場名稱：" + this.page_data[row].name + 
+				"\n經度：" + this.page_data[row].longitude + 
+				"\n緯度：" + this.page_data[row].latitude)) {
+		post('php/airport.php', {
+			id: this.page_data[row].id,
+			funct: "delete"
+		}, function(data, status) {
+			airport.goto_page("now");
+		});
+	}
 }
