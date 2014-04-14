@@ -45,6 +45,38 @@ airport.prepare = function() {
 			airport.add_dialog.dialog("close");
 		});
 	});
+
+	this.edit_dialog = $('#airport_manage #airport_edit_dialog').dialog({
+		autoOpen: false,
+		modal: true,
+		width: 400,
+		buttons: {
+			"修改": function() {
+				$(this).find("button").click();
+			},
+			"取消": function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+	this.edit_dialog.find('input[name="longitude"]').slidemoney({
+		min: -180,
+		max: 180,
+		step: 0.000001
+	});
+	this.edit_dialog.find('input[name="latitude"]').slidemoney({
+		min: -90,
+		max: 90,
+		step: 0.000001
+	});
+	this.edit_dialog.find("form").submit(function() {
+		event.preventDefault();
+
+		post('php/airport.php', $(this).serialize(), function(data, status) {
+			airport.goto_page("now");
+			airport.edit_dialog.dialog("close");
+		});
+	});
 }
 
 airport.goto_page = function(page, callback) {
@@ -141,4 +173,12 @@ airport.remove = function(row) {
 			airport.goto_page("now");
 		});
 	}
+}
+
+airport.editing = function(row) {
+	this.edit_dialog.find('input[name="id"]').val(this.page_data[row].id);
+	this.edit_dialog.find('input[name="name"]').val(this.page_data[row].name);
+	this.edit_dialog.find('input[name="longitude"]').val(this.page_data[row].longitude);
+	this.edit_dialog.find('input[name="latitude"]').val(this.page_data[row].latitude);
+	this.edit_dialog.dialog("open");
 }
