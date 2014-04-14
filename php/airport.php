@@ -51,5 +51,14 @@ case 'edit':
 
 	echo json_encode(array("status" => ($airport->edit($_POST) ? "success" : "fail")));
 	break;
+case 'all':
+	echo json_encode(array(
+		"status" => "success",
+		"data" => $airport->list_all()
+	));
+	break;
+default:
+	echo json_encode(array("status" => "fail"));
+	break;
 }
 ?>

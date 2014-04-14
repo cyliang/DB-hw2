@@ -182,3 +182,15 @@ airport.editing = function(row) {
 	this.edit_dialog.find('input[name="latitude"]').val(this.page_data[row].latitude);
 	this.edit_dialog.dialog("open");
 }
+
+airport.refresh_list = function() {
+	post("php/airport.php", {
+		funct: "all"
+	}, function(data, status) {
+		var dlist = $("datalist#airport_list").empty();
+
+		for(var item in data.data) {
+			dlist.append('<option value="' + data.data[item].name + '">');
+		}
+	});
+}

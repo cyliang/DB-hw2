@@ -53,5 +53,9 @@ class Airport {
 		$count = $this->db->query("SELECT COUNT(*) FROM `flight_airport` ;")->fetchColumn();
 		return ceil($count / 10);
 	}
+
+	public function list_all() {
+		return $this->db->query("SELECT `name` FROM `flight_airport`")->fetchAll();
+	}
 }
 ?>

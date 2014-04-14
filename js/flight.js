@@ -190,9 +190,9 @@ flight.editing = function(row) {
 		
 		id_field.html('<input type="hidden" name="id" value="' + flight.page_data[row].id + '" />' + id_field.text());
 		no_field.html('<input type="text" name="number" value="' + flight.page_data[row].flight_number + '" required pattern="^\\S+$" title="班機號碼不得包含空白" />');
-		dept_field.html('<input type="text" name="departure" value="' + flight.page_data[row].departure + '" required pattern="^\\S+$" title="起飛機場不得包含空白" />');
+		dept_field.html('<input type="text" name="departure" value="' + flight.page_data[row].departure + '" required list="airport_list" />');
 		dept_date_field.html('<input type="text" name="departure_date" value="' + flight.page_data[row].departure_date + '" class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="起飛時間 Departure Time" required />');
-		dest_field.html('<input type="text" name="destination" value="' + flight.page_data[row].destination + '" required pattern="^\\S+$" title="到達機場不得包含空白" />');
+		dest_field.html('<input type="text" name="destination" value="' + flight.page_data[row].destination + '" required list="airport_list" />');
 		dest_date_field.html('<input type="text" name="arrival_date" value="' + flight.page_data[row].arrival_date + '" required class="date_input" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$" title="yyyy-mm-dd hh:mm:ss" placeholder="到達時間 Arrival Time" />');
 		price_field.html('<input type="number" name="price" class="money_input" form="flight_add_form" placeholder="機票價格 Ticket Price" min="0" max="99999999.99" step="0.01" value="' + flight.page_data[row].ticket_price + '" required />');
 		
@@ -213,6 +213,7 @@ flight.editing = function(row) {
 		$("#flight_manage tbody #plain_row" + row + " .money_input").slidemoney();
 		$("#flight_manage tbody #plain_row" + row + " .plain_control button").hide();
 	});
+	airport.refresh_list();
 }
 
 flight.remove = function(row) {
@@ -230,6 +231,7 @@ flight.adding = function() {
 		$("#flight_manage #flight_add_save").show();
 		$("#flight_manage tfoot").show();
 	});
+	airport.refresh_list();
 }
 
 flight.adding_reset = function() {
