@@ -12,7 +12,7 @@ if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 	$alert_msg .= '必須輸入正確Email！\n';
 }
 
-if(!preg_match("/^[A-Za-z0-9_]{6,}$/",$_POST['username'])) {
+if(!preg_match("/^[A-Za-z0-9_]{5,}$/",$_POST['username'])) {
 	$alert_msg .= '必須輸入正確使用者名稱！\n';
 }
 
