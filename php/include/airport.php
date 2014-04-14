@@ -55,7 +55,7 @@ class Airport {
 	}
 
 	public function list_all() {
-		return $this->db->query("SELECT `name` FROM `flight_airport`")->fetchAll();
+		return $this->db->query("SELECT `name` FROM `flight_airport`")->fetchAll(PDO::FETCH_COLUMN, 0);
 	}
 }
 ?>

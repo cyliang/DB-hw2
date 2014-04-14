@@ -5,6 +5,7 @@ airport.title = "機場管理";
 airport.now_page = 1;
 airport.total_page = 0;
 airport.page_data;
+airport.list = null;
 
 airport.prepare = function() {
 	$("#airport_manage #airport_page_control #airport_p_select").bind('input', function() {
@@ -173,10 +174,11 @@ airport.refresh_list = function() {
 	post("php/airport.php", {
 		funct: "all"
 	}, function(data, status) {
+		airport.list = data.data;
 		var dlist = $("datalist#airport_list").empty();
 
 		for(var item in data.data) {
-			dlist.append('<option value="' + data.data[item].name + '">');
+			dlist.append('<option value="' + data.data[item] + '">');
 		}
 	});
 }
