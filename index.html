@@ -295,9 +295,25 @@
 			<button type="button" id="airport_p_next" onClick="airport.goto_page('next')">下一頁</button>
 			<button type="button" id="airport_p_last" onClick="airport.goto_page('last')">最後一頁</button>
 		</span>
-		<div id="airport_add_dialog" title="新增使用者">
+		<div id="airport_add_dialog" title="新增機場">
 		<form method="POST" action="">
-			<button type="submit" style="display: none" /></button>
+		<div>
+			機場名稱：
+			<input type="text" name="name" placeholder="請輸入新的機場名稱" pattern="^\S+$" title="名稱不得包含空白 Ex: TPE">
+		</div>
+		<fieldset>
+			<legend>位置資訊</legend>
+		<div>
+			經度：
+			<input type="number" name="longitude" placeholder="請輸入經度" min="-180" max="180" step="0.000001">
+		</div>
+		<div>
+			緯度：
+			<input type="number" name="latitude" placeholder="請輸入緯度" min="-90" max="90" step="0.000001">
+		</div>
+		</fieldset>
+			<input type="hidden" name="funct" value="add" />
+			<button type="submit" style="display: none"></button>
 		</form>
 		</div>
 	</section>
@@ -346,7 +362,7 @@
 		</div>
 			<input type="hidden" name="funct" value="add" />
 			<input type="hidden" name="admin" value="no" />
-			<button type="submit" style="display: none" /></button>
+			<button type="submit" style="display: none" ></button>
 		</form>
 		</div>
 	</section>

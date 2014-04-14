@@ -12,6 +12,39 @@ airport.prepare = function() {
 			airport.goto_page($(this).val());
 		}
 	});
+
+	this.add_dialog = $("#airport_manage #airport_add_dialog").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 400,
+		height: 300,
+		buttons: {
+			"新增": function() {
+				$(this).find("button").click();
+			}, "取消": function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+
+	this.add_dialog.find('input[name="longitude"]').slidemoney({
+		min: -180,
+		max: 180,
+		step: 0.000001
+	});
+	this.add_dialog.find('input[name="latitude"]').slidemoney({
+		min: -90,
+		max: 90,
+		step: 0.000001
+	});
+	this.add_dialog.find("form").submit(function() {
+		event.preventDefault();
+
+		post('php/airport.php', $(this).serialize(), function(data, status) {
+			airport.goto_page("last");
+			airport.add_dialog.dialog("close");
+		});
+	});
 }
 
 airport.goto_page = function(page, callback) {
@@ -88,4 +121,9 @@ airport.goto_page = function(page, callback) {
 airport.init = function() {
 	this.now_page = 1;
 	this.goto_page(1);
+}
+
+airport.adding = function() {
+	this.add_dialog.find('input[type!="hidden"]').val("");
+	this.add_dialog.dialog("open");
 }

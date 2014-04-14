@@ -1,4 +1,9 @@
 $.widget("custom.slidemoney", {
+	options: {
+		min: 0,
+		max: 999.99,
+		step: 0.01
+	},
 	_create: function() {
 		this._on(this.element, {
 			focusin: "showSlider"
@@ -9,9 +14,9 @@ $.widget("custom.slidemoney", {
 			.insertAfter(this.element)
 			.addClass("ui-slidemoney")
 			.slider({
-				min: 0,
-				max: 999.99,
-				step: 0.01,
+				min: this.options.min,
+				max: this.options.max,
+				step: this.options.step,
 				value: this.element.val()
 			})
 			.hide();
