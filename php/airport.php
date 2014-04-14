@@ -26,7 +26,7 @@ case 'add':
 		die(json_encode(array('status' => "miss_arguments")));
 	}
 
-	if(strpos($_POST['name'].$_POST['longitude'].$_POST['latitude'], ' ') !== false) {
+	if(strpos($_POST['name'], ' ') !== false) {
 		die(json_encode(array('status' => "contain_space")));
 	}
 
@@ -38,6 +38,18 @@ case 'delete':
 	}
 
 	echo json_encode(array("status" => ($airport->delete($_POST['id']) ? "success" : "fail")));
+	break;
+case 'edit':
+	if(!isset($_POST['id'], $_POST['name'], $_POST['longitude'], $_POST['latitude']) || 
+		$_POST['id'] == "" || $_POST['name'] == "" || $_POST['longitude'] == "" || $_POST['latitude'] == "") {
+		die(json_encode(array("status" => "miss_arguments")));
+	}
+
+	if(strpos($_POST['name'], ' ') !== false) {
+		die(json_encode(array('status' => "contain_space")));
+	}
+
+	echo json_encode(array("status" => ($airport->edit($_POST) ? "success" : "fail")));
 	break;
 }
 ?>

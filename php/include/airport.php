@@ -24,7 +24,7 @@ class Airport {
 		$stat->execute(array(
 			':id' => $airport_info['id'],
 			':name' => filter_var($airport_info['name'], FILTER_SANITIZE_SPECIAL_CHARS),
-			':long' => $airport_info['longtitude'],
+			':long' => $airport_info['longitude'],
 			':lat' => $airport_info['latitude']
 		));
 		
