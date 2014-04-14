@@ -21,7 +21,7 @@ airport.prepare = function() {
 		buttons: {
 			"檢視地圖": function() {
 				airport.refresh_map();
-			}, "新增": function() {
+			}, "確定": function() {
 				$(this).find("button").click();
 			}, "取消": function() {
 				$(this).dialog("close");
@@ -127,6 +127,7 @@ airport.init = function() {
 }
 
 airport.adding = function() {
+	this.add_dialog.dialog("option", "title", "新增機場");
 	this.add_dialog.find('input[type!="hidden"]').val("");
 	this.add_dialog.find('input[name="funct"]').val("add");
 	this.add_dialog.find('.airport_map').hide();
@@ -147,6 +148,7 @@ airport.remove = function(row) {
 }
 
 airport.editing = function(row) {
+	this.add_dialog.dialog("option", "title", "修改機場");
 	this.add_dialog.find('input[name="id"]').val(this.page_data[row].id);
 	this.add_dialog.find('input[name="name"]').val(this.page_data[row].name);
 	this.add_dialog.find('input[name="longitude"]').val(this.page_data[row].longitude);
