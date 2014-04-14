@@ -69,6 +69,12 @@ flight.prepare = function() {
 
 	$("#flight_manage #flight_add_form").submit(function() {
 		event.preventDefault();
+		if(airport.list.indexOf($('#flight_manage tfoot input[name="departure"]').val()) == -1 ||
+			airport.list.indexOf($('#flight_manage tfoot input[name="destination"]').val()) == -1) {
+
+			alert("起飛或到達的機場不存在");
+			return;
+		}
 		
 		$("#flight_manage #flight_add_cancal, #flight_manage #flight_add_save").hide();
 		post('php/add_flight.php', $("#flight_manage tfoot input").serialize(), function(data, status) {
@@ -78,6 +84,12 @@ flight.prepare = function() {
 	
 	$("#flight_manage #flight_update_form").submit(function() {
 		event.preventDefault();
+		if(airport.list.indexOf($('#flight_manage tbody input[name="departure"]').val()) == -1 ||
+			airport.list.indexOf($('#flight_manage tbody input[name="destination"]').val()) == -1) {
+
+			alert("起飛或到達的機場不存在");
+			return;
+		}
 		
 		post('php/edit_flight.php', $("#flight_manage tbody input").serialize(), function(data, status) {
 			flight.goto_page("now");
