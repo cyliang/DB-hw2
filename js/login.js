@@ -55,7 +55,14 @@ function logout() {
 }
 
 function post(URL, data, onSuccess, onFail) {
+	$.loader({
+		className: "blue-with-image-2",
+		content: ''
+	});
+
 	$.post(URL, data, function(data, status) {
+		$.loader("close");
+
 		if(status != "success") {
 			alert("連線錯誤：請稍候再試");
 		} else if(data.status == "not_login") {
